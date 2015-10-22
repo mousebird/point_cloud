@@ -1,0 +1,1442 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2B162B021BD59E3C0001E17B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B162B011BD59E3C0001E17B /* main.m */; };
+		2B162B051BD59E3C0001E17B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B162B041BD59E3C0001E17B /* AppDelegate.m */; };
+		2B162B081BD59E3C0001E17B /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2B162B071BD59E3C0001E17B /* ViewController.mm */; };
+		2B162B0B1BD59E3C0001E17B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B162B091BD59E3C0001E17B /* Main.storyboard */; };
+		2B162B0D1BD59E3C0001E17B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B162B0C1BD59E3C0001E17B /* Assets.xcassets */; };
+		2B162B101BD59E3C0001E17B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B162B0E1BD59E3C0001E17B /* LaunchScreen.storyboard */; };
+		2B162B1B1BD59E3D0001E17B /* LidarViewerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B162B1A1BD59E3D0001E17B /* LidarViewerTests.m */; };
+		2B162B261BD59E3D0001E17B /* LidarViewerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B162B251BD59E3D0001E17B /* LidarViewerUITests.m */; };
+		2B162B3A1BD59E840001E17B /* libWhirlyGlobe-MaplyComponent.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B162B391BD59E5D0001E17B /* libWhirlyGlobe-MaplyComponent.a */; };
+		2B162B3E1BD5A13F0001E17B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B162B3D1BD5A13F0001E17B /* CoreLocation.framework */; };
+		2B162B401BD5A1490001E17B /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B162B3F1BD5A1490001E17B /* libc++.tbd */; };
+		2B162B421BD5A14F0001E17B /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B162B411BD5A14F0001E17B /* libstdc++.tbd */; };
+		2B162B441BD5A1540001E17B /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B162B431BD5A1540001E17B /* libz.tbd */; };
+		2B162B461BD5A1590001E17B /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B162B451BD5A1590001E17B /* libxml2.tbd */; };
+		2B162B481BD5A15E0001E17B /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B162B471BD5A15E0001E17B /* libsqlite3.tbd */; };
+		2B162CE41BD5BDD90001E17B /* cachedreader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162C9B1BD5BD750001E17B /* cachedreader.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162CE51BD5BDD90001E17B /* header.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162C9C1BD5BD750001E17B /* header.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162CE61BD5BDD90001E17B /* reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162C9D1BD5BD750001E17B /* reader.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162CE71BD5BDD90001E17B /* zipreader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162C9E1BD5BD750001E17B /* zipreader.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162CE91BD5C2810001E17B /* boost.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B162CE81BD5C2810001E17B /* boost.a */; };
+		2B162CEA1BD5C2B60001E17B /* dimension.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162CA71BD5BD750001E17B /* dimension.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162CEB1BD5C2B60001E17B /* error.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162CA81BD5BD750001E17B /* error.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162CEC1BD5C2B60001E17B /* factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162CA91BD5BD750001E17B /* factory.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162CED1BD5C2B60001E17B /* filter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162CAA1BD5BD750001E17B /* filter.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162CF01BD5C2B60001E17B /* header.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162CB01BD5BD750001E17B /* header.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162CF11BD5C2B60001E17B /* index.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162CB11BD5BD750001E17B /* index.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162CF21BD5C2B60001E17B /* point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162CB21BD5BD750001E17B /* point.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162CF31BD5C2B60001E17B /* reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162CB31BD5BD750001E17B /* reader.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162CF41BD5C2B60001E17B /* schema.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162CB41BD5BD750001E17B /* schema.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162CF51BD5C2B60001E17B /* spatialreference.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162CB51BD5BD750001E17B /* spatialreference.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162CF71BD5C2B60001E17B /* transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162CB81BD5BD750001E17B /* transform.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162CF81BD5C2B60001E17B /* utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162CB91BD5BD750001E17B /* utility.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162CF91BD5C2B60001E17B /* variablerecord.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162CBA1BD5BD750001E17B /* variablerecord.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162CFA1BD5C2B60001E17B /* version.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162CBB1BD5BD750001E17B /* version.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162CFD1BD5C2FE0001E17B /* chipper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162C921BD5BD750001E17B /* chipper.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162CFE1BD5C2FE0001E17B /* classification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162C931BD5BD750001E17B /* classification.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162CFF1BD5C2FE0001E17B /* color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162C951BD5BD750001E17B /* color.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D001BD5C3110001E17B /* indexcell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162C981BD5BD750001E17B /* indexcell.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D011BD5C3110001E17B /* indexoutput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162C991BD5BD750001E17B /* indexoutput.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D021BD5C3160001E17B /* sha1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162C9F1BD5BD750001E17B /* sha1.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D031BD5C3160001E17B /* utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162CA01BD5BD750001E17B /* utility.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D041BD5C34D0001E17B /* header.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162CA21BD5BD750001E17B /* header.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D051BD5C34D0001E17B /* point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162CA31BD5BD750001E17B /* point.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D081BD5C4110001E17B /* st-helens.laz in Resources */ = {isa = PBXBuildFile; fileRef = 2B162C331BD5B3E90001E17B /* st-helens.laz */; settings = {ASSET_TAGS = (); }; };
+		2B162D411BD5C5740001E17B /* arithmeticdecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D0B1BD5C5730001E17B /* arithmeticdecoder.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D421BD5C5740001E17B /* arithmeticencoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D0D1BD5C5730001E17B /* arithmeticencoder.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D431BD5C5740001E17B /* arithmeticmodel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D0F1BD5C5730001E17B /* arithmeticmodel.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D441BD5C5740001E17B /* integercompressor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D1C1BD5C5730001E17B /* integercompressor.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D451BD5C5740001E17B /* lasindex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D1F1BD5C5730001E17B /* lasindex.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D461BD5C5740001E17B /* lasinterval.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D211BD5C5730001E17B /* lasinterval.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D471BD5C5740001E17B /* lasquadtree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D241BD5C5730001E17B /* lasquadtree.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D481BD5C5740001E17B /* lasreaditemcompressed_v1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D281BD5C5730001E17B /* lasreaditemcompressed_v1.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D491BD5C5740001E17B /* lasreaditemcompressed_v2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D2A1BD5C5730001E17B /* lasreaditemcompressed_v2.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D4A1BD5C5740001E17B /* lasreadpoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D2D1BD5C5730001E17B /* lasreadpoint.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D4B1BD5C5740001E17B /* lasunzipper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D2F1BD5C5730001E17B /* lasunzipper.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D4C1BD5C5740001E17B /* laswriteitemcompressed_v1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D321BD5C5730001E17B /* laswriteitemcompressed_v1.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D4F1BD5C5740001E17B /* laszip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D391BD5C5740001E17B /* laszip.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D501BD5C5740001E17B /* laszip_dll.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D3D1BD5C5740001E17B /* laszip_dll.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D511BD5C5740001E17B /* laszipper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D3E1BD5C5740001E17B /* laszipper.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D871BD6B0A40001E17B /* fopen_compressed.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D6E1BD6B0A40001E17B /* fopen_compressed.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D881BD6B0A40001E17B /* lasfilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D6F1BD6B0A40001E17B /* lasfilter.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D891BD6B0A40001E17B /* lasreader_asc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D701BD6B0A40001E17B /* lasreader_asc.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D8A1BD6B0A40001E17B /* lasreader_bil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D711BD6B0A40001E17B /* lasreader_bil.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D8B1BD6B0A40001E17B /* lasreader_bin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D721BD6B0A40001E17B /* lasreader_bin.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D8C1BD6B0A40001E17B /* lasreader_dtm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D731BD6B0A40001E17B /* lasreader_dtm.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D8D1BD6B0A40001E17B /* lasreader_las.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D741BD6B0A40001E17B /* lasreader_las.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D8E1BD6B0A40001E17B /* lasreader_qfit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D751BD6B0A40001E17B /* lasreader_qfit.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D8F1BD6B0A40001E17B /* lasreader_shp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D761BD6B0A40001E17B /* lasreader_shp.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D901BD6B0A40001E17B /* lasreader_txt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D771BD6B0A40001E17B /* lasreader_txt.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D911BD6B0A40001E17B /* lasreader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D781BD6B0A40001E17B /* lasreader.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D921BD6B0A40001E17B /* lasreaderbuffered.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D791BD6B0A40001E17B /* lasreaderbuffered.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D931BD6B0A40001E17B /* lasreadermerged.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D7A1BD6B0A40001E17B /* lasreadermerged.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D951BD6B0A40001E17B /* lastransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D7C1BD6B0A40001E17B /* lastransform.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D961BD6B0A40001E17B /* lasutility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D7D1BD6B0A40001E17B /* lasutility.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D971BD6B0A40001E17B /* laswaveform13reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D7E1BD6B0A40001E17B /* laswaveform13reader.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162D981BD6B0A40001E17B /* laswaveform13writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D7F1BD6B0A40001E17B /* laswaveform13writer.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162DA01BD6B2200001E17B /* lasreaderpipeon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D7B1BD6B0A40001E17B /* lasreaderpipeon.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162DA11BD6B2200001E17B /* laswriter_bin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D801BD6B0A40001E17B /* laswriter_bin.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162DA21BD6B2200001E17B /* laswriter_las.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D811BD6B0A40001E17B /* laswriter_las.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162DA31BD6B2200001E17B /* laswriter_qfit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D821BD6B0A40001E17B /* laswriter_qfit.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162DA41BD6B2200001E17B /* laswriter_txt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D831BD6B0A40001E17B /* laswriter_txt.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162DA51BD6B2200001E17B /* laswriter_wrl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D841BD6B0A40001E17B /* laswriter_wrl.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162DA61BD6B2200001E17B /* laswriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D851BD6B0A40001E17B /* laswriter.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162DA71BD6B2200001E17B /* laswritercompatible.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D861BD6B0A40001E17B /* laswritercompatible.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162DA81BD6B2460001E17B /* laswriteitemcompressed_v2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D341BD5C5730001E17B /* laswriteitemcompressed_v2.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162DA91BD6B2460001E17B /* laswritepoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162D371BD5C5740001E17B /* laswritepoint.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162DAA1BD6B2500001E17B /* c_api.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162C911BD5BD750001E17B /* c_api.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162DAB1BD6B25C0001E17B /* writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162CA41BD5BD750001E17B /* writer.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162DAC1BD6B25C0001E17B /* zipwriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162CA51BD5BD750001E17B /* zipwriter.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162DAD1BD6B25F0001E17B /* zippoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162CA61BD5BD750001E17B /* zippoint.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162DB11BD6B2640001E17B /* writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B162CBD1BD5BD750001E17B /* writer.cpp */; settings = {ASSET_TAGS = (); }; };
+		2B162DC81BD6DBB90001E17B /* libgdal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B162DC41BD6DA670001E17B /* libgdal.a */; };
+		2B162DC91BD6DBB90001E17B /* libproj.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B162DC51BD6DA670001E17B /* libproj.a */; };
+		2B162DCB1BD6DC250001E17B /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B162DCA1BD6DC250001E17B /* libiconv.tbd */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2B162B171BD59E3D0001E17B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2B162AF51BD59E3C0001E17B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2B162AFC1BD59E3C0001E17B;
+			remoteInfo = LidarViewer;
+		};
+		2B162B221BD59E3D0001E17B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2B162AF51BD59E3C0001E17B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2B162AFC1BD59E3C0001E17B;
+			remoteInfo = LidarViewer;
+		};
+		2B162B381BD59E5D0001E17B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2B162B331BD59E5D0001E17B /* WhirlyGlobe-MaplyComponent.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2B11E0DB15B4C030007AAE3F;
+			remoteInfo = "WhirlyGlobe-MaplyComponent";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2B162AFD1BD59E3C0001E17B /* LidarViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LidarViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B162B011BD59E3C0001E17B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2B162B031BD59E3C0001E17B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		2B162B041BD59E3C0001E17B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		2B162B061BD59E3C0001E17B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		2B162B071BD59E3C0001E17B /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
+		2B162B0A1BD59E3C0001E17B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2B162B0C1BD59E3C0001E17B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2B162B0F1BD59E3C0001E17B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2B162B111BD59E3C0001E17B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2B162B161BD59E3D0001E17B /* LidarViewerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LidarViewerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B162B1A1BD59E3D0001E17B /* LidarViewerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LidarViewerTests.m; sourceTree = "<group>"; };
+		2B162B1C1BD59E3D0001E17B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2B162B211BD59E3D0001E17B /* LidarViewerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LidarViewerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B162B251BD59E3D0001E17B /* LidarViewerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LidarViewerUITests.m; sourceTree = "<group>"; };
+		2B162B271BD59E3D0001E17B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2B162B331BD59E5D0001E17B /* WhirlyGlobe-MaplyComponent.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "WhirlyGlobe-MaplyComponent.xcodeproj"; path = "../libs/WhirlyGlobe-Maply/WhirlyGlobeSrc/WhirlyGlobe-MaplyComponent/WhirlyGlobe-MaplyComponent.xcodeproj"; sourceTree = "<group>"; };
+		2B162B3D1BD5A13F0001E17B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		2B162B3F1BD5A1490001E17B /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		2B162B411BD5A14F0001E17B /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		2B162B431BD5A1540001E17B /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		2B162B451BD5A1590001E17B /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		2B162B471BD5A15E0001E17B /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		2B162C331BD5B3E90001E17B /* st-helens.laz */ = {isa = PBXFileReference; lastKnownFileType = file; name = "st-helens.laz"; path = "../data/st-helens.laz"; sourceTree = "<group>"; };
+		2B162C3A1BD5BD750001E17B /* bounds.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bounds.hpp; sourceTree = "<group>"; };
+		2B162C3C1BD5BD750001E17B /* las_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = las_config.h; sourceTree = "<group>"; };
+		2B162C3D1BD5BD750001E17B /* las_version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = las_version.h; sourceTree = "<group>"; };
+		2B162C3E1BD5BD750001E17B /* liblas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = liblas.h; sourceTree = "<group>"; };
+		2B162C3F1BD5BD750001E17B /* chipper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = chipper.hpp; sourceTree = "<group>"; };
+		2B162C401BD5BD750001E17B /* classification.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = classification.hpp; sourceTree = "<group>"; };
+		2B162C411BD5BD750001E17B /* color.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = color.hpp; sourceTree = "<group>"; };
+		2B162C421BD5BD750001E17B /* compatibility.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = compatibility.hpp; sourceTree = "<group>"; };
+		2B162C441BD5BD750001E17B /* binary.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = binary.hpp; sourceTree = "<group>"; };
+		2B162C451BD5BD750001E17B /* endian.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = endian.hpp; sourceTree = "<group>"; };
+		2B162C461BD5BD750001E17B /* file_ptr_stream.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = file_ptr_stream.hpp; sourceTree = "<group>"; };
+		2B162C471BD5BD750001E17B /* fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = fwd.hpp; sourceTree = "<group>"; };
+		2B162C491BD5BD750001E17B /* indexcell.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = indexcell.hpp; sourceTree = "<group>"; };
+		2B162C4A1BD5BD750001E17B /* indexoutput.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = indexoutput.hpp; sourceTree = "<group>"; };
+		2B162C4B1BD5BD750001E17B /* opt_allocator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = opt_allocator.hpp; sourceTree = "<group>"; };
+		2B162C4C1BD5BD750001E17B /* pointrecord.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pointrecord.hpp; sourceTree = "<group>"; };
+		2B162C4D1BD5BD750001E17B /* private_utility.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = private_utility.hpp; sourceTree = "<group>"; };
+		2B162C4F1BD5BD750001E17B /* cachedreader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cachedreader.hpp; sourceTree = "<group>"; };
+		2B162C501BD5BD750001E17B /* header.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = header.hpp; sourceTree = "<group>"; };
+		2B162C511BD5BD750001E17B /* reader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = reader.hpp; sourceTree = "<group>"; };
+		2B162C521BD5BD750001E17B /* zipreader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = zipreader.hpp; sourceTree = "<group>"; };
+		2B162C531BD5BD750001E17B /* sha1.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = sha1.hpp; sourceTree = "<group>"; };
+		2B162C541BD5BD750001E17B /* singleton.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = singleton.hpp; sourceTree = "<group>"; };
+		2B162C551BD5BD750001E17B /* timer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = timer.hpp; sourceTree = "<group>"; };
+		2B162C571BD5BD750001E17B /* header.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = header.hpp; sourceTree = "<group>"; };
+		2B162C581BD5BD750001E17B /* point.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = point.hpp; sourceTree = "<group>"; };
+		2B162C591BD5BD750001E17B /* writer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = writer.hpp; sourceTree = "<group>"; };
+		2B162C5A1BD5BD750001E17B /* zipwriter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = zipwriter.hpp; sourceTree = "<group>"; };
+		2B162C5B1BD5BD750001E17B /* zippoint.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = zippoint.hpp; sourceTree = "<group>"; };
+		2B162C5C1BD5BD750001E17B /* dimension.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = dimension.hpp; sourceTree = "<group>"; };
+		2B162C5D1BD5BD750001E17B /* error.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = error.hpp; sourceTree = "<group>"; };
+		2B162C5E1BD5BD750001E17B /* exception.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = exception.hpp; sourceTree = "<group>"; };
+		2B162C5F1BD5BD750001E17B /* export.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = export.hpp; sourceTree = "<group>"; };
+		2B162C631BD5BD750001E17B /* exception_implementation.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = exception_implementation.hpp; sourceTree = "<group>"; };
+		2B162C641BD5BD750001E17B /* file_parser_error.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = file_parser_error.hpp; sourceTree = "<group>"; };
+		2B162C651BD5BD750001E17B /* info_parser_error.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = info_parser_error.hpp; sourceTree = "<group>"; };
+		2B162C661BD5BD750001E17B /* info_parser_read.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = info_parser_read.hpp; sourceTree = "<group>"; };
+		2B162C671BD5BD750001E17B /* info_parser_utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = info_parser_utils.hpp; sourceTree = "<group>"; };
+		2B162C681BD5BD750001E17B /* info_parser_write.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = info_parser_write.hpp; sourceTree = "<group>"; };
+		2B162C691BD5BD750001E17B /* info_parser_writer_settings.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = info_parser_writer_settings.hpp; sourceTree = "<group>"; };
+		2B162C6A1BD5BD750001E17B /* json_parser_error.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = json_parser_error.hpp; sourceTree = "<group>"; };
+		2B162C6B1BD5BD750001E17B /* json_parser_read.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = json_parser_read.hpp; sourceTree = "<group>"; };
+		2B162C6C1BD5BD750001E17B /* json_parser_write.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = json_parser_write.hpp; sourceTree = "<group>"; };
+		2B162C6D1BD5BD750001E17B /* ptree_implementation.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ptree_implementation.hpp; sourceTree = "<group>"; };
+		2B162C6E1BD5BD750001E17B /* ptree_utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ptree_utils.hpp; sourceTree = "<group>"; };
+		2B162C6F1BD5BD750001E17B /* rapidxml.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml.hpp; sourceTree = "<group>"; };
+		2B162C701BD5BD750001E17B /* xml_parser_error.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = xml_parser_error.hpp; sourceTree = "<group>"; };
+		2B162C711BD5BD750001E17B /* xml_parser_flags.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = xml_parser_flags.hpp; sourceTree = "<group>"; };
+		2B162C721BD5BD750001E17B /* xml_parser_read_rapidxml.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = xml_parser_read_rapidxml.hpp; sourceTree = "<group>"; };
+		2B162C731BD5BD750001E17B /* xml_parser_utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = xml_parser_utils.hpp; sourceTree = "<group>"; };
+		2B162C741BD5BD750001E17B /* xml_parser_write.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = xml_parser_write.hpp; sourceTree = "<group>"; };
+		2B162C751BD5BD750001E17B /* xml_parser_writer_settings.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = xml_parser_writer_settings.hpp; sourceTree = "<group>"; };
+		2B162C761BD5BD750001E17B /* exceptions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = exceptions.hpp; sourceTree = "<group>"; };
+		2B162C771BD5BD750001E17B /* id_translator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = id_translator.hpp; sourceTree = "<group>"; };
+		2B162C781BD5BD750001E17B /* info_parser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = info_parser.hpp; sourceTree = "<group>"; };
+		2B162C791BD5BD750001E17B /* ini_parser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ini_parser.hpp; sourceTree = "<group>"; };
+		2B162C7A1BD5BD750001E17B /* json_parser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = json_parser.hpp; sourceTree = "<group>"; };
+		2B162C7B1BD5BD750001E17B /* ptree.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ptree.hpp; sourceTree = "<group>"; };
+		2B162C7C1BD5BD750001E17B /* ptree_fwd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ptree_fwd.hpp; sourceTree = "<group>"; };
+		2B162C7D1BD5BD750001E17B /* ptree_serialization.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ptree_serialization.hpp; sourceTree = "<group>"; };
+		2B162C7E1BD5BD750001E17B /* stream_translator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = stream_translator.hpp; sourceTree = "<group>"; };
+		2B162C7F1BD5BD750001E17B /* string_path.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = string_path.hpp; sourceTree = "<group>"; };
+		2B162C801BD5BD750001E17B /* xml_parser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = xml_parser.hpp; sourceTree = "<group>"; };
+		2B162C811BD5BD750001E17B /* factory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = factory.hpp; sourceTree = "<group>"; };
+		2B162C821BD5BD750001E17B /* filter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = filter.hpp; sourceTree = "<group>"; };
+		2B162C831BD5BD750001E17B /* header.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = header.hpp; sourceTree = "<group>"; };
+		2B162C841BD5BD750001E17B /* index.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = index.hpp; sourceTree = "<group>"; };
+		2B162C851BD5BD750001E17B /* iterator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = iterator.hpp; sourceTree = "<group>"; };
+		2B162C861BD5BD750001E17B /* liblas.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = liblas.hpp; sourceTree = "<group>"; };
+		2B162C871BD5BD750001E17B /* point.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = point.hpp; sourceTree = "<group>"; };
+		2B162C881BD5BD750001E17B /* reader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = reader.hpp; sourceTree = "<group>"; };
+		2B162C891BD5BD750001E17B /* schema.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = schema.hpp; sourceTree = "<group>"; };
+		2B162C8A1BD5BD750001E17B /* spatialreference.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = spatialreference.hpp; sourceTree = "<group>"; };
+		2B162C8B1BD5BD750001E17B /* transform.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = transform.hpp; sourceTree = "<group>"; };
+		2B162C8C1BD5BD750001E17B /* utility.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = utility.hpp; sourceTree = "<group>"; };
+		2B162C8D1BD5BD750001E17B /* variablerecord.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = variablerecord.hpp; sourceTree = "<group>"; };
+		2B162C8E1BD5BD750001E17B /* version.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = version.hpp; sourceTree = "<group>"; };
+		2B162C8F1BD5BD750001E17B /* writer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = writer.hpp; sourceTree = "<group>"; };
+		2B162C911BD5BD750001E17B /* c_api.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = c_api.cpp; sourceTree = "<group>"; };
+		2B162C921BD5BD750001E17B /* chipper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = chipper.cpp; sourceTree = "<group>"; };
+		2B162C931BD5BD750001E17B /* classification.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = classification.cpp; sourceTree = "<group>"; };
+		2B162C951BD5BD750001E17B /* color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = color.cpp; sourceTree = "<group>"; };
+		2B162C981BD5BD750001E17B /* indexcell.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = indexcell.cpp; sourceTree = "<group>"; };
+		2B162C991BD5BD750001E17B /* indexoutput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = indexoutput.cpp; sourceTree = "<group>"; };
+		2B162C9B1BD5BD750001E17B /* cachedreader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cachedreader.cpp; sourceTree = "<group>"; };
+		2B162C9C1BD5BD750001E17B /* header.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = header.cpp; sourceTree = "<group>"; };
+		2B162C9D1BD5BD750001E17B /* reader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = reader.cpp; sourceTree = "<group>"; };
+		2B162C9E1BD5BD750001E17B /* zipreader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = zipreader.cpp; sourceTree = "<group>"; };
+		2B162C9F1BD5BD750001E17B /* sha1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sha1.cpp; sourceTree = "<group>"; };
+		2B162CA01BD5BD750001E17B /* utility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utility.cpp; sourceTree = "<group>"; };
+		2B162CA21BD5BD750001E17B /* header.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = header.cpp; sourceTree = "<group>"; };
+		2B162CA31BD5BD750001E17B /* point.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = point.cpp; sourceTree = "<group>"; };
+		2B162CA41BD5BD750001E17B /* writer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = writer.cpp; sourceTree = "<group>"; };
+		2B162CA51BD5BD750001E17B /* zipwriter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = zipwriter.cpp; sourceTree = "<group>"; };
+		2B162CA61BD5BD750001E17B /* zippoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = zippoint.cpp; sourceTree = "<group>"; };
+		2B162CA71BD5BD750001E17B /* dimension.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dimension.cpp; sourceTree = "<group>"; };
+		2B162CA81BD5BD750001E17B /* error.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = error.cpp; sourceTree = "<group>"; };
+		2B162CA91BD5BD750001E17B /* factory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = factory.cpp; sourceTree = "<group>"; };
+		2B162CAA1BD5BD750001E17B /* filter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = filter.cpp; sourceTree = "<group>"; };
+		2B162CAB1BD5BD750001E17B /* gt_citation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gt_citation.cpp; sourceTree = "<group>"; };
+		2B162CAC1BD5BD750001E17B /* gt_citation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gt_citation.h; sourceTree = "<group>"; };
+		2B162CAD1BD5BD750001E17B /* gt_wkt_srs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gt_wkt_srs.cpp; sourceTree = "<group>"; };
+		2B162CAE1BD5BD750001E17B /* gt_wkt_srs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gt_wkt_srs.h; sourceTree = "<group>"; };
+		2B162CAF1BD5BD750001E17B /* gt_wkt_srs_for_gdal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gt_wkt_srs_for_gdal.h; sourceTree = "<group>"; };
+		2B162CB01BD5BD750001E17B /* header.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = header.cpp; sourceTree = "<group>"; };
+		2B162CB11BD5BD750001E17B /* index.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = index.cpp; sourceTree = "<group>"; };
+		2B162CB21BD5BD750001E17B /* point.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = point.cpp; sourceTree = "<group>"; };
+		2B162CB31BD5BD750001E17B /* reader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = reader.cpp; sourceTree = "<group>"; };
+		2B162CB41BD5BD750001E17B /* schema.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = schema.cpp; sourceTree = "<group>"; };
+		2B162CB51BD5BD750001E17B /* spatialreference.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = spatialreference.cpp; sourceTree = "<group>"; };
+		2B162CB61BD5BD750001E17B /* tifvsi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tifvsi.cpp; sourceTree = "<group>"; };
+		2B162CB71BD5BD750001E17B /* tifvsi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tifvsi.h; sourceTree = "<group>"; };
+		2B162CB81BD5BD750001E17B /* transform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = transform.cpp; sourceTree = "<group>"; };
+		2B162CB91BD5BD750001E17B /* utility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utility.cpp; sourceTree = "<group>"; };
+		2B162CBA1BD5BD750001E17B /* variablerecord.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = variablerecord.cpp; sourceTree = "<group>"; };
+		2B162CBB1BD5BD750001E17B /* version.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = version.cpp; sourceTree = "<group>"; };
+		2B162CBD1BD5BD750001E17B /* writer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = writer.cpp; sourceTree = "<group>"; };
+		2B162CE81BD5C2810001E17B /* boost.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = boost.a; path = ../../ofxiOSBoost/libs/boost/ios/boost.a; sourceTree = "<group>"; };
+		2B162D0B1BD5C5730001E17B /* arithmeticdecoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = arithmeticdecoder.cpp; sourceTree = "<group>"; };
+		2B162D0C1BD5C5730001E17B /* arithmeticdecoder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = arithmeticdecoder.hpp; sourceTree = "<group>"; };
+		2B162D0D1BD5C5730001E17B /* arithmeticencoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = arithmeticencoder.cpp; sourceTree = "<group>"; };
+		2B162D0E1BD5C5730001E17B /* arithmeticencoder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = arithmeticencoder.hpp; sourceTree = "<group>"; };
+		2B162D0F1BD5C5730001E17B /* arithmeticmodel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = arithmeticmodel.cpp; sourceTree = "<group>"; };
+		2B162D101BD5C5730001E17B /* arithmeticmodel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = arithmeticmodel.hpp; sourceTree = "<group>"; };
+		2B162D111BD5C5730001E17B /* bytestreamin.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bytestreamin.hpp; sourceTree = "<group>"; };
+		2B162D121BD5C5730001E17B /* bytestreamin_array.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bytestreamin_array.hpp; sourceTree = "<group>"; };
+		2B162D131BD5C5730001E17B /* bytestreamin_file.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bytestreamin_file.hpp; sourceTree = "<group>"; };
+		2B162D141BD5C5730001E17B /* bytestreamin_istream.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bytestreamin_istream.hpp; sourceTree = "<group>"; };
+		2B162D151BD5C5730001E17B /* bytestreaminout.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bytestreaminout.hpp; sourceTree = "<group>"; };
+		2B162D161BD5C5730001E17B /* bytestreaminout_file.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bytestreaminout_file.hpp; sourceTree = "<group>"; };
+		2B162D171BD5C5730001E17B /* bytestreamout.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bytestreamout.hpp; sourceTree = "<group>"; };
+		2B162D181BD5C5730001E17B /* bytestreamout_array.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bytestreamout_array.hpp; sourceTree = "<group>"; };
+		2B162D191BD5C5730001E17B /* bytestreamout_file.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bytestreamout_file.hpp; sourceTree = "<group>"; };
+		2B162D1A1BD5C5730001E17B /* bytestreamout_nil.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bytestreamout_nil.hpp; sourceTree = "<group>"; };
+		2B162D1B1BD5C5730001E17B /* bytestreamout_ostream.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bytestreamout_ostream.hpp; sourceTree = "<group>"; };
+		2B162D1C1BD5C5730001E17B /* integercompressor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = integercompressor.cpp; sourceTree = "<group>"; };
+		2B162D1D1BD5C5730001E17B /* integercompressor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = integercompressor.hpp; sourceTree = "<group>"; };
+		2B162D1E1BD5C5730001E17B /* lasattributer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasattributer.hpp; sourceTree = "<group>"; };
+		2B162D1F1BD5C5730001E17B /* lasindex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lasindex.cpp; sourceTree = "<group>"; };
+		2B162D201BD5C5730001E17B /* lasindex.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasindex.hpp; sourceTree = "<group>"; };
+		2B162D211BD5C5730001E17B /* lasinterval.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lasinterval.cpp; sourceTree = "<group>"; };
+		2B162D221BD5C5730001E17B /* lasinterval.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasinterval.hpp; sourceTree = "<group>"; };
+		2B162D231BD5C5730001E17B /* laspoint.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = laspoint.hpp; sourceTree = "<group>"; };
+		2B162D241BD5C5730001E17B /* lasquadtree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lasquadtree.cpp; sourceTree = "<group>"; };
+		2B162D251BD5C5730001E17B /* lasquadtree.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasquadtree.hpp; sourceTree = "<group>"; };
+		2B162D261BD5C5730001E17B /* lasquantizer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasquantizer.hpp; sourceTree = "<group>"; };
+		2B162D271BD5C5730001E17B /* lasreaditem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasreaditem.hpp; sourceTree = "<group>"; };
+		2B162D281BD5C5730001E17B /* lasreaditemcompressed_v1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lasreaditemcompressed_v1.cpp; sourceTree = "<group>"; };
+		2B162D291BD5C5730001E17B /* lasreaditemcompressed_v1.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasreaditemcompressed_v1.hpp; sourceTree = "<group>"; };
+		2B162D2A1BD5C5730001E17B /* lasreaditemcompressed_v2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lasreaditemcompressed_v2.cpp; sourceTree = "<group>"; };
+		2B162D2B1BD5C5730001E17B /* lasreaditemcompressed_v2.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasreaditemcompressed_v2.hpp; sourceTree = "<group>"; };
+		2B162D2C1BD5C5730001E17B /* lasreaditemraw.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasreaditemraw.hpp; sourceTree = "<group>"; };
+		2B162D2D1BD5C5730001E17B /* lasreadpoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lasreadpoint.cpp; sourceTree = "<group>"; };
+		2B162D2E1BD5C5730001E17B /* lasreadpoint.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasreadpoint.hpp; sourceTree = "<group>"; };
+		2B162D2F1BD5C5730001E17B /* lasunzipper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lasunzipper.cpp; sourceTree = "<group>"; };
+		2B162D301BD5C5730001E17B /* lasunzipper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasunzipper.hpp; sourceTree = "<group>"; };
+		2B162D311BD5C5730001E17B /* laswriteitem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = laswriteitem.hpp; sourceTree = "<group>"; };
+		2B162D321BD5C5730001E17B /* laswriteitemcompressed_v1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = laswriteitemcompressed_v1.cpp; sourceTree = "<group>"; };
+		2B162D331BD5C5730001E17B /* laswriteitemcompressed_v1.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = laswriteitemcompressed_v1.hpp; sourceTree = "<group>"; };
+		2B162D341BD5C5730001E17B /* laswriteitemcompressed_v2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = laswriteitemcompressed_v2.cpp; sourceTree = "<group>"; };
+		2B162D351BD5C5730001E17B /* laswriteitemcompressed_v2.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = laswriteitemcompressed_v2.hpp; sourceTree = "<group>"; };
+		2B162D361BD5C5730001E17B /* laswriteitemraw.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = laswriteitemraw.hpp; sourceTree = "<group>"; };
+		2B162D371BD5C5740001E17B /* laswritepoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = laswritepoint.cpp; sourceTree = "<group>"; };
+		2B162D381BD5C5740001E17B /* laswritepoint.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = laswritepoint.hpp; sourceTree = "<group>"; };
+		2B162D391BD5C5740001E17B /* laszip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = laszip.cpp; sourceTree = "<group>"; };
+		2B162D3A1BD5C5740001E17B /* laszip.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = laszip.hpp; sourceTree = "<group>"; };
+		2B162D3B1BD5C5740001E17B /* laszip_common_v1.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = laszip_common_v1.hpp; sourceTree = "<group>"; };
+		2B162D3C1BD5C5740001E17B /* laszip_common_v2.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = laszip_common_v2.hpp; sourceTree = "<group>"; };
+		2B162D3D1BD5C5740001E17B /* laszip_dll.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = laszip_dll.cpp; sourceTree = "<group>"; };
+		2B162D3E1BD5C5740001E17B /* laszipper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = laszipper.cpp; sourceTree = "<group>"; };
+		2B162D3F1BD5C5740001E17B /* laszipper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = laszipper.hpp; sourceTree = "<group>"; };
+		2B162D401BD5C5740001E17B /* mydefs.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mydefs.hpp; sourceTree = "<group>"; };
+		2B162D541BD6B07D0001E17B /* lasdefinitions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasdefinitions.hpp; sourceTree = "<group>"; };
+		2B162D551BD6B07D0001E17B /* lasfilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasfilter.hpp; sourceTree = "<group>"; };
+		2B162D561BD6B07D0001E17B /* lasreader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasreader.hpp; sourceTree = "<group>"; };
+		2B162D571BD6B07D0001E17B /* lasreader_asc.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasreader_asc.hpp; sourceTree = "<group>"; };
+		2B162D581BD6B07D0001E17B /* lasreader_bil.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasreader_bil.hpp; sourceTree = "<group>"; };
+		2B162D591BD6B07D0001E17B /* lasreader_bin.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasreader_bin.hpp; sourceTree = "<group>"; };
+		2B162D5A1BD6B07D0001E17B /* lasreader_dtm.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasreader_dtm.hpp; sourceTree = "<group>"; };
+		2B162D5B1BD6B07D0001E17B /* lasreader_las.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasreader_las.hpp; sourceTree = "<group>"; };
+		2B162D5C1BD6B07D0001E17B /* lasreader_qfit.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasreader_qfit.hpp; sourceTree = "<group>"; };
+		2B162D5D1BD6B07D0001E17B /* lasreader_shp.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasreader_shp.hpp; sourceTree = "<group>"; };
+		2B162D5E1BD6B07D0001E17B /* lasreader_txt.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasreader_txt.hpp; sourceTree = "<group>"; };
+		2B162D5F1BD6B07D0001E17B /* lasreaderbuffered.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasreaderbuffered.hpp; sourceTree = "<group>"; };
+		2B162D601BD6B07D0001E17B /* lasreadermerged.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasreadermerged.hpp; sourceTree = "<group>"; };
+		2B162D611BD6B07D0001E17B /* lasreaderpipeon.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasreaderpipeon.hpp; sourceTree = "<group>"; };
+		2B162D621BD6B07D0001E17B /* lastransform.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lastransform.hpp; sourceTree = "<group>"; };
+		2B162D631BD6B07D0001E17B /* lasutility.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasutility.hpp; sourceTree = "<group>"; };
+		2B162D641BD6B07D0001E17B /* laswaveform13reader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = laswaveform13reader.hpp; sourceTree = "<group>"; };
+		2B162D651BD6B07D0001E17B /* laswaveform13writer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = laswaveform13writer.hpp; sourceTree = "<group>"; };
+		2B162D661BD6B07D0001E17B /* laswriter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = laswriter.hpp; sourceTree = "<group>"; };
+		2B162D671BD6B07D0001E17B /* laswriter_bin.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = laswriter_bin.hpp; sourceTree = "<group>"; };
+		2B162D681BD6B07D0001E17B /* laswriter_las.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = laswriter_las.hpp; sourceTree = "<group>"; };
+		2B162D691BD6B07D0001E17B /* laswriter_qfit.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = laswriter_qfit.hpp; sourceTree = "<group>"; };
+		2B162D6A1BD6B07D0001E17B /* laswriter_txt.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = laswriter_txt.hpp; sourceTree = "<group>"; };
+		2B162D6B1BD6B07D0001E17B /* laswriter_wrl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = laswriter_wrl.hpp; sourceTree = "<group>"; };
+		2B162D6C1BD6B07E0001E17B /* laswritercompatible.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = laswritercompatible.hpp; sourceTree = "<group>"; };
+		2B162D6E1BD6B0A40001E17B /* fopen_compressed.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fopen_compressed.cpp; path = ../../../LAStools/LASlib/src/fopen_compressed.cpp; sourceTree = "<group>"; };
+		2B162D6F1BD6B0A40001E17B /* lasfilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lasfilter.cpp; path = ../../../LAStools/LASlib/src/lasfilter.cpp; sourceTree = "<group>"; };
+		2B162D701BD6B0A40001E17B /* lasreader_asc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lasreader_asc.cpp; path = ../../../LAStools/LASlib/src/lasreader_asc.cpp; sourceTree = "<group>"; };
+		2B162D711BD6B0A40001E17B /* lasreader_bil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lasreader_bil.cpp; path = ../../../LAStools/LASlib/src/lasreader_bil.cpp; sourceTree = "<group>"; };
+		2B162D721BD6B0A40001E17B /* lasreader_bin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lasreader_bin.cpp; path = ../../../LAStools/LASlib/src/lasreader_bin.cpp; sourceTree = "<group>"; };
+		2B162D731BD6B0A40001E17B /* lasreader_dtm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lasreader_dtm.cpp; path = ../../../LAStools/LASlib/src/lasreader_dtm.cpp; sourceTree = "<group>"; };
+		2B162D741BD6B0A40001E17B /* lasreader_las.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lasreader_las.cpp; path = ../../../LAStools/LASlib/src/lasreader_las.cpp; sourceTree = "<group>"; };
+		2B162D751BD6B0A40001E17B /* lasreader_qfit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lasreader_qfit.cpp; path = ../../../LAStools/LASlib/src/lasreader_qfit.cpp; sourceTree = "<group>"; };
+		2B162D761BD6B0A40001E17B /* lasreader_shp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lasreader_shp.cpp; path = ../../../LAStools/LASlib/src/lasreader_shp.cpp; sourceTree = "<group>"; };
+		2B162D771BD6B0A40001E17B /* lasreader_txt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lasreader_txt.cpp; path = ../../../LAStools/LASlib/src/lasreader_txt.cpp; sourceTree = "<group>"; };
+		2B162D781BD6B0A40001E17B /* lasreader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lasreader.cpp; path = ../../../LAStools/LASlib/src/lasreader.cpp; sourceTree = "<group>"; };
+		2B162D791BD6B0A40001E17B /* lasreaderbuffered.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lasreaderbuffered.cpp; path = ../../../LAStools/LASlib/src/lasreaderbuffered.cpp; sourceTree = "<group>"; };
+		2B162D7A1BD6B0A40001E17B /* lasreadermerged.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lasreadermerged.cpp; path = ../../../LAStools/LASlib/src/lasreadermerged.cpp; sourceTree = "<group>"; };
+		2B162D7B1BD6B0A40001E17B /* lasreaderpipeon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lasreaderpipeon.cpp; path = ../../../LAStools/LASlib/src/lasreaderpipeon.cpp; sourceTree = "<group>"; };
+		2B162D7C1BD6B0A40001E17B /* lastransform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lastransform.cpp; path = ../../../LAStools/LASlib/src/lastransform.cpp; sourceTree = "<group>"; };
+		2B162D7D1BD6B0A40001E17B /* lasutility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lasutility.cpp; path = ../../../LAStools/LASlib/src/lasutility.cpp; sourceTree = "<group>"; };
+		2B162D7E1BD6B0A40001E17B /* laswaveform13reader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = laswaveform13reader.cpp; path = ../../../LAStools/LASlib/src/laswaveform13reader.cpp; sourceTree = "<group>"; };
+		2B162D7F1BD6B0A40001E17B /* laswaveform13writer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = laswaveform13writer.cpp; path = ../../../LAStools/LASlib/src/laswaveform13writer.cpp; sourceTree = "<group>"; };
+		2B162D801BD6B0A40001E17B /* laswriter_bin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = laswriter_bin.cpp; path = ../../../LAStools/LASlib/src/laswriter_bin.cpp; sourceTree = "<group>"; };
+		2B162D811BD6B0A40001E17B /* laswriter_las.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = laswriter_las.cpp; path = ../../../LAStools/LASlib/src/laswriter_las.cpp; sourceTree = "<group>"; };
+		2B162D821BD6B0A40001E17B /* laswriter_qfit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = laswriter_qfit.cpp; path = ../../../LAStools/LASlib/src/laswriter_qfit.cpp; sourceTree = "<group>"; };
+		2B162D831BD6B0A40001E17B /* laswriter_txt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = laswriter_txt.cpp; path = ../../../LAStools/LASlib/src/laswriter_txt.cpp; sourceTree = "<group>"; };
+		2B162D841BD6B0A40001E17B /* laswriter_wrl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = laswriter_wrl.cpp; path = ../../../LAStools/LASlib/src/laswriter_wrl.cpp; sourceTree = "<group>"; };
+		2B162D851BD6B0A40001E17B /* laswriter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = laswriter.cpp; path = ../../../LAStools/LASlib/src/laswriter.cpp; sourceTree = "<group>"; };
+		2B162D861BD6B0A40001E17B /* laswritercompatible.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = laswritercompatible.cpp; path = ../../../LAStools/LASlib/src/laswritercompatible.cpp; sourceTree = "<group>"; };
+		2B162DC41BD6DA670001E17B /* libgdal.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgdal.a; path = ../../gdal/install/libgdal.a; sourceTree = "<group>"; };
+		2B162DC51BD6DA670001E17B /* libproj.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libproj.a; path = ../../gdal/install/libproj.a; sourceTree = "<group>"; };
+		2B162DCA1BD6DC250001E17B /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		2BB6A8931BD992DC00FDB60A /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperation.h; path = "../../libs/WhirlyGlobe-Maply/third-party/AFNetworking/AFNetworking/AFHTTPRequestOperation.h"; sourceTree = "<group>"; };
+		2BB6A8941BD992DC00FDB60A /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperationManager.h; path = "../../libs/WhirlyGlobe-Maply/third-party/AFNetworking/AFNetworking/AFHTTPRequestOperationManager.h"; sourceTree = "<group>"; };
+		2BB6A8951BD992DC00FDB60A /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPSessionManager.h; path = "../../libs/WhirlyGlobe-Maply/third-party/AFNetworking/AFNetworking/AFHTTPSessionManager.h"; sourceTree = "<group>"; };
+		2BB6A8961BD992DC00FDB60A /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFNetworking.h; path = "../../libs/WhirlyGlobe-Maply/third-party/AFNetworking/AFNetworking/AFNetworking.h"; sourceTree = "<group>"; };
+		2BB6A8971BD992DC00FDB60A /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFNetworkReachabilityManager.h; path = "../../libs/WhirlyGlobe-Maply/third-party/AFNetworking/AFNetworking/AFNetworkReachabilityManager.h"; sourceTree = "<group>"; };
+		2BB6A8981BD992DC00FDB60A /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFSecurityPolicy.h; path = "../../libs/WhirlyGlobe-Maply/third-party/AFNetworking/AFNetworking/AFSecurityPolicy.h"; sourceTree = "<group>"; };
+		2BB6A8991BD992DC00FDB60A /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFURLConnectionOperation.h; path = "../../libs/WhirlyGlobe-Maply/third-party/AFNetworking/AFNetworking/AFURLConnectionOperation.h"; sourceTree = "<group>"; };
+		2BB6A89A1BD992DC00FDB60A /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFURLRequestSerialization.h; path = "../../libs/WhirlyGlobe-Maply/third-party/AFNetworking/AFNetworking/AFURLRequestSerialization.h"; sourceTree = "<group>"; };
+		2BB6A89B1BD992DC00FDB60A /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFURLResponseSerialization.h; path = "../../libs/WhirlyGlobe-Maply/third-party/AFNetworking/AFNetworking/AFURLResponseSerialization.h"; sourceTree = "<group>"; };
+		2BB6A89C1BD992DC00FDB60A /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFURLSessionManager.h; path = "../../libs/WhirlyGlobe-Maply/third-party/AFNetworking/AFNetworking/AFURLSessionManager.h"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2B162AFA1BD59E3C0001E17B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2B162DCB1BD6DC250001E17B /* libiconv.tbd in Frameworks */,
+				2B162DC81BD6DBB90001E17B /* libgdal.a in Frameworks */,
+				2B162DC91BD6DBB90001E17B /* libproj.a in Frameworks */,
+				2B162CE91BD5C2810001E17B /* boost.a in Frameworks */,
+				2B162B481BD5A15E0001E17B /* libsqlite3.tbd in Frameworks */,
+				2B162B461BD5A1590001E17B /* libxml2.tbd in Frameworks */,
+				2B162B441BD5A1540001E17B /* libz.tbd in Frameworks */,
+				2B162B421BD5A14F0001E17B /* libstdc++.tbd in Frameworks */,
+				2B162B401BD5A1490001E17B /* libc++.tbd in Frameworks */,
+				2B162B3E1BD5A13F0001E17B /* CoreLocation.framework in Frameworks */,
+				2B162B3A1BD59E840001E17B /* libWhirlyGlobe-MaplyComponent.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2B162B131BD59E3D0001E17B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2B162B1E1BD59E3D0001E17B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2B162AF41BD59E3C0001E17B = {
+			isa = PBXGroup;
+			children = (
+				2B162DCA1BD6DC250001E17B /* libiconv.tbd */,
+				2B162DC41BD6DA670001E17B /* libgdal.a */,
+				2B162DC51BD6DA670001E17B /* libproj.a */,
+				2B162CE81BD5C2810001E17B /* boost.a */,
+				2B162B471BD5A15E0001E17B /* libsqlite3.tbd */,
+				2B162B451BD5A1590001E17B /* libxml2.tbd */,
+				2B162B431BD5A1540001E17B /* libz.tbd */,
+				2B162B411BD5A14F0001E17B /* libstdc++.tbd */,
+				2B162B3F1BD5A1490001E17B /* libc++.tbd */,
+				2B162B3D1BD5A13F0001E17B /* CoreLocation.framework */,
+				2B162B331BD59E5D0001E17B /* WhirlyGlobe-MaplyComponent.xcodeproj */,
+				2B162AFF1BD59E3C0001E17B /* LidarViewer */,
+				2B162C321BD5B3A40001E17B /* Data */,
+				2B162B191BD59E3D0001E17B /* LidarViewerTests */,
+				2B162B241BD59E3D0001E17B /* LidarViewerUITests */,
+				2B162AFE1BD59E3C0001E17B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2B162AFE1BD59E3C0001E17B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2B162AFD1BD59E3C0001E17B /* LidarViewer.app */,
+				2B162B161BD59E3D0001E17B /* LidarViewerTests.xctest */,
+				2B162B211BD59E3D0001E17B /* LidarViewerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2B162AFF1BD59E3C0001E17B /* LidarViewer */ = {
+			isa = PBXGroup;
+			children = (
+				2BB6A8921BD992A400FDB60A /* AFNetworking */,
+				2B162B031BD59E3C0001E17B /* AppDelegate.h */,
+				2B162B041BD59E3C0001E17B /* AppDelegate.m */,
+				2B162B061BD59E3C0001E17B /* ViewController.h */,
+				2B162B071BD59E3C0001E17B /* ViewController.mm */,
+				2B162B091BD59E3C0001E17B /* Main.storyboard */,
+				2B162B0C1BD59E3C0001E17B /* Assets.xcassets */,
+				2B162B0E1BD59E3C0001E17B /* LaunchScreen.storyboard */,
+				2B162B111BD59E3C0001E17B /* Info.plist */,
+				2B162D521BD6B0670001E17B /* LASlib */,
+				2B162D091BD5C5680001E17B /* laszip */,
+				2B162B951BD5B1B20001E17B /* liblas */,
+				2B162B001BD59E3C0001E17B /* Supporting Files */,
+			);
+			path = LidarViewer;
+			sourceTree = "<group>";
+		};
+		2B162B001BD59E3C0001E17B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2B162B011BD59E3C0001E17B /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2B162B191BD59E3D0001E17B /* LidarViewerTests */ = {
+			isa = PBXGroup;
+			children = (
+				2B162B1A1BD59E3D0001E17B /* LidarViewerTests.m */,
+				2B162B1C1BD59E3D0001E17B /* Info.plist */,
+			);
+			path = LidarViewerTests;
+			sourceTree = "<group>";
+		};
+		2B162B241BD59E3D0001E17B /* LidarViewerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				2B162B251BD59E3D0001E17B /* LidarViewerUITests.m */,
+				2B162B271BD59E3D0001E17B /* Info.plist */,
+			);
+			path = LidarViewerUITests;
+			sourceTree = "<group>";
+		};
+		2B162B341BD59E5D0001E17B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2B162B391BD59E5D0001E17B /* libWhirlyGlobe-MaplyComponent.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2B162B951BD5B1B20001E17B /* liblas */ = {
+			isa = PBXGroup;
+			children = (
+				2B162C371BD5BD750001E17B /* include */,
+				2B162C901BD5BD750001E17B /* src */,
+			);
+			name = liblas;
+			path = "../../libs/WhirlyGlobe-Maply/WhirlyGlobeSrc/local_libs/las";
+			sourceTree = "<group>";
+		};
+		2B162C321BD5B3A40001E17B /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				2B162C331BD5B3E90001E17B /* st-helens.laz */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		2B162C371BD5BD750001E17B /* include */ = {
+			isa = PBXGroup;
+			children = (
+				2B162C391BD5BD750001E17B /* liblas */,
+			);
+			name = include;
+			path = ../liblas/include;
+			sourceTree = "<group>";
+		};
+		2B162C391BD5BD750001E17B /* liblas */ = {
+			isa = PBXGroup;
+			children = (
+				2B162C3A1BD5BD750001E17B /* bounds.hpp */,
+				2B162C3B1BD5BD750001E17B /* capi */,
+				2B162C3F1BD5BD750001E17B /* chipper.hpp */,
+				2B162C401BD5BD750001E17B /* classification.hpp */,
+				2B162C411BD5BD750001E17B /* color.hpp */,
+				2B162C421BD5BD750001E17B /* compatibility.hpp */,
+				2B162C431BD5BD750001E17B /* detail */,
+				2B162C5C1BD5BD750001E17B /* dimension.hpp */,
+				2B162C5D1BD5BD750001E17B /* error.hpp */,
+				2B162C5E1BD5BD750001E17B /* exception.hpp */,
+				2B162C5F1BD5BD750001E17B /* export.hpp */,
+				2B162C601BD5BD750001E17B /* external */,
+				2B162C811BD5BD750001E17B /* factory.hpp */,
+				2B162C821BD5BD750001E17B /* filter.hpp */,
+				2B162C831BD5BD750001E17B /* header.hpp */,
+				2B162C841BD5BD750001E17B /* index.hpp */,
+				2B162C851BD5BD750001E17B /* iterator.hpp */,
+				2B162C861BD5BD750001E17B /* liblas.hpp */,
+				2B162C871BD5BD750001E17B /* point.hpp */,
+				2B162C881BD5BD750001E17B /* reader.hpp */,
+				2B162C891BD5BD750001E17B /* schema.hpp */,
+				2B162C8A1BD5BD750001E17B /* spatialreference.hpp */,
+				2B162C8B1BD5BD750001E17B /* transform.hpp */,
+				2B162C8C1BD5BD750001E17B /* utility.hpp */,
+				2B162C8D1BD5BD750001E17B /* variablerecord.hpp */,
+				2B162C8E1BD5BD750001E17B /* version.hpp */,
+				2B162C8F1BD5BD750001E17B /* writer.hpp */,
+			);
+			path = liblas;
+			sourceTree = "<group>";
+		};
+		2B162C3B1BD5BD750001E17B /* capi */ = {
+			isa = PBXGroup;
+			children = (
+				2B162C3C1BD5BD750001E17B /* las_config.h */,
+				2B162C3D1BD5BD750001E17B /* las_version.h */,
+				2B162C3E1BD5BD750001E17B /* liblas.h */,
+			);
+			path = capi;
+			sourceTree = "<group>";
+		};
+		2B162C431BD5BD750001E17B /* detail */ = {
+			isa = PBXGroup;
+			children = (
+				2B162C441BD5BD750001E17B /* binary.hpp */,
+				2B162C451BD5BD750001E17B /* endian.hpp */,
+				2B162C461BD5BD750001E17B /* file_ptr_stream.hpp */,
+				2B162C471BD5BD750001E17B /* fwd.hpp */,
+				2B162C481BD5BD750001E17B /* index */,
+				2B162C4B1BD5BD750001E17B /* opt_allocator.hpp */,
+				2B162C4C1BD5BD750001E17B /* pointrecord.hpp */,
+				2B162C4D1BD5BD750001E17B /* private_utility.hpp */,
+				2B162C4E1BD5BD750001E17B /* reader */,
+				2B162C531BD5BD750001E17B /* sha1.hpp */,
+				2B162C541BD5BD750001E17B /* singleton.hpp */,
+				2B162C551BD5BD750001E17B /* timer.hpp */,
+				2B162C561BD5BD750001E17B /* writer */,
+				2B162C5B1BD5BD750001E17B /* zippoint.hpp */,
+			);
+			path = detail;
+			sourceTree = "<group>";
+		};
+		2B162C481BD5BD750001E17B /* index */ = {
+			isa = PBXGroup;
+			children = (
+				2B162C491BD5BD750001E17B /* indexcell.hpp */,
+				2B162C4A1BD5BD750001E17B /* indexoutput.hpp */,
+			);
+			path = index;
+			sourceTree = "<group>";
+		};
+		2B162C4E1BD5BD750001E17B /* reader */ = {
+			isa = PBXGroup;
+			children = (
+				2B162C4F1BD5BD750001E17B /* cachedreader.hpp */,
+				2B162C501BD5BD750001E17B /* header.hpp */,
+				2B162C511BD5BD750001E17B /* reader.hpp */,
+				2B162C521BD5BD750001E17B /* zipreader.hpp */,
+			);
+			path = reader;
+			sourceTree = "<group>";
+		};
+		2B162C561BD5BD750001E17B /* writer */ = {
+			isa = PBXGroup;
+			children = (
+				2B162C571BD5BD750001E17B /* header.hpp */,
+				2B162C581BD5BD750001E17B /* point.hpp */,
+				2B162C591BD5BD750001E17B /* writer.hpp */,
+				2B162C5A1BD5BD750001E17B /* zipwriter.hpp */,
+			);
+			path = writer;
+			sourceTree = "<group>";
+		};
+		2B162C601BD5BD750001E17B /* external */ = {
+			isa = PBXGroup;
+			children = (
+				2B162C611BD5BD750001E17B /* property_tree */,
+			);
+			path = external;
+			sourceTree = "<group>";
+		};
+		2B162C611BD5BD750001E17B /* property_tree */ = {
+			isa = PBXGroup;
+			children = (
+				2B162C621BD5BD750001E17B /* detail */,
+				2B162C761BD5BD750001E17B /* exceptions.hpp */,
+				2B162C771BD5BD750001E17B /* id_translator.hpp */,
+				2B162C781BD5BD750001E17B /* info_parser.hpp */,
+				2B162C791BD5BD750001E17B /* ini_parser.hpp */,
+				2B162C7A1BD5BD750001E17B /* json_parser.hpp */,
+				2B162C7B1BD5BD750001E17B /* ptree.hpp */,
+				2B162C7C1BD5BD750001E17B /* ptree_fwd.hpp */,
+				2B162C7D1BD5BD750001E17B /* ptree_serialization.hpp */,
+				2B162C7E1BD5BD750001E17B /* stream_translator.hpp */,
+				2B162C7F1BD5BD750001E17B /* string_path.hpp */,
+				2B162C801BD5BD750001E17B /* xml_parser.hpp */,
+			);
+			path = property_tree;
+			sourceTree = "<group>";
+		};
+		2B162C621BD5BD750001E17B /* detail */ = {
+			isa = PBXGroup;
+			children = (
+				2B162C631BD5BD750001E17B /* exception_implementation.hpp */,
+				2B162C641BD5BD750001E17B /* file_parser_error.hpp */,
+				2B162C651BD5BD750001E17B /* info_parser_error.hpp */,
+				2B162C661BD5BD750001E17B /* info_parser_read.hpp */,
+				2B162C671BD5BD750001E17B /* info_parser_utils.hpp */,
+				2B162C681BD5BD750001E17B /* info_parser_write.hpp */,
+				2B162C691BD5BD750001E17B /* info_parser_writer_settings.hpp */,
+				2B162C6A1BD5BD750001E17B /* json_parser_error.hpp */,
+				2B162C6B1BD5BD750001E17B /* json_parser_read.hpp */,
+				2B162C6C1BD5BD750001E17B /* json_parser_write.hpp */,
+				2B162C6D1BD5BD750001E17B /* ptree_implementation.hpp */,
+				2B162C6E1BD5BD750001E17B /* ptree_utils.hpp */,
+				2B162C6F1BD5BD750001E17B /* rapidxml.hpp */,
+				2B162C701BD5BD750001E17B /* xml_parser_error.hpp */,
+				2B162C711BD5BD750001E17B /* xml_parser_flags.hpp */,
+				2B162C721BD5BD750001E17B /* xml_parser_read_rapidxml.hpp */,
+				2B162C731BD5BD750001E17B /* xml_parser_utils.hpp */,
+				2B162C741BD5BD750001E17B /* xml_parser_write.hpp */,
+				2B162C751BD5BD750001E17B /* xml_parser_writer_settings.hpp */,
+			);
+			path = detail;
+			sourceTree = "<group>";
+		};
+		2B162C901BD5BD750001E17B /* src */ = {
+			isa = PBXGroup;
+			children = (
+				2B162C911BD5BD750001E17B /* c_api.cpp */,
+				2B162C921BD5BD750001E17B /* chipper.cpp */,
+				2B162C931BD5BD750001E17B /* classification.cpp */,
+				2B162C951BD5BD750001E17B /* color.cpp */,
+				2B162C961BD5BD750001E17B /* detail */,
+				2B162CA71BD5BD750001E17B /* dimension.cpp */,
+				2B162CA81BD5BD750001E17B /* error.cpp */,
+				2B162CA91BD5BD750001E17B /* factory.cpp */,
+				2B162CAA1BD5BD750001E17B /* filter.cpp */,
+				2B162CAB1BD5BD750001E17B /* gt_citation.cpp */,
+				2B162CAC1BD5BD750001E17B /* gt_citation.h */,
+				2B162CAD1BD5BD750001E17B /* gt_wkt_srs.cpp */,
+				2B162CAE1BD5BD750001E17B /* gt_wkt_srs.h */,
+				2B162CAF1BD5BD750001E17B /* gt_wkt_srs_for_gdal.h */,
+				2B162CB01BD5BD750001E17B /* header.cpp */,
+				2B162CB11BD5BD750001E17B /* index.cpp */,
+				2B162CB21BD5BD750001E17B /* point.cpp */,
+				2B162CB31BD5BD750001E17B /* reader.cpp */,
+				2B162CB41BD5BD750001E17B /* schema.cpp */,
+				2B162CB51BD5BD750001E17B /* spatialreference.cpp */,
+				2B162CB61BD5BD750001E17B /* tifvsi.cpp */,
+				2B162CB71BD5BD750001E17B /* tifvsi.h */,
+				2B162CB81BD5BD750001E17B /* transform.cpp */,
+				2B162CB91BD5BD750001E17B /* utility.cpp */,
+				2B162CBA1BD5BD750001E17B /* variablerecord.cpp */,
+				2B162CBB1BD5BD750001E17B /* version.cpp */,
+				2B162CBD1BD5BD750001E17B /* writer.cpp */,
+			);
+			name = src;
+			path = ../liblas/src;
+			sourceTree = "<group>";
+		};
+		2B162C961BD5BD750001E17B /* detail */ = {
+			isa = PBXGroup;
+			children = (
+				2B162C971BD5BD750001E17B /* index */,
+				2B162C9A1BD5BD750001E17B /* reader */,
+				2B162C9F1BD5BD750001E17B /* sha1.cpp */,
+				2B162CA01BD5BD750001E17B /* utility.cpp */,
+				2B162CA11BD5BD750001E17B /* writer */,
+				2B162CA61BD5BD750001E17B /* zippoint.cpp */,
+			);
+			path = detail;
+			sourceTree = "<group>";
+		};
+		2B162C971BD5BD750001E17B /* index */ = {
+			isa = PBXGroup;
+			children = (
+				2B162C981BD5BD750001E17B /* indexcell.cpp */,
+				2B162C991BD5BD750001E17B /* indexoutput.cpp */,
+			);
+			path = index;
+			sourceTree = "<group>";
+		};
+		2B162C9A1BD5BD750001E17B /* reader */ = {
+			isa = PBXGroup;
+			children = (
+				2B162C9B1BD5BD750001E17B /* cachedreader.cpp */,
+				2B162C9C1BD5BD750001E17B /* header.cpp */,
+				2B162C9D1BD5BD750001E17B /* reader.cpp */,
+				2B162C9E1BD5BD750001E17B /* zipreader.cpp */,
+			);
+			path = reader;
+			sourceTree = "<group>";
+		};
+		2B162CA11BD5BD750001E17B /* writer */ = {
+			isa = PBXGroup;
+			children = (
+				2B162CA21BD5BD750001E17B /* header.cpp */,
+				2B162CA31BD5BD750001E17B /* point.cpp */,
+				2B162CA41BD5BD750001E17B /* writer.cpp */,
+				2B162CA51BD5BD750001E17B /* zipwriter.cpp */,
+			);
+			path = writer;
+			sourceTree = "<group>";
+		};
+		2B162D091BD5C5680001E17B /* laszip */ = {
+			isa = PBXGroup;
+			children = (
+				2B162D0A1BD5C5730001E17B /* src */,
+			);
+			name = laszip;
+			sourceTree = "<group>";
+		};
+		2B162D0A1BD5C5730001E17B /* src */ = {
+			isa = PBXGroup;
+			children = (
+				2B162D0B1BD5C5730001E17B /* arithmeticdecoder.cpp */,
+				2B162D0C1BD5C5730001E17B /* arithmeticdecoder.hpp */,
+				2B162D0D1BD5C5730001E17B /* arithmeticencoder.cpp */,
+				2B162D0E1BD5C5730001E17B /* arithmeticencoder.hpp */,
+				2B162D0F1BD5C5730001E17B /* arithmeticmodel.cpp */,
+				2B162D101BD5C5730001E17B /* arithmeticmodel.hpp */,
+				2B162D111BD5C5730001E17B /* bytestreamin.hpp */,
+				2B162D121BD5C5730001E17B /* bytestreamin_array.hpp */,
+				2B162D131BD5C5730001E17B /* bytestreamin_file.hpp */,
+				2B162D141BD5C5730001E17B /* bytestreamin_istream.hpp */,
+				2B162D151BD5C5730001E17B /* bytestreaminout.hpp */,
+				2B162D161BD5C5730001E17B /* bytestreaminout_file.hpp */,
+				2B162D171BD5C5730001E17B /* bytestreamout.hpp */,
+				2B162D181BD5C5730001E17B /* bytestreamout_array.hpp */,
+				2B162D191BD5C5730001E17B /* bytestreamout_file.hpp */,
+				2B162D1A1BD5C5730001E17B /* bytestreamout_nil.hpp */,
+				2B162D1B1BD5C5730001E17B /* bytestreamout_ostream.hpp */,
+				2B162D1C1BD5C5730001E17B /* integercompressor.cpp */,
+				2B162D1D1BD5C5730001E17B /* integercompressor.hpp */,
+				2B162D1E1BD5C5730001E17B /* lasattributer.hpp */,
+				2B162D1F1BD5C5730001E17B /* lasindex.cpp */,
+				2B162D201BD5C5730001E17B /* lasindex.hpp */,
+				2B162D211BD5C5730001E17B /* lasinterval.cpp */,
+				2B162D221BD5C5730001E17B /* lasinterval.hpp */,
+				2B162D231BD5C5730001E17B /* laspoint.hpp */,
+				2B162D241BD5C5730001E17B /* lasquadtree.cpp */,
+				2B162D251BD5C5730001E17B /* lasquadtree.hpp */,
+				2B162D261BD5C5730001E17B /* lasquantizer.hpp */,
+				2B162D271BD5C5730001E17B /* lasreaditem.hpp */,
+				2B162D281BD5C5730001E17B /* lasreaditemcompressed_v1.cpp */,
+				2B162D291BD5C5730001E17B /* lasreaditemcompressed_v1.hpp */,
+				2B162D2A1BD5C5730001E17B /* lasreaditemcompressed_v2.cpp */,
+				2B162D2B1BD5C5730001E17B /* lasreaditemcompressed_v2.hpp */,
+				2B162D2C1BD5C5730001E17B /* lasreaditemraw.hpp */,
+				2B162D2D1BD5C5730001E17B /* lasreadpoint.cpp */,
+				2B162D2E1BD5C5730001E17B /* lasreadpoint.hpp */,
+				2B162D2F1BD5C5730001E17B /* lasunzipper.cpp */,
+				2B162D301BD5C5730001E17B /* lasunzipper.hpp */,
+				2B162D311BD5C5730001E17B /* laswriteitem.hpp */,
+				2B162D321BD5C5730001E17B /* laswriteitemcompressed_v1.cpp */,
+				2B162D331BD5C5730001E17B /* laswriteitemcompressed_v1.hpp */,
+				2B162D341BD5C5730001E17B /* laswriteitemcompressed_v2.cpp */,
+				2B162D351BD5C5730001E17B /* laswriteitemcompressed_v2.hpp */,
+				2B162D361BD5C5730001E17B /* laswriteitemraw.hpp */,
+				2B162D371BD5C5740001E17B /* laswritepoint.cpp */,
+				2B162D381BD5C5740001E17B /* laswritepoint.hpp */,
+				2B162D391BD5C5740001E17B /* laszip.cpp */,
+				2B162D3A1BD5C5740001E17B /* laszip.hpp */,
+				2B162D3B1BD5C5740001E17B /* laszip_common_v1.hpp */,
+				2B162D3C1BD5C5740001E17B /* laszip_common_v2.hpp */,
+				2B162D3D1BD5C5740001E17B /* laszip_dll.cpp */,
+				2B162D3E1BD5C5740001E17B /* laszipper.cpp */,
+				2B162D3F1BD5C5740001E17B /* laszipper.hpp */,
+				2B162D401BD5C5740001E17B /* mydefs.hpp */,
+			);
+			name = src;
+			path = ../../../LAStools/LASzip/src;
+			sourceTree = "<group>";
+		};
+		2B162D521BD6B0670001E17B /* LASlib */ = {
+			isa = PBXGroup;
+			children = (
+				2B162D6D1BD6B09C0001E17B /* src */,
+				2B162D531BD6B07D0001E17B /* inc */,
+			);
+			name = LASlib;
+			sourceTree = "<group>";
+		};
+		2B162D531BD6B07D0001E17B /* inc */ = {
+			isa = PBXGroup;
+			children = (
+				2B162D541BD6B07D0001E17B /* lasdefinitions.hpp */,
+				2B162D551BD6B07D0001E17B /* lasfilter.hpp */,
+				2B162D561BD6B07D0001E17B /* lasreader.hpp */,
+				2B162D571BD6B07D0001E17B /* lasreader_asc.hpp */,
+				2B162D581BD6B07D0001E17B /* lasreader_bil.hpp */,
+				2B162D591BD6B07D0001E17B /* lasreader_bin.hpp */,
+				2B162D5A1BD6B07D0001E17B /* lasreader_dtm.hpp */,
+				2B162D5B1BD6B07D0001E17B /* lasreader_las.hpp */,
+				2B162D5C1BD6B07D0001E17B /* lasreader_qfit.hpp */,
+				2B162D5D1BD6B07D0001E17B /* lasreader_shp.hpp */,
+				2B162D5E1BD6B07D0001E17B /* lasreader_txt.hpp */,
+				2B162D5F1BD6B07D0001E17B /* lasreaderbuffered.hpp */,
+				2B162D601BD6B07D0001E17B /* lasreadermerged.hpp */,
+				2B162D611BD6B07D0001E17B /* lasreaderpipeon.hpp */,
+				2B162D621BD6B07D0001E17B /* lastransform.hpp */,
+				2B162D631BD6B07D0001E17B /* lasutility.hpp */,
+				2B162D641BD6B07D0001E17B /* laswaveform13reader.hpp */,
+				2B162D651BD6B07D0001E17B /* laswaveform13writer.hpp */,
+				2B162D661BD6B07D0001E17B /* laswriter.hpp */,
+				2B162D671BD6B07D0001E17B /* laswriter_bin.hpp */,
+				2B162D681BD6B07D0001E17B /* laswriter_las.hpp */,
+				2B162D691BD6B07D0001E17B /* laswriter_qfit.hpp */,
+				2B162D6A1BD6B07D0001E17B /* laswriter_txt.hpp */,
+				2B162D6B1BD6B07D0001E17B /* laswriter_wrl.hpp */,
+				2B162D6C1BD6B07E0001E17B /* laswritercompatible.hpp */,
+			);
+			name = inc;
+			path = ../../../LAStools/LASlib/inc;
+			sourceTree = "<group>";
+		};
+		2B162D6D1BD6B09C0001E17B /* src */ = {
+			isa = PBXGroup;
+			children = (
+				2B162D6E1BD6B0A40001E17B /* fopen_compressed.cpp */,
+				2B162D6F1BD6B0A40001E17B /* lasfilter.cpp */,
+				2B162D701BD6B0A40001E17B /* lasreader_asc.cpp */,
+				2B162D711BD6B0A40001E17B /* lasreader_bil.cpp */,
+				2B162D721BD6B0A40001E17B /* lasreader_bin.cpp */,
+				2B162D731BD6B0A40001E17B /* lasreader_dtm.cpp */,
+				2B162D741BD6B0A40001E17B /* lasreader_las.cpp */,
+				2B162D751BD6B0A40001E17B /* lasreader_qfit.cpp */,
+				2B162D761BD6B0A40001E17B /* lasreader_shp.cpp */,
+				2B162D771BD6B0A40001E17B /* lasreader_txt.cpp */,
+				2B162D781BD6B0A40001E17B /* lasreader.cpp */,
+				2B162D791BD6B0A40001E17B /* lasreaderbuffered.cpp */,
+				2B162D7A1BD6B0A40001E17B /* lasreadermerged.cpp */,
+				2B162D7B1BD6B0A40001E17B /* lasreaderpipeon.cpp */,
+				2B162D7C1BD6B0A40001E17B /* lastransform.cpp */,
+				2B162D7D1BD6B0A40001E17B /* lasutility.cpp */,
+				2B162D7E1BD6B0A40001E17B /* laswaveform13reader.cpp */,
+				2B162D7F1BD6B0A40001E17B /* laswaveform13writer.cpp */,
+				2B162D801BD6B0A40001E17B /* laswriter_bin.cpp */,
+				2B162D811BD6B0A40001E17B /* laswriter_las.cpp */,
+				2B162D821BD6B0A40001E17B /* laswriter_qfit.cpp */,
+				2B162D831BD6B0A40001E17B /* laswriter_txt.cpp */,
+				2B162D841BD6B0A40001E17B /* laswriter_wrl.cpp */,
+				2B162D851BD6B0A40001E17B /* laswriter.cpp */,
+				2B162D861BD6B0A40001E17B /* laswritercompatible.cpp */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		2BB6A8921BD992A400FDB60A /* AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				2BB6A8931BD992DC00FDB60A /* AFHTTPRequestOperation.h */,
+				2BB6A8941BD992DC00FDB60A /* AFHTTPRequestOperationManager.h */,
+				2BB6A8951BD992DC00FDB60A /* AFHTTPSessionManager.h */,
+				2BB6A8961BD992DC00FDB60A /* AFNetworking.h */,
+				2BB6A8971BD992DC00FDB60A /* AFNetworkReachabilityManager.h */,
+				2BB6A8981BD992DC00FDB60A /* AFSecurityPolicy.h */,
+				2BB6A8991BD992DC00FDB60A /* AFURLConnectionOperation.h */,
+				2BB6A89A1BD992DC00FDB60A /* AFURLRequestSerialization.h */,
+				2BB6A89B1BD992DC00FDB60A /* AFURLResponseSerialization.h */,
+				2BB6A89C1BD992DC00FDB60A /* AFURLSessionManager.h */,
+			);
+			name = AFNetworking;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2B162AFC1BD59E3C0001E17B /* LidarViewer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2B162B2A1BD59E3D0001E17B /* Build configuration list for PBXNativeTarget "LidarViewer" */;
+			buildPhases = (
+				2B162AF91BD59E3C0001E17B /* Sources */,
+				2B162AFA1BD59E3C0001E17B /* Frameworks */,
+				2B162AFB1BD59E3C0001E17B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LidarViewer;
+			productName = LidarViewer;
+			productReference = 2B162AFD1BD59E3C0001E17B /* LidarViewer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2B162B151BD59E3D0001E17B /* LidarViewerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2B162B2D1BD59E3D0001E17B /* Build configuration list for PBXNativeTarget "LidarViewerTests" */;
+			buildPhases = (
+				2B162B121BD59E3D0001E17B /* Sources */,
+				2B162B131BD59E3D0001E17B /* Frameworks */,
+				2B162B141BD59E3D0001E17B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2B162B181BD59E3D0001E17B /* PBXTargetDependency */,
+			);
+			name = LidarViewerTests;
+			productName = LidarViewerTests;
+			productReference = 2B162B161BD59E3D0001E17B /* LidarViewerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2B162B201BD59E3D0001E17B /* LidarViewerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2B162B301BD59E3D0001E17B /* Build configuration list for PBXNativeTarget "LidarViewerUITests" */;
+			buildPhases = (
+				2B162B1D1BD59E3D0001E17B /* Sources */,
+				2B162B1E1BD59E3D0001E17B /* Frameworks */,
+				2B162B1F1BD59E3D0001E17B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2B162B231BD59E3D0001E17B /* PBXTargetDependency */,
+			);
+			name = LidarViewerUITests;
+			productName = LidarViewerUITests;
+			productReference = 2B162B211BD59E3D0001E17B /* LidarViewerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2B162AF51BD59E3C0001E17B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "mousebird consulting";
+				TargetAttributes = {
+					2B162AFC1BD59E3C0001E17B = {
+						CreatedOnToolsVersion = 7.0;
+					};
+					2B162B151BD59E3D0001E17B = {
+						CreatedOnToolsVersion = 7.0;
+						TestTargetID = 2B162AFC1BD59E3C0001E17B;
+					};
+					2B162B201BD59E3D0001E17B = {
+						CreatedOnToolsVersion = 7.0;
+						TestTargetID = 2B162AFC1BD59E3C0001E17B;
+					};
+				};
+			};
+			buildConfigurationList = 2B162AF81BD59E3C0001E17B /* Build configuration list for PBXProject "LidarViewer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2B162AF41BD59E3C0001E17B;
+			productRefGroup = 2B162AFE1BD59E3C0001E17B /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 2B162B341BD59E5D0001E17B /* Products */;
+					ProjectRef = 2B162B331BD59E5D0001E17B /* WhirlyGlobe-MaplyComponent.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				2B162AFC1BD59E3C0001E17B /* LidarViewer */,
+				2B162B151BD59E3D0001E17B /* LidarViewerTests */,
+				2B162B201BD59E3D0001E17B /* LidarViewerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		2B162B391BD59E5D0001E17B /* libWhirlyGlobe-MaplyComponent.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libWhirlyGlobe-MaplyComponent.a";
+			remoteRef = 2B162B381BD59E5D0001E17B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2B162AFB1BD59E3C0001E17B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2B162B101BD59E3C0001E17B /* LaunchScreen.storyboard in Resources */,
+				2B162D081BD5C4110001E17B /* st-helens.laz in Resources */,
+				2B162B0D1BD59E3C0001E17B /* Assets.xcassets in Resources */,
+				2B162B0B1BD59E3C0001E17B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2B162B141BD59E3D0001E17B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2B162B1F1BD59E3D0001E17B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2B162AF91BD59E3C0001E17B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2B162D471BD5C5740001E17B /* lasquadtree.cpp in Sources */,
+				2B162D501BD5C5740001E17B /* laszip_dll.cpp in Sources */,
+				2B162DAB1BD6B25C0001E17B /* writer.cpp in Sources */,
+				2B162CE41BD5BDD90001E17B /* cachedreader.cpp in Sources */,
+				2B162D041BD5C34D0001E17B /* header.cpp in Sources */,
+				2B162D881BD6B0A40001E17B /* lasfilter.cpp in Sources */,
+				2B162D4F1BD5C5740001E17B /* laszip.cpp in Sources */,
+				2B162CF51BD5C2B60001E17B /* spatialreference.cpp in Sources */,
+				2B162DA71BD6B2200001E17B /* laswritercompatible.cpp in Sources */,
+				2B162DA51BD6B2200001E17B /* laswriter_wrl.cpp in Sources */,
+				2B162D8D1BD6B0A40001E17B /* lasreader_las.cpp in Sources */,
+				2B162B081BD59E3C0001E17B /* ViewController.mm in Sources */,
+				2B162D051BD5C34D0001E17B /* point.cpp in Sources */,
+				2B162D461BD5C5740001E17B /* lasinterval.cpp in Sources */,
+				2B162CFE1BD5C2FE0001E17B /* classification.cpp in Sources */,
+				2B162D431BD5C5740001E17B /* arithmeticmodel.cpp in Sources */,
+				2B162D971BD6B0A40001E17B /* laswaveform13reader.cpp in Sources */,
+				2B162DAC1BD6B25C0001E17B /* zipwriter.cpp in Sources */,
+				2B162CF01BD5C2B60001E17B /* header.cpp in Sources */,
+				2B162CF91BD5C2B60001E17B /* variablerecord.cpp in Sources */,
+				2B162D891BD6B0A40001E17B /* lasreader_asc.cpp in Sources */,
+				2B162D031BD5C3160001E17B /* utility.cpp in Sources */,
+				2B162DAA1BD6B2500001E17B /* c_api.cpp in Sources */,
+				2B162CED1BD5C2B60001E17B /* filter.cpp in Sources */,
+				2B162D4B1BD5C5740001E17B /* lasunzipper.cpp in Sources */,
+				2B162D8A1BD6B0A40001E17B /* lasreader_bil.cpp in Sources */,
+				2B162D441BD5C5740001E17B /* integercompressor.cpp in Sources */,
+				2B162CF21BD5C2B60001E17B /* point.cpp in Sources */,
+				2B162DA61BD6B2200001E17B /* laswriter.cpp in Sources */,
+				2B162CF71BD5C2B60001E17B /* transform.cpp in Sources */,
+				2B162B051BD59E3C0001E17B /* AppDelegate.m in Sources */,
+				2B162D511BD5C5740001E17B /* laszipper.cpp in Sources */,
+				2B162CE51BD5BDD90001E17B /* header.cpp in Sources */,
+				2B162D951BD6B0A40001E17B /* lastransform.cpp in Sources */,
+				2B162D911BD6B0A40001E17B /* lasreader.cpp in Sources */,
+				2B162D4C1BD5C5740001E17B /* laswriteitemcompressed_v1.cpp in Sources */,
+				2B162CF41BD5C2B60001E17B /* schema.cpp in Sources */,
+				2B162DA41BD6B2200001E17B /* laswriter_txt.cpp in Sources */,
+				2B162DB11BD6B2640001E17B /* writer.cpp in Sources */,
+				2B162DAD1BD6B25F0001E17B /* zippoint.cpp in Sources */,
+				2B162DA21BD6B2200001E17B /* laswriter_las.cpp in Sources */,
+				2B162CEA1BD5C2B60001E17B /* dimension.cpp in Sources */,
+				2B162D011BD5C3110001E17B /* indexoutput.cpp in Sources */,
+				2B162D001BD5C3110001E17B /* indexcell.cpp in Sources */,
+				2B162CEB1BD5C2B60001E17B /* error.cpp in Sources */,
+				2B162CEC1BD5C2B60001E17B /* factory.cpp in Sources */,
+				2B162D8F1BD6B0A40001E17B /* lasreader_shp.cpp in Sources */,
+				2B162CF31BD5C2B60001E17B /* reader.cpp in Sources */,
+				2B162CFA1BD5C2B60001E17B /* version.cpp in Sources */,
+				2B162D491BD5C5740001E17B /* lasreaditemcompressed_v2.cpp in Sources */,
+				2B162CE61BD5BDD90001E17B /* reader.cpp in Sources */,
+				2B162D421BD5C5740001E17B /* arithmeticencoder.cpp in Sources */,
+				2B162DA91BD6B2460001E17B /* laswritepoint.cpp in Sources */,
+				2B162DA01BD6B2200001E17B /* lasreaderpipeon.cpp in Sources */,
+				2B162D931BD6B0A40001E17B /* lasreadermerged.cpp in Sources */,
+				2B162D8C1BD6B0A40001E17B /* lasreader_dtm.cpp in Sources */,
+				2B162CF81BD5C2B60001E17B /* utility.cpp in Sources */,
+				2B162D481BD5C5740001E17B /* lasreaditemcompressed_v1.cpp in Sources */,
+				2B162B021BD59E3C0001E17B /* main.m in Sources */,
+				2B162CE71BD5BDD90001E17B /* zipreader.cpp in Sources */,
+				2B162CFF1BD5C2FE0001E17B /* color.cpp in Sources */,
+				2B162D451BD5C5740001E17B /* lasindex.cpp in Sources */,
+				2B162DA81BD6B2460001E17B /* laswriteitemcompressed_v2.cpp in Sources */,
+				2B162D921BD6B0A40001E17B /* lasreaderbuffered.cpp in Sources */,
+				2B162CF11BD5C2B60001E17B /* index.cpp in Sources */,
+				2B162D8E1BD6B0A40001E17B /* lasreader_qfit.cpp in Sources */,
+				2B162D981BD6B0A40001E17B /* laswaveform13writer.cpp in Sources */,
+				2B162DA11BD6B2200001E17B /* laswriter_bin.cpp in Sources */,
+				2B162D411BD5C5740001E17B /* arithmeticdecoder.cpp in Sources */,
+				2B162CFD1BD5C2FE0001E17B /* chipper.cpp in Sources */,
+				2B162DA31BD6B2200001E17B /* laswriter_qfit.cpp in Sources */,
+				2B162D961BD6B0A40001E17B /* lasutility.cpp in Sources */,
+				2B162D871BD6B0A40001E17B /* fopen_compressed.cpp in Sources */,
+				2B162D8B1BD6B0A40001E17B /* lasreader_bin.cpp in Sources */,
+				2B162D021BD5C3160001E17B /* sha1.cpp in Sources */,
+				2B162D901BD6B0A40001E17B /* lasreader_txt.cpp in Sources */,
+				2B162D4A1BD5C5740001E17B /* lasreadpoint.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2B162B121BD59E3D0001E17B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2B162B1B1BD59E3D0001E17B /* LidarViewerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2B162B1D1BD59E3D0001E17B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2B162B261BD59E3D0001E17B /* LidarViewerUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2B162B181BD59E3D0001E17B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2B162AFC1BD59E3C0001E17B /* LidarViewer */;
+			targetProxy = 2B162B171BD59E3D0001E17B /* PBXContainerItemProxy */;
+		};
+		2B162B231BD59E3D0001E17B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2B162AFC1BD59E3C0001E17B /* LidarViewer */;
+			targetProxy = 2B162B221BD59E3D0001E17B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2B162B091BD59E3C0001E17B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2B162B0A1BD59E3C0001E17B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2B162B0E1BD59E3C0001E17B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2B162B0F1BD59E3C0001E17B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2B162B281BD59E3D0001E17B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"HAVE_LASZIP=1",
+					"UNORDERED=1",
+					"HAVE_GDAL=1",
+					"_LITTLE_ENDIAN=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2B162B291BD59E3D0001E17B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"HAVE_LASZIP=1",
+					"UNORDERED=1",
+					"HAVE_GDAL=1",
+					"_LITTLE_ENDIAN=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2B162B2B1BD59E3D0001E17B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
+				HEADER_SEARCH_PATHS = (
+					"../libs/WhirlyGlobe-Maply/WhirlyGlobeSrc/WhirlyGlobe-MaplyComponent/include/",
+					"../libs/WhirlyGlobe-Maply/WhirlyGlobeSrc/local_libs/liblas/include/",
+					/Users/sjg/iPhone/ofxiOSBoost/libs/boost/include,
+					/Users/sjg/iPhone/LAStools/LASzip/,
+					/Users/sjg/iPhone/LAStools/LASzip/laszip/,
+					/Users/sjg/iPhone/LAStools/LASlib/inc/,
+					"/Users/sjg/iPhone/gdal/gdal-2.0.1/gcore/",
+					"/Users/sjg/iPhone/gdal/gdal-2.0.1/ogr/",
+					"/Users/sjg/iPhone/gdal/gdal-2.0.1/port/",
+					"/Users/sjg/iPhone/gdal/gdal-2.0.1/frmts/gtiff/libgeotiff/",
+					"/Users/sjg/iPhone/gdal/gdal-2.0.1/frmts/gtiff/libtiff/",
+				);
+				INFOPLIST_FILE = LidarViewer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = /Users/sjg/iPhone/gdal/install/;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mousebirdconsulting.LidarViewer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		2B162B2C1BD59E3D0001E17B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
+				HEADER_SEARCH_PATHS = (
+					"../libs/WhirlyGlobe-Maply/WhirlyGlobeSrc/WhirlyGlobe-MaplyComponent/include/",
+					"../libs/WhirlyGlobe-Maply/WhirlyGlobeSrc/local_libs/liblas/include/",
+					/Users/sjg/iPhone/ofxiOSBoost/libs/boost/include,
+					/Users/sjg/iPhone/LAStools/LASzip/,
+					/Users/sjg/iPhone/LAStools/LASzip/laszip/,
+					/Users/sjg/iPhone/LAStools/LASlib/inc/,
+					"/Users/sjg/iPhone/gdal/gdal-2.0.1/gcore/",
+					"/Users/sjg/iPhone/gdal/gdal-2.0.1/ogr/",
+					"/Users/sjg/iPhone/gdal/gdal-2.0.1/port/",
+					"/Users/sjg/iPhone/gdal/gdal-2.0.1/frmts/gtiff/libgeotiff/",
+					"/Users/sjg/iPhone/gdal/gdal-2.0.1/frmts/gtiff/libtiff/",
+				);
+				INFOPLIST_FILE = LidarViewer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = /Users/sjg/iPhone/gdal/install/;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mousebirdconsulting.LidarViewer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		2B162B2E1BD59E3D0001E17B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = LidarViewerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mousebirdconsulting.LidarViewerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LidarViewer.app/LidarViewer";
+			};
+			name = Debug;
+		};
+		2B162B2F1BD59E3D0001E17B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = LidarViewerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mousebirdconsulting.LidarViewerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LidarViewer.app/LidarViewer";
+			};
+			name = Release;
+		};
+		2B162B311BD59E3D0001E17B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = LidarViewerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mousebirdconsulting.LidarViewerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = LidarViewer;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		2B162B321BD59E3D0001E17B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = LidarViewerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mousebirdconsulting.LidarViewerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = LidarViewer;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2B162AF81BD59E3C0001E17B /* Build configuration list for PBXProject "LidarViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2B162B281BD59E3D0001E17B /* Debug */,
+				2B162B291BD59E3D0001E17B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2B162B2A1BD59E3D0001E17B /* Build configuration list for PBXNativeTarget "LidarViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2B162B2B1BD59E3D0001E17B /* Debug */,
+				2B162B2C1BD59E3D0001E17B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2B162B2D1BD59E3D0001E17B /* Build configuration list for PBXNativeTarget "LidarViewerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2B162B2E1BD59E3D0001E17B /* Debug */,
+				2B162B2F1BD59E3D0001E17B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2B162B301BD59E3D0001E17B /* Build configuration list for PBXNativeTarget "LidarViewerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2B162B311BD59E3D0001E17B /* Debug */,
+				2B162B321BD59E3D0001E17B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2B162AF51BD59E3C0001E17B /* Project object */;
+}
