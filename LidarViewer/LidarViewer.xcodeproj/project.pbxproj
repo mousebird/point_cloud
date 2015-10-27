@@ -50,8 +50,6 @@
 		2BB6BB591BDFFE7A00FDB60A /* error.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BB301BDFFE7A00FDB60A /* error.cpp */; settings = {ASSET_TAGS = (); }; };
 		2BB6BB5A1BDFFE7A00FDB60A /* factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BB311BDFFE7A00FDB60A /* factory.cpp */; settings = {ASSET_TAGS = (); }; };
 		2BB6BB5B1BDFFE7A00FDB60A /* filter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BB321BDFFE7A00FDB60A /* filter.cpp */; settings = {ASSET_TAGS = (); }; };
-		2BB6BB5C1BDFFE7A00FDB60A /* gt_citation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BB331BDFFE7A00FDB60A /* gt_citation.cpp */; settings = {ASSET_TAGS = (); }; };
-		2BB6BB5D1BDFFE7A00FDB60A /* gt_wkt_srs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BB351BDFFE7A00FDB60A /* gt_wkt_srs.cpp */; settings = {ASSET_TAGS = (); }; };
 		2BB6BB5E1BDFFE7A00FDB60A /* header.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BB381BDFFE7A00FDB60A /* header.cpp */; settings = {ASSET_TAGS = (); }; };
 		2BB6BB5F1BDFFE7A00FDB60A /* index.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BB391BDFFE7A00FDB60A /* index.cpp */; settings = {ASSET_TAGS = (); }; };
 		2BB6BB601BDFFE7A00FDB60A /* point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BB3A1BDFFE7A00FDB60A /* point.cpp */; settings = {ASSET_TAGS = (); }; };
@@ -107,6 +105,8 @@
 		2BB6BBFF1BE0052100FDB60A /* laswriter_txt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BBE51BE0052100FDB60A /* laswriter_txt.cpp */; settings = {ASSET_TAGS = (); }; };
 		2BB6BC001BE0052100FDB60A /* laswriter_wrl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BBE61BE0052100FDB60A /* laswriter_wrl.cpp */; settings = {ASSET_TAGS = (); }; };
 		2BB6BC011BE0052100FDB60A /* laswritercompatible.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BBE71BE0052100FDB60A /* laswritercompatible.cpp */; settings = {ASSET_TAGS = (); }; };
+		2BB6BC061BE01E5300FDB60A /* LAZReader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BC051BE01E5300FDB60A /* LAZReader.mm */; settings = {ASSET_TAGS = (); }; };
+		2BB6BC091BE01F0300FDB60A /* LAZShader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BC081BE01F0300FDB60A /* LAZShader.mm */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -396,6 +396,10 @@
 		2BB6BBE51BE0052100FDB60A /* laswriter_txt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = laswriter_txt.cpp; sourceTree = "<group>"; };
 		2BB6BBE61BE0052100FDB60A /* laswriter_wrl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = laswriter_wrl.cpp; sourceTree = "<group>"; };
 		2BB6BBE71BE0052100FDB60A /* laswritercompatible.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = laswritercompatible.cpp; sourceTree = "<group>"; };
+		2BB6BC041BE01E5300FDB60A /* LAZReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAZReader.h; sourceTree = "<group>"; };
+		2BB6BC051BE01E5300FDB60A /* LAZReader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LAZReader.mm; sourceTree = "<group>"; };
+		2BB6BC071BE01F0300FDB60A /* LAZShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAZShader.h; sourceTree = "<group>"; };
+		2BB6BC081BE01F0300FDB60A /* LAZShader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LAZShader.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -472,6 +476,10 @@
 				2BB6A8921BD992A400FDB60A /* AFNetworking */,
 				2B162B031BD59E3C0001E17B /* AppDelegate.h */,
 				2B162B041BD59E3C0001E17B /* AppDelegate.m */,
+				2BB6BC071BE01F0300FDB60A /* LAZShader.h */,
+				2BB6BC081BE01F0300FDB60A /* LAZShader.mm */,
+				2BB6BC041BE01E5300FDB60A /* LAZReader.h */,
+				2BB6BC051BE01E5300FDB60A /* LAZReader.mm */,
 				2B162B061BD59E3C0001E17B /* ViewController.h */,
 				2B162B071BD59E3C0001E17B /* ViewController.mm */,
 				2B162B091BD59E3C0001E17B /* Main.storyboard */,
@@ -1114,6 +1122,7 @@
 				2BB6BB481BDFFE7A00FDB60A /* classification.cpp in Sources */,
 				2BB6BB4F1BDFFE7A00FDB60A /* reader.cpp in Sources */,
 				2BB6BBF81BE0052100FDB60A /* lasutility.cpp in Sources */,
+				2BB6BC061BE01E5300FDB60A /* LAZReader.mm in Sources */,
 				2B162B051BD59E3C0001E17B /* AppDelegate.m in Sources */,
 				2BB6BBFE1BE0052100FDB60A /* laswriter_qfit.cpp in Sources */,
 				2BB6BB5F1BDFFE7A00FDB60A /* index.cpp in Sources */,
@@ -1142,20 +1151,19 @@
 				2BB6BBF51BE0052100FDB60A /* lasreadermerged.cpp in Sources */,
 				2BB6BBA71BE004FE00FDB60A /* lasindex.cpp in Sources */,
 				2BB6BB511BDFFE7A00FDB60A /* sha1.cpp in Sources */,
+				2BB6BC091BE01F0300FDB60A /* LAZShader.mm in Sources */,
 				2BB6BB551BDFFE7A00FDB60A /* writer.cpp in Sources */,
 				2BB6BB4C1BDFFE7A00FDB60A /* indexoutput.cpp in Sources */,
 				2BB6BBA51BE004FE00FDB60A /* arithmeticmodel.cpp in Sources */,
 				2BB6BBED1BE0052100FDB60A /* lasreader_bil.cpp in Sources */,
 				2BB6BB681BDFFE7A00FDB60A /* version.cpp in Sources */,
 				2BB6BBAF1BE004FE00FDB60A /* laswriteitemcompressed_v2.cpp in Sources */,
-				2BB6BB5C1BDFFE7A00FDB60A /* gt_citation.cpp in Sources */,
 				2BB6BB4A1BDFFE7A00FDB60A /* color.cpp in Sources */,
 				2BB6BB501BDFFE7A00FDB60A /* zipreader.cpp in Sources */,
 				2BB6BBA81BE004FE00FDB60A /* lasinterval.cpp in Sources */,
 				2BB6BB461BDFFE7A00FDB60A /* c_api.cpp in Sources */,
 				2BB6BB4D1BDFFE7A00FDB60A /* cachedreader.cpp in Sources */,
 				2BB6BB4E1BDFFE7A00FDB60A /* header.cpp in Sources */,
-				2BB6BB5D1BDFFE7A00FDB60A /* gt_wkt_srs.cpp in Sources */,
 				2BB6BB631BDFFE7A00FDB60A /* spatialreference.cpp in Sources */,
 				2BB6BB541BDFFE7A00FDB60A /* point.cpp in Sources */,
 				2BB6BB471BDFFE7A00FDB60A /* chipper.cpp in Sources */,
@@ -1256,6 +1264,7 @@
 					"UNORDERED=1",
 					"HAVE_GDAL=1",
 					"_LITTLE_ENDIAN=1",
+					"HAVE_LIBGEOTIFF=1",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -1300,6 +1309,7 @@
 					"UNORDERED=1",
 					"HAVE_GDAL=1",
 					"_LITTLE_ENDIAN=1",
+					"HAVE_LIBGEOTIFF=1",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
