@@ -77,6 +77,8 @@ MaplyShader *BuildPointShader(MaplyBaseViewController *viewC)
     [self.view addSubview:globeViewC.view];
     globeViewC.view.frame = self.view.bounds;
     [self addChildViewController:globeViewC];
+    globeViewC.frameInterval = 2;
+    globeViewC.performanceOutput = true;
     
     // Give us a tilt
     [globeViewC setTiltMinHeight:0.001 maxHeight:0.01 minTilt:1.21771169 maxTilt:0.0];
@@ -144,67 +146,74 @@ MaplyShader *BuildPointShader(MaplyBaseViewController *viewC)
 //    double scaleZ = header.GetScaleZ();
     double scaleX = 1.0, scaleY = 1.0, scaleZ = 1.0;
     
-    int skip = 16;
-    int maxPoints = 100000 * skip;
+    int skip = 6;
+    int maxPoints = 400000 * skip;
     int allPoints = 0;
+    int displayedPoints = 0;
 
     bool done = false;
     NSMutableArray *pointsObjMut = [NSMutableArray array];
     while (!done)
     {
-        int numPoints = 0;
-        
-        MaplyPoints *points = [[MaplyPoints alloc] initWithNumPoints:(maxPoints/skip)];
-        while (reader.ReadNextPoint() && numPoints < maxPoints)
+        @autoreleasepool
         {
-            // Get the point and convert to geocentric
-            liblas::Point const& p = reader.GetPoint();
-            double x,y,z;
-            x = p.GetX(), y = p.GetY(); z = p.GetZ();
-            trans->TransformEx(1, &x, &y, &z);
+            int numPoints = 0;
             
-            x *= scaleX;  y *= scaleY;  z *= scaleZ;
-            
-            // Scale that to our fake display coordinates
-            x /= 6371000; y /= 6371000; z /= 6371000;
+            MaplyPoints *points = [[MaplyPoints alloc] initWithNumPoints:(maxPoints/skip)];
+            while (reader.ReadNextPoint() && numPoints < maxPoints)
+            {
+                // Get the point and convert to geocentric
+                liblas::Point const& p = reader.GetPoint();
+                double x,y,z;
+                x = p.GetX(), y = p.GetY(); z = p.GetZ();
+                trans->TransformEx(1, &x, &y, &z);
+                
+                x *= scaleX;  y *= scaleY;  z *= scaleZ;
+                
+                // Scale that to our fake display coordinates
+                x /= 6371000; y /= 6371000; z /= 6371000;
 
-            // Note: Nudging above the datum
-            x *= 1.0005;  y *= 1.0005;  z *= 1.0005;
+                // Note: Nudging above the datum
+                x *= 1.0005;  y *= 1.0005;  z *= 1.0005;
 
-            if (numPoints % skip == 0) {
-                liblas::Color color = p.GetColor();
-                float red = color.GetRed() / 255.0,green = color.GetGreen() / 255.0,blue = color.GetBlue() / 255.0;
-                [points addDispCoordDoubleX:x y:y z:z];
-                [points addColorR:red g:green b:blue a:1.0];
+                if (numPoints % skip == 0) {
+                    liblas::Color color = p.GetColor();
+                    float red = color.GetRed() / 255.0,green = color.GetGreen() / 255.0,blue = color.GetBlue() / 255.0;
+                    [points addDispCoordDoubleX:x y:y z:z];
+                    [points addColorR:red g:green b:blue a:1.0];
+                    displayedPoints++;
+                }
+                
+                numPoints++;
+                allPoints++;
             }
             
-            numPoints++;
-            allPoints++;
+            if (numPoints < maxPoints)
+                done = true;
+            
+            if (numPoints > 0)
+            {
+                MaplyComponentObject *compObj = [globeViewC addPoints:@[points] desc:
+                                                 @{kMaplyColor: [UIColor redColor],
+                                                   kMaplyPointSize: @(6.0),
+                                                   kMaplyDrawPriority: @(10000000),
+                                                   kMaplyShader: pointShader.name,
+                                                   kMaplyZBufferRead: @(YES),
+                                                   kMaplyZBufferWrite: @(YES)
+                                                   }
+                                                                 mode:MaplyThreadAny];
+                if (compObj)
+                    [pointsObjMut addObject:compObj];
+            }
+            
+    //        if (allPoints > 1000000)
+    //            break;
         }
-        
-        if (numPoints < maxPoints)
-            done = true;
-        
-        if (numPoints > 0)
-        {
-            MaplyComponentObject *compObj = [globeViewC addPoints:@[points] desc:
-                                             @{kMaplyColor: [UIColor redColor],
-                                               kMaplyPointSize: @(6.0),
-                                               kMaplyDrawPriority: @(10000000),
-                                               kMaplyShader: pointShader.name,
-                                               kMaplyZBufferRead: @(YES),
-                                               kMaplyZBufferWrite: @(YES)
-                                               }
-                                                             mode:MaplyThreadAny];
-            if (compObj)
-                [pointsObjMut addObject:compObj];
-        }
-        
-//        if (allPoints > 1000000)
-//            break;
     }
     
     pointObjs = pointsObjMut;
+    
+    NSLog(@"Displaying a total of %d points",displayedPoints);
 }
 
 @end
