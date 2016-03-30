@@ -23,7 +23,6 @@
 		2B162B461BD5A1590001E17B /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B162B451BD5A1590001E17B /* libxml2.tbd */; };
 		2B162B481BD5A15E0001E17B /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B162B471BD5A15E0001E17B /* libsqlite3.tbd */; };
 		2B162CE91BD5C2810001E17B /* boost.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B162CE81BD5C2810001E17B /* boost.a */; };
-		2B162D081BD5C4110001E17B /* st-helens.laz in Resources */ = {isa = PBXBuildFile; fileRef = 2B162C331BD5B3E90001E17B /* st-helens.laz */; };
 		2B162DC81BD6DBB90001E17B /* libgdal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B162DC41BD6DA670001E17B /* libgdal.a */; };
 		2B162DC91BD6DBB90001E17B /* libproj.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B162DC51BD6DA670001E17B /* libproj.a */; };
 		2B162DCB1BD6DC250001E17B /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B162DCA1BD6DC250001E17B /* libiconv.tbd */; };
@@ -158,7 +157,6 @@
 		2B162B431BD5A1540001E17B /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		2B162B451BD5A1590001E17B /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		2B162B471BD5A15E0001E17B /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		2B162C331BD5B3E90001E17B /* st-helens.laz */ = {isa = PBXFileReference; lastKnownFileType = file; name = "st-helens.laz"; path = "../data/st-helens.laz"; sourceTree = "<group>"; };
 		2B162CE81BD5C2810001E17B /* boost.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = boost.a; path = ../libs/ofxiOSBoost/libs/boost/ios/boost.a; sourceTree = "<group>"; };
 		2B162DC41BD6DA670001E17B /* libgdal.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgdal.a; path = ../../gdal/install/libgdal.a; sourceTree = "<group>"; };
 		2B162DC51BD6DA670001E17B /* libproj.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libproj.a; path = ../../gdal/install/libproj.a; sourceTree = "<group>"; };
@@ -532,7 +530,6 @@
 		2B162C321BD5B3A40001E17B /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				2B162C331BD5B3E90001E17B /* st-helens.laz */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -1068,7 +1065,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B162B101BD59E3C0001E17B /* LaunchScreen.storyboard in Resources */,
-				2B162D081BD5C4110001E17B /* st-helens.laz in Resources */,
 				2B4329EF1BE2B012003293EE /* Version.rc in Resources */,
 				2B4329CF1BE2B012003293EE /* CMakeLists.txt in Resources */,
 				2B162B0D1BD59E3C0001E17B /* Assets.xcassets in Resources */,

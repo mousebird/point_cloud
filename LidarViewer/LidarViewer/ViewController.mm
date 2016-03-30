@@ -64,12 +64,25 @@
     
     lazReader = [[LAZReader alloc] init];
     lazReader.shader = pointShader;
+    
+    // Database to read
+//    NSString *dbName = @"st-helens";
+    NSString *dbName = @"CA_DayFire_2007_000472";
+    NSString *dbExt = @"laz";
+
+    NSString *docDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
+    NSString *dbPath = [[docDir stringByAppendingPathComponent:dbName] stringByAppendingPathExtension:dbExt];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:dbPath])
+    {
+        dbPath = [[NSBundle mainBundle] pathForResource:dbName ofType:dbExt];
+        if (![[NSFileManager defaultManager] fileExistsAtPath:dbPath])
+            dbPath = nil;
+    }
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
     ^{
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"st-helens" ofType:@"laz"];
-        if (path)
-            [lazReader readPoints:path viewC:globeViewC];
+        if (dbPath)
+            [lazReader readPoints:dbPath viewC:globeViewC];
     });
 }
 
