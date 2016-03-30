@@ -1,0 +1,6 @@
+LidarViewer/Build
+libs/gdal
+libs/LAStools
+libs/liblas
+*.jpg
+*.PNG

@@ -12,7 +12,7 @@
 #import "LAZShader.h"
 #import "LAZReader.h"
 
-@interface ViewController ()
+@interface ViewController () <WhirlyGlobeViewControllerDelegate>
 
 @end
 
@@ -34,36 +34,30 @@
     [self addChildViewController:globeViewC];
     globeViewC.frameInterval = 2;
     globeViewC.performanceOutput = true;
+    globeViewC.delegate = self;
     
     // Give us a tilt
     [globeViewC setTiltMinHeight:0.001 maxHeight:0.01 minTilt:1.21771169 maxTilt:0.0];
     
+    // Start location
+    WhirlyGlobeViewControllerAnimationState *viewState = [[WhirlyGlobeViewControllerAnimationState alloc] init];
+    viewState.heading = -3.118891;
+    viewState.height = 0.003194;
+    viewState.tilt   = 0.988057;
+    viewState.pos = MaplyCoordinateMake(-2.132972, 0.808100);
+    [globeViewC setViewState:viewState];
+    
     // Add a base layer
-    NSString *thisCacheDir = @"mapbox_satellite";
-    NSString *jsonTileSpec = @"http://a.tiles.mapbox.com/v3/examples.map-zyt2v9k2.json";
-    if (jsonTileSpec)
-    {
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:jsonTileSpec]];
-        
-        AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-        operation.responseSerializer = [AFJSONResponseSerializer serializer];
-        [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject)
-         {
-             // Add a quad earth paging layer based on the tile spec we just fetched
-             MaplyRemoteTileSource *tileSource = [[MaplyRemoteTileSource alloc] initWithTilespec:responseObject];
-             tileSource.cacheDir = thisCacheDir;
-             MaplyQuadImageTilesLayer *layer = [[MaplyQuadImageTilesLayer alloc] initWithCoordSystem:tileSource.coordSys tileSource:tileSource];
-             layer.handleEdges = true;
-             [globeViewC addLayer:layer];
-         }
-                                         failure:^(AFHTTPRequestOperation *operation, NSError *error)
-         {
-             NSLog(@"Failed to reach JSON tile spec at: %@",jsonTileSpec);
-         }
-         ];
-        
-        [operation start];
-    }
+    NSString * baseCacheDir = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString * cartodbTilesCacheDir = [NSString stringWithFormat:@"%@/cartodbtiles/", baseCacheDir];
+    int maxZoom = 18;
+    MaplyRemoteTileSource *tileSource = [[MaplyRemoteTileSource alloc] initWithBaseURL:@"http://otile1.mqcdn.com/tiles/1.0.0/sat/" ext:@"png" minZoom:0 maxZoom:maxZoom];
+    tileSource.cacheDir = cartodbTilesCacheDir;
+    MaplyQuadImageTilesLayer *layer = [[MaplyQuadImageTilesLayer alloc] initWithCoordSystem:tileSource.coordSys tileSource:tileSource];
+    layer.handleEdges = true;
+    layer.coverPoles = true;
+    layer.drawPriority = 0;
+    [globeViewC addLayer:layer];
     
     // Custom point shader (may get more complex later)
     pointShader = BuildPointShader(globeViewC);
@@ -78,5 +72,12 @@
             [lazReader readPoints:path viewC:globeViewC];
     });
 }
+
+//- (void)globeViewController:(WhirlyGlobeViewController *__nonnull)viewC didMove:(MaplyCoordinate *__nonnull)corners
+//{
+//    WhirlyGlobeViewControllerAnimationState *viewState = [viewC getViewState];
+//    
+//    NSLog(@"Loc = (%f,%f), heading = %f, tilt = %f, height = %f",viewState.pos.x,viewState.pos.y,viewState.heading,viewState.tilt,viewState.height);
+//}
 
 @end

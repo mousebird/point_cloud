@@ -52,7 +52,7 @@
     //    double scaleZ = header.GetScaleZ();
     double scaleX = 1.0, scaleY = 1.0, scaleZ = 1.0;
     
-    int allocPoints = 400000 * _skipPoints;
+    int allocPoints = 50000 * _skipPoints;
     int allPoints = 0;
     int displayedPoints = 0;
     
