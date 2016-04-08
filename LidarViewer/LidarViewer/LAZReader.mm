@@ -52,6 +52,11 @@
     //    double scaleZ = header.GetScaleZ();
     double scaleX = 1.0, scaleY = 1.0, scaleZ = 1.0;
 
+    if (proj4Str.empty())
+    {
+        // Note: Make up a coordinate system
+    }
+
     MaplyProj4CoordSystem *inSys = [[MaplyProj4CoordSystem alloc] initWithString:[NSString stringWithFormat:@"%s",proj4Str.c_str()]];
     
     // Figure out the bounds
@@ -102,7 +107,7 @@
                 geoc.x /= 6371000; geoc.y /= 6371000; geoc.z /= 6371000;
                 
                 // Note: Nudging above the datum
-//                geoc.x *= 1.0005;  geoc.y *= 1.0005;  geoc.z *= 1.0005;
+                geoc.x *= 1.0005;  geoc.y *= 1.0005;  geoc.z *= 1.0005;
                 
                 if (numPoints % _skipPoints == 0) {
                     float red = 1.0,green = 1.0, blue = 1.0;

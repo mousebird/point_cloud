@@ -23,8 +23,6 @@
 		2B162B461BD5A1590001E17B /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B162B451BD5A1590001E17B /* libxml2.tbd */; };
 		2B162B481BD5A15E0001E17B /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B162B471BD5A15E0001E17B /* libsqlite3.tbd */; };
 		2B162CE91BD5C2810001E17B /* boost.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B162CE81BD5C2810001E17B /* boost.a */; };
-		2B162DC81BD6DBB90001E17B /* libgdal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B162DC41BD6DA670001E17B /* libgdal.a */; };
-		2B162DC91BD6DBB90001E17B /* libproj.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B162DC51BD6DA670001E17B /* libproj.a */; };
 		2B162DCB1BD6DC250001E17B /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B162DCA1BD6DC250001E17B /* libiconv.tbd */; };
 		2B43299D1BE2B003003293EE /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2B4329451BE2B003003293EE /* CMakeLists.txt */; };
 		2B4329CC1BE2B012003293EE /* c_api.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B43299F1BE2B012003293EE /* c_api.cpp */; };
@@ -63,6 +61,7 @@
 		2B4329EE1BE2B012003293EE /* version.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B4329C91BE2B012003293EE /* version.cpp */; };
 		2B4329EF1BE2B012003293EE /* Version.rc in Resources */ = {isa = PBXBuildFile; fileRef = 2B4329CA1BE2B012003293EE /* Version.rc */; };
 		2B4329F01BE2B012003293EE /* writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B4329CB1BE2B012003293EE /* writer.cpp */; };
+		2BA6DB141CB710BD0017E3AF /* libgdal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BA6DB131CB710BD0017E3AF /* libgdal.a */; };
 		2BB6BBA31BE004FE00FDB60A /* arithmeticdecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BB6D1BE004FE00FDB60A /* arithmeticdecoder.cpp */; };
 		2BB6BBA41BE004FE00FDB60A /* arithmeticencoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BB6F1BE004FE00FDB60A /* arithmeticencoder.cpp */; };
 		2BB6BBA51BE004FE00FDB60A /* arithmeticmodel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BB711BE004FE00FDB60A /* arithmeticmodel.cpp */; };
@@ -158,8 +157,6 @@
 		2B162B451BD5A1590001E17B /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		2B162B471BD5A15E0001E17B /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		2B162CE81BD5C2810001E17B /* boost.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = boost.a; path = ../libs/ofxiOSBoost/libs/boost/ios/boost.a; sourceTree = "<group>"; };
-		2B162DC41BD6DA670001E17B /* libgdal.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgdal.a; path = ../../gdal/install/libgdal.a; sourceTree = "<group>"; };
-		2B162DC51BD6DA670001E17B /* libproj.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libproj.a; path = ../../gdal/install/libproj.a; sourceTree = "<group>"; };
 		2B162DCA1BD6DC250001E17B /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		2B4329451BE2B003003293EE /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		2B4329471BE2B003003293EE /* bounds.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bounds.hpp; sourceTree = "<group>"; };
@@ -281,6 +278,7 @@
 		2B4329C91BE2B012003293EE /* version.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = version.cpp; sourceTree = "<group>"; };
 		2B4329CA1BE2B012003293EE /* Version.rc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Version.rc; sourceTree = "<group>"; };
 		2B4329CB1BE2B012003293EE /* writer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = writer.cpp; sourceTree = "<group>"; };
+		2BA6DB131CB710BD0017E3AF /* libgdal.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgdal.a; path = ../../../../../usr/local/Cellar/gdal/1.11.1_3/lib/libgdal.a; sourceTree = "<group>"; };
 		2BB6A8931BD992DC00FDB60A /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperation.h; path = "../../libs/WhirlyGlobe-Maply/third-party/AFNetworking/AFNetworking/AFHTTPRequestOperation.h"; sourceTree = "<group>"; };
 		2BB6A8941BD992DC00FDB60A /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperationManager.h; path = "../../libs/WhirlyGlobe-Maply/third-party/AFNetworking/AFNetworking/AFHTTPRequestOperationManager.h"; sourceTree = "<group>"; };
 		2BB6A8951BD992DC00FDB60A /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPSessionManager.h; path = "../../libs/WhirlyGlobe-Maply/third-party/AFNetworking/AFNetworking/AFHTTPSessionManager.h"; sourceTree = "<group>"; };
@@ -407,8 +405,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B162DCB1BD6DC250001E17B /* libiconv.tbd in Frameworks */,
-				2B162DC81BD6DBB90001E17B /* libgdal.a in Frameworks */,
-				2B162DC91BD6DBB90001E17B /* libproj.a in Frameworks */,
 				2B162CE91BD5C2810001E17B /* boost.a in Frameworks */,
 				2B162B481BD5A15E0001E17B /* libsqlite3.tbd in Frameworks */,
 				2B162B461BD5A1590001E17B /* libxml2.tbd in Frameworks */,
@@ -417,6 +413,7 @@
 				2B162B401BD5A1490001E17B /* libc++.tbd in Frameworks */,
 				2B162B3E1BD5A13F0001E17B /* CoreLocation.framework in Frameworks */,
 				2B162B3A1BD59E840001E17B /* libWhirlyGlobe-MaplyComponent.a in Frameworks */,
+				2BA6DB141CB710BD0017E3AF /* libgdal.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,8 +438,7 @@
 			isa = PBXGroup;
 			children = (
 				2B162DCA1BD6DC250001E17B /* libiconv.tbd */,
-				2B162DC41BD6DA670001E17B /* libgdal.a */,
-				2B162DC51BD6DA670001E17B /* libproj.a */,
+				2BA6DB131CB710BD0017E3AF /* libgdal.a */,
 				2B162CE81BD5C2810001E17B /* boost.a */,
 				2B162B471BD5A15E0001E17B /* libsqlite3.tbd */,
 				2B162B451BD5A1590001E17B /* libxml2.tbd */,
@@ -1342,7 +1338,10 @@
 				);
 				INFOPLIST_FILE = LidarViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = ../libs/gdal/install/;
+				LIBRARY_SEARCH_PATHS = (
+					../libs/gdal/install/,
+					/usr/local/Cellar/gdal/1.11.1_3/lib,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mousebirdconsulting.LidarViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -1367,7 +1366,10 @@
 				);
 				INFOPLIST_FILE = LidarViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = ../libs/gdal/install/;
+				LIBRARY_SEARCH_PATHS = (
+					../libs/gdal/install/,
+					/usr/local/Cellar/gdal/1.11.1_3/lib,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mousebirdconsulting.LidarViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

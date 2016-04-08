@@ -44,7 +44,7 @@
     viewState.heading = -3.118891;
     viewState.height = 0.003194;
     viewState.tilt   = 0.988057;
-    viewState.pos = MaplyCoordinateMake(-2.132972, 0.808100);
+    viewState.pos = MaplyCoordinateDMake(-2.132972, 0.808100);
     [globeViewC setViewState:viewState];
     
     // Add a base layer
@@ -67,6 +67,7 @@
     
     // Database to read
 //    NSString *dbName = @"st-helens";
+//    NSString *dbName = @"Mount St Helens Nov 20 2004";
     NSString *dbName = @"CA_DayFire_2007_000472";
     NSString *dbExt = @"laz";
 
