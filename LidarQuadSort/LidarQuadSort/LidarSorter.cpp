@@ -18,16 +18,16 @@
 #include <gdal.h>
 
 LidarSorter::LidarSorter(const char *tmp_dir)
-: tmpDir(tmp_dir), minPointLimit(1000), maxPointLimit(1500), totalWrittenPoints(0)
+: tmpDir(tmp_dir), minPointLimit(1000), maxPointLimit(1500), totalWrittenPoints(0),maxLevel(0)
 {
 }
 
-bool LidarSorter::process(const std::string &fileName)
+bool LidarSorter::process(const std::string &fileName,LidarDatabase *lidarDB)
 {
-    return process(fileName,TileIdent(0,0,0),false);
+    return process(fileName,TileIdent(0,0,0),lidarDB,false);
 }
 
-bool LidarSorter::process(const std::string &fileName,TileIdent tileID,bool removeAfterDone)
+bool LidarSorter::process(const std::string &fileName,TileIdent tileID,LidarDatabase *lidarDB,bool removeAfterDone)
 {
     try {
         // Input file
@@ -38,14 +38,13 @@ bool LidarSorter::process(const std::string &fileName,TileIdent tileID,bool remo
         liblas::Reader reader = f.CreateWithStream(ifs);
         liblas::Header header = reader.GetHeader();
         liblas::SpatialReference srs = header.GetSRS();
-
+        
         // Tile output
         liblas::Header tileHeader = header;
         tileHeader.SetPointRecordsCount(0);
         tileHeader.SetCompressed(true);
         std::string tileFile = tmpDir + "/" + std::to_string(tileID.x) + "_" + std::to_string(tileID.y) + "_" + std::to_string(tileID.z) + ".laz";
-        std::ofstream ofs;
-        ofs.open(tileFile, std::ios::out | std::ios::binary);
+        std::stringstream ofs(std::stringstream::out);
         liblas::Writer *tileW = new liblas::Writer(ofs,tileHeader);
         
         // Figure out which points we're keeping and which we're outputting
@@ -54,6 +53,7 @@ bool LidarSorter::process(const std::string &fileName,TileIdent tileID,bool remo
 
         liblas::Writer *subTiles[4] = {NULL,NULL,NULL,NULL};
         std::ofstream *subOfStreams[4] = {NULL,NULL,NULL,NULL};
+        int subTileCount[4] = {0,0,0,0};
         TileIdent subTileIDs[4];
         std::string subTileNames[4];
         double spanX_2 = (header.GetMaxX()-header.GetMinX())/2.0;
@@ -108,7 +108,9 @@ bool LidarSorter::process(const std::string &fileName,TileIdent tileID,bool remo
                 whichX = std::min(whichX,1); whichY = std::min(whichY,1);
                 whichX = std::max(whichX,0); whichY = std::max(whichY,0);
                 
-                liblas::Writer *w = subTiles[whichY*2+whichX];
+                int whichTile = whichY*2+whichX;
+                liblas::Writer *w = subTiles[whichTile];
+                subTileCount[whichTile]++;
                 if (!w->WritePoint(p))
                     throw (std::string)"Failed to write point in sub tile";
             }
@@ -121,7 +123,8 @@ bool LidarSorter::process(const std::string &fileName,TileIdent tileID,bool remo
         
         // Close down the main tile
         delete tileW;
-        ofs.close();
+        std::string tileStr = ofs.str();
+        lidarDB->addTile(tileStr.c_str(), (int)tileStr.size(), tileID.x, tileID.y, tileID.z);
         
         // Close down the subtiles
         for (unsigned int ii=0;ii<4;ii++)
@@ -130,6 +133,13 @@ bool LidarSorter::process(const std::string &fileName,TileIdent tileID,bool remo
                 delete subTiles[ii];
                 subOfStreams[ii]->close();
                 delete subOfStreams[ii];
+                
+                // Remove the file if there were no points
+                if (subTileCount[ii] == 0)
+                {
+                    std::remove(subTileNames[ii].c_str());
+                    subTileNames[ii] = "";
+                }
             }
         
         // Now keep going recursively
@@ -140,13 +150,25 @@ bool LidarSorter::process(const std::string &fileName,TileIdent tileID,bool remo
                     TileIdent subIdent(2*tileID.x + sx,2*tileID.y + sy,tileID.z+1);
                     
                     std::string subFile = subTileNames[sy*2+sx];
-                    if (!process(subFile,subIdent,true))
-                        throw (std::string)"Failed to write tile " + std::to_string(subIdent.z) + ": (" + std::to_string(subIdent.x) + "," + std::to_string(subIdent.y) + ")";
+                    if (!subFile.empty())
+                    {
+                        if (!process(subFile,subIdent,lidarDB,true))
+                            throw (std::string)"Failed to write tile " + std::to_string(subIdent.z) + ": (" + std::to_string(subIdent.x) + "," + std::to_string(subIdent.y) + ")";
+                    }
                 }
         
         // Note: Remove the starting file if we need to
         if (removeAfterDone)
             std::remove(fileName.c_str());
+        
+        maxLevel = std::max(maxLevel,tileID.z);
+
+        // If this is the top file, we'll set up the output header
+        if (!removeAfterDone)
+        {
+            std::string proj4Str = header.GetSRS().GetProj4();
+            lidarDB->setHeader(proj4Str.c_str(), header.GetMinX(), header.GetMinY(), header.GetMinZ(), header.GetMaxX(), header.GetMaxY(), header.GetMaxZ(), 0, maxLevel);
+        }
     }
     catch (const std::string &reason)
     {

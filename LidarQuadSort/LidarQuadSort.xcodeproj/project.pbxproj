@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B55221E1CBD69FF00EF7EBC /* LidarDatabase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B55221C1CBD69FF00EF7EBC /* LidarDatabase.cpp */; };
+		2B55222C1CBD701800EF7EBC /* KompexSQLiteBlob.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B5522281CBD701800EF7EBC /* KompexSQLiteBlob.cpp */; };
+		2B55222D1CBD701800EF7EBC /* KompexSQLiteDatabase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B5522291CBD701800EF7EBC /* KompexSQLiteDatabase.cpp */; };
+		2B55222E1CBD701800EF7EBC /* KompexSQLiteStatement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B55222A1CBD701800EF7EBC /* KompexSQLiteStatement.cpp */; };
+		2B55222F1CBD701800EF7EBC /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 2B55222B1CBD701800EF7EBC /* sqlite3.c */; };
 		2B5FB43D1CBC6E46007ECD06 /* libboost_system-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B5FB43C1CBC6E46007ECD06 /* libboost_system-mt.dylib */; };
 		2B5FB43F1CBC6E50007ECD06 /* libboost_filesystem-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B5FB43E1CBC6E50007ECD06 /* libboost_filesystem-mt.dylib */; };
 		2BA6D9B81CB7014A0017E3AF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BA6D9B71CB7014A0017E3AF /* main.cpp */; };
@@ -113,6 +118,20 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2B55221C1CBD69FF00EF7EBC /* LidarDatabase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LidarDatabase.cpp; sourceTree = "<group>"; };
+		2B55221D1CBD69FF00EF7EBC /* LidarDatabase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LidarDatabase.hpp; sourceTree = "<group>"; };
+		2B5522201CBD700200EF7EBC /* KompexSQLiteBlob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KompexSQLiteBlob.h; path = "../../libs/WhirlyGlobe-Maply/third-party/kompex-sqlite-wrapper/include/KompexSQLiteBlob.h"; sourceTree = "<group>"; };
+		2B5522211CBD700200EF7EBC /* KompexSQLiteDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KompexSQLiteDatabase.h; path = "../../libs/WhirlyGlobe-Maply/third-party/kompex-sqlite-wrapper/include/KompexSQLiteDatabase.h"; sourceTree = "<group>"; };
+		2B5522221CBD700200EF7EBC /* KompexSQLiteException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KompexSQLiteException.h; path = "../../libs/WhirlyGlobe-Maply/third-party/kompex-sqlite-wrapper/include/KompexSQLiteException.h"; sourceTree = "<group>"; };
+		2B5522231CBD700200EF7EBC /* KompexSQLitePrerequisites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KompexSQLitePrerequisites.h; path = "../../libs/WhirlyGlobe-Maply/third-party/kompex-sqlite-wrapper/include/KompexSQLitePrerequisites.h"; sourceTree = "<group>"; };
+		2B5522241CBD700200EF7EBC /* KompexSQLiteStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KompexSQLiteStatement.h; path = "../../libs/WhirlyGlobe-Maply/third-party/kompex-sqlite-wrapper/include/KompexSQLiteStatement.h"; sourceTree = "<group>"; };
+		2B5522251CBD700200EF7EBC /* KompexSQLiteStreamRedirection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KompexSQLiteStreamRedirection.h; path = "../../libs/WhirlyGlobe-Maply/third-party/kompex-sqlite-wrapper/include/KompexSQLiteStreamRedirection.h"; sourceTree = "<group>"; };
+		2B5522261CBD700200EF7EBC /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sqlite3.h; path = "../../libs/WhirlyGlobe-Maply/third-party/kompex-sqlite-wrapper/include/sqlite3.h"; sourceTree = "<group>"; };
+		2B5522271CBD700200EF7EBC /* sqlite3ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sqlite3ext.h; path = "../../libs/WhirlyGlobe-Maply/third-party/kompex-sqlite-wrapper/include/sqlite3ext.h"; sourceTree = "<group>"; };
+		2B5522281CBD701800EF7EBC /* KompexSQLiteBlob.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = KompexSQLiteBlob.cpp; path = "../../libs/WhirlyGlobe-Maply/third-party/kompex-sqlite-wrapper/src/KompexSQLiteBlob.cpp"; sourceTree = "<group>"; };
+		2B5522291CBD701800EF7EBC /* KompexSQLiteDatabase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = KompexSQLiteDatabase.cpp; path = "../../libs/WhirlyGlobe-Maply/third-party/kompex-sqlite-wrapper/src/KompexSQLiteDatabase.cpp"; sourceTree = "<group>"; };
+		2B55222A1CBD701800EF7EBC /* KompexSQLiteStatement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = KompexSQLiteStatement.cpp; path = "../../libs/WhirlyGlobe-Maply/third-party/kompex-sqlite-wrapper/src/KompexSQLiteStatement.cpp"; sourceTree = "<group>"; };
+		2B55222B1CBD701800EF7EBC /* sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sqlite3.c; path = "../../libs/WhirlyGlobe-Maply/third-party/kompex-sqlite-wrapper/src/sqlite3.c"; sourceTree = "<group>"; };
 		2B5FB43C1CBC6E46007ECD06 /* libboost_system-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_system-mt.dylib"; path = "../../../../../usr/local/Cellar/boost/1.60.0_1/lib/libboost_system-mt.dylib"; sourceTree = "<group>"; };
 		2B5FB43E1CBC6E50007ECD06 /* libboost_filesystem-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_filesystem-mt.dylib"; path = "../../../../../usr/local/Cellar/boost/1.60.0_1/lib/libboost_filesystem-mt.dylib"; sourceTree = "<group>"; };
 		2BA6D9B41CB7014A0017E3AF /* LidarQuadSort */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LidarQuadSort; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -378,6 +397,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B55221F1CBD6FD800EF7EBC /* Kompex */ = {
+			isa = PBXGroup;
+			children = (
+				2B5522281CBD701800EF7EBC /* KompexSQLiteBlob.cpp */,
+				2B5522291CBD701800EF7EBC /* KompexSQLiteDatabase.cpp */,
+				2B55222A1CBD701800EF7EBC /* KompexSQLiteStatement.cpp */,
+				2B55222B1CBD701800EF7EBC /* sqlite3.c */,
+				2B5522201CBD700200EF7EBC /* KompexSQLiteBlob.h */,
+				2B5522211CBD700200EF7EBC /* KompexSQLiteDatabase.h */,
+				2B5522221CBD700200EF7EBC /* KompexSQLiteException.h */,
+				2B5522231CBD700200EF7EBC /* KompexSQLitePrerequisites.h */,
+				2B5522241CBD700200EF7EBC /* KompexSQLiteStatement.h */,
+				2B5522251CBD700200EF7EBC /* KompexSQLiteStreamRedirection.h */,
+				2B5522261CBD700200EF7EBC /* sqlite3.h */,
+				2B5522271CBD700200EF7EBC /* sqlite3ext.h */,
+			);
+			name = Kompex;
+			sourceTree = "<group>";
+		};
 		2BA6D9AB1CB7014A0017E3AF = {
 			isa = PBXGroup;
 			children = (
@@ -409,12 +447,15 @@
 		2BA6D9B61CB7014A0017E3AF /* LidarQuadSort */ = {
 			isa = PBXGroup;
 			children = (
+				2B55221F1CBD6FD800EF7EBC /* Kompex */,
 				2BA6DB201CB84C4F0017E3AF /* liblas */,
 				2BA6DA0E1CB701A20017E3AF /* laszip */,
 				2BA6D9BE1CB7017E0017E3AF /* LASlib */,
-				2BA6D9B71CB7014A0017E3AF /* main.cpp */,
+				2B55221D1CBD69FF00EF7EBC /* LidarDatabase.hpp */,
+				2B55221C1CBD69FF00EF7EBC /* LidarDatabase.cpp */,
 				2BA6DBCF1CB852200017E3AF /* LidarSorter.hpp */,
 				2BA6DBCE1CB852200017E3AF /* LidarSorter.cpp */,
+				2BA6D9B71CB7014A0017E3AF /* main.cpp */,
 			);
 			path = LidarQuadSort;
 			sourceTree = "<group>";
@@ -870,6 +911,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BA6DA0B1CB701970017E3AF /* laswriter_wrl.cpp in Sources */,
+				2B55222E1CBD701800EF7EBC /* KompexSQLiteStatement.cpp in Sources */,
 				2BA6DBBD1CB84C640017E3AF /* filter.cpp in Sources */,
 				2BA6DBC71CB84C640017E3AF /* transform.cpp in Sources */,
 				2BA6DA051CB701970017E3AF /* laswaveform13writer.cpp in Sources */,
@@ -887,6 +929,8 @@
 				2BA6DA081CB701970017E3AF /* laswriter_las.cpp in Sources */,
 				2BA6DA561CB701C20017E3AF /* laszipper.cpp in Sources */,
 				2BA6D9FA1CB701970017E3AF /* lasreader_dtm.cpp in Sources */,
+				2B55222F1CBD701800EF7EBC /* sqlite3.c in Sources */,
+				2B55222D1CBD701800EF7EBC /* KompexSQLiteDatabase.cpp in Sources */,
 				2BA6DA0A1CB701970017E3AF /* laswriter_txt.cpp in Sources */,
 				2BA6D9F61CB701970017E3AF /* lasreader.cpp in Sources */,
 				2BA6D9FC1CB701970017E3AF /* lasreader_qfit.cpp in Sources */,
@@ -919,6 +963,7 @@
 				2BA6DBB61CB84C640017E3AF /* point.cpp in Sources */,
 				2BA6D9F81CB701970017E3AF /* lasreader_bil.cpp in Sources */,
 				2BA6DBD01CB852200017E3AF /* LidarSorter.cpp in Sources */,
+				2B55222C1CBD701800EF7EBC /* KompexSQLiteBlob.cpp in Sources */,
 				2BA6DA4F1CB701C20017E3AF /* lasreadpoint.cpp in Sources */,
 				2BA6DA071CB701970017E3AF /* laswriter_bin.cpp in Sources */,
 				2BA6DA4A1CB701C20017E3AF /* lasindex.cpp in Sources */,
@@ -936,6 +981,7 @@
 				2BA6DBC41CB84C640017E3AF /* schema.cpp in Sources */,
 				2BA6DA4B1CB701C20017E3AF /* lasinterval.cpp in Sources */,
 				2BA6DBAC1CB84C640017E3AF /* color.cpp in Sources */,
+				2B55221E1CBD69FF00EF7EBC /* LidarDatabase.cpp in Sources */,
 				2BA6D9FE1CB701970017E3AF /* lasreader_txt.cpp in Sources */,
 				2BA6D9F91CB701970017E3AF /* lasreader_bin.cpp in Sources */,
 				2BA6DBB01CB84C640017E3AF /* header.cpp in Sources */,
