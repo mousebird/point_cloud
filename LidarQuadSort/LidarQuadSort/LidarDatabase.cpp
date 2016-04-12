@@ -20,6 +20,8 @@ LidarDatabase::LidarDatabase(Kompex::SQLiteDatabase *db)
         stmt.SqlStatement((std::string)"CREATE TABLE manifest (minx REAL, miny REAL, minz REAL, maxx REAL, maxy REAL, maxz REAL);");
         stmt.SqlStatement((std::string)"ALTER TABLE manifest ADD minlevel INTEGER DEFAULT 0 NOT NULL;");
         stmt.SqlStatement((std::string)"ALTER TABLE manifest ADD maxlevel INTEGER DEFAULT 0 NOT NULL;");
+        stmt.SqlStatement((std::string)"ALTER TABLE manifest ADD minpoints INTEGER DEFAULT 0 NOT NULL;");
+        stmt.SqlStatement((std::string)"ALTER TABLE manifest ADD maxpoints INTEGER DEFAULT 0 NOT NULL;");
         stmt.SqlStatement((std::string)"ALTER TABLE manifest ADD srs TEXT DEFAULT '' NOT NULL;");
 
         stmt.SqlStatement("CREATE TABLE lidartiles (data BLOB,level INTEGER,x INTEGER,y INTEGER,quadindex INTEGER PRIMARY KEY);");
@@ -31,12 +33,12 @@ LidarDatabase::LidarDatabase(Kompex::SQLiteDatabase *db)
     valid = true;
 }
 
-bool LidarDatabase::setHeader(const char *srs,double minX,double minY,double minZ,double maxX,double maxY,double maxZ,int minLevel,int maxLevel)
+bool LidarDatabase::setHeader(const char *srs,double minX,double minY,double minZ,double maxX,double maxY,double maxZ,int minLevel,int maxLevel,int minPoints,int maxPoints)
 {
     SQLiteStatement stmt(db);
 
     char stmtStr[1024];
-    sprintf(stmtStr,"INSERT INTO manifest (minx,miny,minz,maxx,maxy,maxz,minlevel,maxlevel,srs) VALUES (%f,%f,%f,%f,%f,%f,%d,%d,'%s');",minX,minY,minZ,maxX,maxY,maxZ,minLevel,maxLevel,(srs ? srs : ""));
+    sprintf(stmtStr,"INSERT INTO manifest (minx,miny,minz,maxx,maxy,maxz,minlevel,maxlevel,minpoints,maxpoints,srs) VALUES (%f,%f,%f,%f,%f,%f,%d,%d,%d,%d,'%s');",minX,minY,minZ,maxX,maxY,maxZ,minLevel,maxLevel,minPoints,maxPoints,(srs ? srs : ""));
     stmt.SqlStatement(stmtStr);
     
     return true;
