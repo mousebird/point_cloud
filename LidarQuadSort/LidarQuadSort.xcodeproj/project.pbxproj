@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B5FB43D1CBC6E46007ECD06 /* libboost_system-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B5FB43C1CBC6E46007ECD06 /* libboost_system-mt.dylib */; };
+		2B5FB43F1CBC6E50007ECD06 /* libboost_filesystem-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B5FB43E1CBC6E50007ECD06 /* libboost_filesystem-mt.dylib */; };
 		2BA6D9B81CB7014A0017E3AF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BA6D9B71CB7014A0017E3AF /* main.cpp */; };
 		2BA6D9F41CB701970017E3AF /* fopen_compressed.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BA6D9DA1CB701970017E3AF /* fopen_compressed.cpp */; };
 		2BA6D9F51CB701970017E3AF /* lasfilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BA6D9DB1CB701970017E3AF /* lasfilter.cpp */; };
@@ -95,6 +97,7 @@
 		2BA6DBCA1CB84C640017E3AF /* version.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BA6DB4D1CB84C640017E3AF /* version.cpp */; };
 		2BA6DBCB1CB84C640017E3AF /* writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BA6DB4F1CB84C640017E3AF /* writer.cpp */; };
 		2BA6DBCD1CB84E240017E3AF /* libboost_thread-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BA6DBCC1CB84E240017E3AF /* libboost_thread-mt.dylib */; };
+		2BA6DBD01CB852200017E3AF /* LidarSorter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BA6DBCE1CB852200017E3AF /* LidarSorter.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -110,6 +113,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2B5FB43C1CBC6E46007ECD06 /* libboost_system-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_system-mt.dylib"; path = "../../../../../usr/local/Cellar/boost/1.60.0_1/lib/libboost_system-mt.dylib"; sourceTree = "<group>"; };
+		2B5FB43E1CBC6E50007ECD06 /* libboost_filesystem-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_filesystem-mt.dylib"; path = "../../../../../usr/local/Cellar/boost/1.60.0_1/lib/libboost_filesystem-mt.dylib"; sourceTree = "<group>"; };
 		2BA6D9B41CB7014A0017E3AF /* LidarQuadSort */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LidarQuadSort; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BA6D9B71CB7014A0017E3AF /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		2BA6D9C01CB701970017E3AF /* lasdefinitions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasdefinitions.hpp; sourceTree = "<group>"; };
@@ -346,6 +351,8 @@
 		2BA6DBA71CB84C640017E3AF /* version.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = version.hpp; sourceTree = "<group>"; };
 		2BA6DBA81CB84C640017E3AF /* writer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = writer.hpp; sourceTree = "<group>"; };
 		2BA6DBCC1CB84E240017E3AF /* libboost_thread-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_thread-mt.dylib"; path = "../../../../../usr/local/Cellar/boost/1.60.0_1/lib/libboost_thread-mt.dylib"; sourceTree = "<group>"; };
+		2BA6DBCE1CB852200017E3AF /* LidarSorter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LidarSorter.cpp; sourceTree = "<group>"; };
+		2BA6DBCF1CB852200017E3AF /* LidarSorter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LidarSorter.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -355,6 +362,7 @@
 			files = (
 				2BA6DB1B1CB711620017E3AF /* libtiff.a in Frameworks */,
 				2BA6DB121CB7084D0017E3AF /* libc++.tbd in Frameworks */,
+				2B5FB43F1CBC6E50007ECD06 /* libboost_filesystem-mt.dylib in Frameworks */,
 				2BA6DB101CB708470017E3AF /* libstdc++.tbd in Frameworks */,
 				2BA6DB0E1CB7083A0017E3AF /* libz.tbd in Frameworks */,
 				2BA6DB0C1CB7082C0017E3AF /* libxml2.tbd in Frameworks */,
@@ -363,6 +371,7 @@
 				2BA6DB081CB708170017E3AF /* libsqlite3.tbd in Frameworks */,
 				2BA6DB1D1CB712D00017E3AF /* libgeotiff.a in Frameworks */,
 				2BA6DB191CB7111B0017E3AF /* libgdal.a in Frameworks */,
+				2B5FB43D1CBC6E46007ECD06 /* libboost_system-mt.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,6 +391,8 @@
 				2BA6DB091CB708210017E3AF /* libiconv.tbd */,
 				2BA6DB071CB708170017E3AF /* libsqlite3.tbd */,
 				2BA6DBCC1CB84E240017E3AF /* libboost_thread-mt.dylib */,
+				2B5FB43C1CBC6E46007ECD06 /* libboost_system-mt.dylib */,
+				2B5FB43E1CBC6E50007ECD06 /* libboost_filesystem-mt.dylib */,
 				2BA6D9B61CB7014A0017E3AF /* LidarQuadSort */,
 				2BA6D9B51CB7014A0017E3AF /* Products */,
 			);
@@ -402,6 +413,8 @@
 				2BA6DA0E1CB701A20017E3AF /* laszip */,
 				2BA6D9BE1CB7017E0017E3AF /* LASlib */,
 				2BA6D9B71CB7014A0017E3AF /* main.cpp */,
+				2BA6DBCF1CB852200017E3AF /* LidarSorter.hpp */,
+				2BA6DBCE1CB852200017E3AF /* LidarSorter.cpp */,
 			);
 			path = LidarQuadSort;
 			sourceTree = "<group>";
@@ -905,6 +918,7 @@
 				2BA6DBC91CB84C640017E3AF /* variablerecord.cpp in Sources */,
 				2BA6DBB61CB84C640017E3AF /* point.cpp in Sources */,
 				2BA6D9F81CB701970017E3AF /* lasreader_bil.cpp in Sources */,
+				2BA6DBD01CB852200017E3AF /* LidarSorter.cpp in Sources */,
 				2BA6DA4F1CB701C20017E3AF /* lasreadpoint.cpp in Sources */,
 				2BA6DA071CB701970017E3AF /* laswriter_bin.cpp in Sources */,
 				2BA6DA4A1CB701C20017E3AF /* lasindex.cpp in Sources */,
@@ -1096,6 +1110,7 @@
 				2BA6D9BD1CB7014A0017E3AF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

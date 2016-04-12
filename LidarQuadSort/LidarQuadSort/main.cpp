@@ -16,6 +16,8 @@
 #include <cpl_port.h>
 #include <ogr_spatialref.h>
 #include <gdal.h>
+#include <boost/filesystem.hpp>
+#include "LidarSorter.hpp"
 
 int main(int argc, const char * argv[])
 {
@@ -27,15 +29,20 @@ int main(int argc, const char * argv[])
     const char *tmpDir = argv[2];
     const char *outFile = argv[3];
     
-    std::ifstream ifs;
-    ifs.open(inFile, std::ios::in | std::ios::binary);
-
-    liblas::ReaderFactory f;
-    liblas::Reader reader = f.CreateWithStream(ifs);
-    liblas::Header header = reader.GetHeader();
-    liblas::SpatialReference srs = header.GetSRS();
-    
+    std::remove(outFile);
+    boost::filesystem::remove_all(boost::filesystem::path(tmpDir));
     mkdir(tmpDir,0775);
+    
+    // Set up the recursive sorter and let it run
+    LidarSorter sorter(tmpDir);
+    sorter.setPointLimit(1000,1500);
+    if (sorter.process(inFile))
+    {
+        fprintf(stdout,"Wrote a total of %d points",sorter.getNumPointsWritten());
+        return 0;
+    }
+    
+    fprintf(stderr,"Failed to sort LIDAR file.");
 
-    return 0;
+    return -1;
 }
