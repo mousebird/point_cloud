@@ -27,29 +27,36 @@
 #include "LidarSorter.hpp"
 #include "LidarDatabase.hpp"
 
+bool FullDataMode = true;
+
 int main(int argc, const char * argv[])
 {
     if (argc < 4)
     {
+//        fprintf(stderr,"syntax: %s <in_las> <tmp_dir> <out.laz> <out_sqlite>\n",argv[0]);
         fprintf(stderr,"syntax: %s <in_las> <tmp_dir> <out_sqlite>\n",argv[0]);
+        return -1;
     }
     const char *inFile = argv[1];
     const char *tmpDir = argv[2];
-    const char *outFile = argv[3];
+//    const char *outLaz = argv[3];
+    const char *outSqlite = argv[3];
+    const char *outLaz = "";
     
-    std::remove(outFile);
+    std::remove(outLaz);
+    std::remove(outSqlite);
     boost::filesystem::remove_all(boost::filesystem::path(tmpDir));
     mkdir(tmpDir,0775);
 
     // Set up a SQLITE output db
     Kompex::SQLiteDatabase *sqliteDb = NULL;
-    sqliteDb = new Kompex::SQLiteDatabase(outFile, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, 0);
+    sqliteDb = new Kompex::SQLiteDatabase(outSqlite, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, 0);
     if (!sqliteDb->GetDatabaseHandle())
     {
-        fprintf(stderr, "Invalid sqlite database: %s\n",outFile);
+        fprintf(stderr, "Invalid sqlite database: %s\n",outSqlite);
         return -1;
     }
-    LidarDatabase *lidarDb = new LidarDatabase(sqliteDb);
+    LidarDatabase *lidarDb = new LidarDatabase(sqliteDb,(FullDataMode ? LidarDatabase::FullData : LidarDatabase::IndexOnly));
     if (!lidarDb->isValid())
     {
         fprintf(stderr,"Failed to set up sqlite output.");
@@ -64,8 +71,8 @@ int main(int argc, const char * argv[])
 
     // Set up the recursive sorter and let it run
     LidarSorter sorter(tmpDir);
-    sorter.setPointLimit(1000,2000);
-    if (sorter.process(inFile,lidarDb))
+    sorter.setPointLimit(5000,5500);
+    if (sorter.process(inFile,outLaz,lidarDb))
     {
         fprintf(stdout,"Wrote a total of %d points",sorter.getNumPointsWritten());
         return 0;

@@ -7,27 +7,44 @@
 //
 
 #include "LidarSorter.hpp"
-#include <sys/stat.h>
-#include <iostream>
-#include <liblas/liblas.hpp>
-#include <fstream>
-#include <iostream>
-#include <ogr_srs_api.h>
-#include <cpl_port.h>
-#include <ogr_spatialref.h>
-#include <gdal.h>
 
 LidarSorter::LidarSorter(const char *tmp_dir)
 : tmpDir(tmp_dir), minPointLimit(1000), maxPointLimit(1500), totalWrittenPoints(0),maxLevel(0)
 {
 }
 
-bool LidarSorter::process(const std::string &fileName,LidarDatabase *lidarDB)
+bool LidarSorter::process(const std::string &fileName,const std::string &outFile,LidarDatabase *lidarDB)
 {
-    return process(fileName,TileIdent(0,0,0),lidarDB,false);
+    std::ofstream *ofs = NULL;
+    liblas::Writer *outW = NULL;
+    if (!outFile.empty())
+    {
+        std::ifstream ifs(fileName, std::ios::in | std::ios::binary);
+
+        liblas::ReaderFactory f;
+        liblas::Reader reader = f.CreateWithStream(ifs);
+        
+        liblas::Header outHeader = reader.GetHeader();
+        outHeader.SetPointRecordsCount(0);
+        outHeader.SetCompressed(true);
+        ofs = new std::ofstream(outFile,std::stringstream::out | std::stringstream::binary);
+        outW = new liblas::Writer(*ofs,outHeader);
+    }
+    
+    bool ret = process(fileName,TileIdent(0,0,0),lidarDB,outW,false);
+    
+    if (outW)
+        delete outW;
+    if (ofs)
+    {
+        ofs->close();
+        delete ofs;
+    }
+    
+    return ret;
 }
 
-bool LidarSorter::process(const std::string &fileName,TileIdent tileID,LidarDatabase *lidarDB,bool removeAfterDone)
+bool LidarSorter::process(const std::string &fileName,TileIdent tileID,LidarDatabase *lidarDB,liblas::Writer *outW,bool removeAfterDone)
 {
     try {
         // Input file
@@ -40,12 +57,19 @@ bool LidarSorter::process(const std::string &fileName,TileIdent tileID,LidarData
         liblas::SpatialReference srs = header.GetSRS();
         
         // Tile output
-        liblas::Header tileHeader = header;
-        tileHeader.SetPointRecordsCount(0);
-        tileHeader.SetCompressed(true);
-        std::string tileFile = tmpDir + "/" + std::to_string(tileID.x) + "_" + std::to_string(tileID.y) + "_" + std::to_string(tileID.z) + ".laz";
-        std::stringstream ofs(std::stringstream::out);
-        liblas::Writer *tileW = new liblas::Writer(ofs,tileHeader);
+        std::stringstream *ofs = NULL;
+        liblas::Writer *tileW = NULL;
+        if (!outW)
+        {
+            liblas::Header tileHeader = header;
+            tileHeader.SetPointRecordsCount(0);
+            tileHeader.SetCompressed(true);
+            ofs = new std::stringstream(std::stringstream::out);
+            tileW = new liblas::Writer(*ofs,tileHeader);
+        } else {
+//            startPoint = outW->GetHeader().GetPointRecordsCount();
+            tileW = outW;
+        }
         
         // Figure out which points we're keeping and which we're outputting
         bool allPoints = header.GetPointRecordsCount() <= maxPointLimit;
@@ -85,6 +109,7 @@ bool LidarSorter::process(const std::string &fileName,TileIdent tileID,LidarData
         // Work through the points in the input file
         int numToCopy = header.GetPointRecordsCount();
         int numCopiedToTile = 0;
+        long long startPoint = totalWrittenPoints;
         for (unsigned int ii=0;ii<numToCopy;ii++)
         {
             if (!reader.ReadNextPoint())
@@ -122,9 +147,15 @@ bool LidarSorter::process(const std::string &fileName,TileIdent tileID,LidarData
         fprintf(stdout,"%sTile %d: (%d,%d) saved %d of %d points\n",indent.c_str(),tileID.z,tileID.x,tileID.y,numCopiedToTile,header.GetPointRecordsCount());
         
         // Close down the main tile
-        delete tileW;
-        std::string tileStr = ofs.str();
-        lidarDB->addTile(tileStr.c_str(), (int)tileStr.size(), tileID.x, tileID.y, tileID.z);
+        if (!outW)
+        {
+            delete tileW;
+            std::string tileStr = ofs->str();
+            lidarDB->addTile(tileStr.c_str(), (int)tileStr.size(), tileID.x, tileID.y, tileID.z);
+            delete ofs;
+        } else {
+            lidarDB->addTileOffset(startPoint, numCopiedToTile, tileID.x, tileID.y, tileID.z);
+        }
         
         // Close down the subtiles
         for (unsigned int ii=0;ii<4;ii++)
@@ -152,7 +183,7 @@ bool LidarSorter::process(const std::string &fileName,TileIdent tileID,LidarData
                     std::string subFile = subTileNames[sy*2+sx];
                     if (!subFile.empty())
                     {
-                        if (!process(subFile,subIdent,lidarDB,true))
+                        if (!process(subFile,subIdent,lidarDB,outW,true))
                             throw (std::string)"Failed to write tile " + std::to_string(subIdent.z) + ": (" + std::to_string(subIdent.x) + "," + std::to_string(subIdent.y) + ")";
                     }
                 }

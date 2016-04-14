@@ -23,7 +23,12 @@
 class LidarDatabase
 {
 public:
-    LidarDatabase(Kompex::SQLiteDatabase *db);
+    typedef enum {FullData,IndexOnly} Type;
+    
+    // Construct with an empty SQLite database and the type.
+    // If this is FullData we'll store data in it
+    // If not, we'll just store offsets into another file.
+    LidarDatabase(Kompex::SQLiteDatabase *db,Type type);
     
     // Set the header info after creation
     bool setHeader(const char *srs,double minX,double minY,double minZ,double maxX,double maxY,double maxZ,int minLevel,int maxLevel,int minPoints,int maxPoints);
@@ -31,13 +36,19 @@ public:
     // Add data for a tile
     bool addTile(const void *tileData,int dataSize,int x,int y,int level);
     
+    // Add tile offset information
+    bool addTileOffset(long long start,int length,int x,int y,int level);
+    
     // Close any open statements and such
     void flush();
+    
+    Type getType() { return type; }
     
     // Check this after opening
     bool isValid() { return valid; }
 
 protected:
+    Type type;
     bool valid;
     Kompex::SQLiteDatabase *db;
     

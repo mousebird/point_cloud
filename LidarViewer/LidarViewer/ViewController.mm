@@ -11,6 +11,7 @@
 #import "AFHTTPRequestOperation.h"
 #import "LAZShader.h"
 #import "LAZReader.h"
+#import "LAZQuadReader.h"
 
 @interface ViewController () <WhirlyGlobeViewControllerDelegate>
 
@@ -21,7 +22,26 @@
     WhirlyGlobeViewController *globeViewC;
     LAZReader *lazReader;
     MaplyShader *pointShader;
+    LAZQuadReader *quadDelegate;
 }
+
+// Look for a file in the bundle or in the doc dir
+- (NSString *)findFile:(NSString *)base ext:(NSString *)ext
+{
+    NSString *docDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
+    NSString *dbPath = [[docDir stringByAppendingPathComponent:base] stringByAppendingPathExtension:ext];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:dbPath])
+    {
+        dbPath = [[NSBundle mainBundle] pathForResource:base ofType:ext];
+        if (![[NSFileManager defaultManager] fileExistsAtPath:dbPath])
+            dbPath = nil;
+    }
+    
+    return dbPath;
+}
+
+// Maximum number of points we'd like to display
+static int MaxDisplayedPoints = 2000000;
 
 - (void)viewDidLoad
 {
@@ -37,6 +57,7 @@
     globeViewC.delegate = self;
     
     // Give us a tilt
+    // Note: Debugging
     [globeViewC setTiltMinHeight:0.001 maxHeight:0.01 minTilt:1.21771169 maxTilt:0.0];
     
     // Start location
@@ -66,25 +87,37 @@
     lazReader.shader = pointShader;
     
     // Database to read
-//    NSString *dbName = @"st-helens";
-//    NSString *dbName = @"Mount St Helens Nov 20 2004";
-    NSString *dbName = @"CA_DayFire_2007_000472";
-    NSString *dbExt = @"laz";
-
-    NSString *docDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
-    NSString *dbPath = [[docDir stringByAppendingPathComponent:dbName] stringByAppendingPathExtension:dbExt];
-    if (![[NSFileManager defaultManager] fileExistsAtPath:dbPath])
+//    NSString *indexPath = [self findFile:@"st-helens-index" ext:@"sqlite"];
+//    NSString *lazPath = [self findFile:@"st-helens" ext:@"laz"];
+    NSString *indexPath = [self findFile:@"st-helens-quad-data" ext:@"sqlite"];
+//    NSString *lazPath = [self findFile:@"st-helens" ext:@"laz"];
+    
+    if (indexPath)
     {
-        dbPath = [[NSBundle mainBundle] pathForResource:dbName ofType:dbExt];
-        if (![[NSFileManager defaultManager] fileExistsAtPath:dbPath])
-            dbPath = nil;
-    }
+        // Set up the paging logic
+//        quadDelegate = [[LAZQuadReader alloc] initWithDB:lazPath indexFile:indexPath];
+        MaplyCoordinate3dD ll,ur;
+        quadDelegate = [[LAZQuadReader alloc] initWithDB:indexPath];
+        quadDelegate.shader = pointShader;
+//        quadDelegate.zOffset = 5000;
+        [quadDelegate getBoundsLL:&ll ur:&ur];
 
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
-    ^{
-        if (dbPath)
-            [lazReader readPoints:dbPath viewC:globeViewC];
-    });
+        MaplyQuadPagingLayer *lazLayer = [[MaplyQuadPagingLayer alloc] initWithCoordSystem:quadDelegate.coordSys delegate:quadDelegate];
+        // Note: Would be nice to fix this
+        lazLayer.numSimultaneousFetches = 1;
+        lazLayer.maxTiles = [quadDelegate getNumTilesFromMaxPoints:MaxDisplayedPoints];
+        lazLayer.importance = 64*64;
+        lazLayer.minTileHeight = ll.z;
+        lazLayer.maxTileHeight = ur.z;
+        [globeViewC addLayer:lazLayer];
+    }
+    // Note: Should toss up a warning if we can't find the files
+
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
+//    ^{
+//        if (indexPath && lazPath)
+//            [lazReader readPoints:lazPath viewC:globeViewC];
+//    });
 }
 
 //- (void)globeViewController:(WhirlyGlobeViewController *__nonnull)viewC didMove:(MaplyCoordinate *__nonnull)corners

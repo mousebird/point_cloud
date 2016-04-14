@@ -12,6 +12,15 @@
 #include <stdio.h>
 #include <string>
 #include "LidarDatabase.hpp"
+#include <sys/stat.h>
+#include <iostream>
+#include <liblas/liblas.hpp>
+#include <fstream>
+#include <iostream>
+#include <ogr_srs_api.h>
+#include <cpl_port.h>
+#include <ogr_spatialref.h>
+#include <gdal.h>
 
 class TileIdent
 {
@@ -32,13 +41,13 @@ public:
     void setPointLimit(int minLimit,int maxLimit) { minPointLimit = minLimit; maxPointLimit = maxLimit; }
     
     // Process the top level file and recurse from there
-    bool process(const std::string &fileName,LidarDatabase *lidarDB);
+    bool process(const std::string &inFileName,const std::string &outFileName,LidarDatabase *lidarDB);
     
     // Number of points written in various files
     int getNumPointsWritten() { return totalWrittenPoints; }
     
 protected:
-    bool process(const std::string &fileName,TileIdent tileID,LidarDatabase *lidarDB,bool removeAfterDone);
+    bool process(const std::string &fileName,TileIdent tileID,LidarDatabase *lidarDB,liblas::Writer *outW,bool removeAfterDone);
 
     int minPointLimit,maxPointLimit;
     int maxLevel;

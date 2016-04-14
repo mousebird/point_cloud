@@ -24,6 +24,7 @@
 		2B162B481BD5A15E0001E17B /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B162B471BD5A15E0001E17B /* libsqlite3.tbd */; };
 		2B162CE91BD5C2810001E17B /* boost.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B162CE81BD5C2810001E17B /* boost.a */; };
 		2B162DCB1BD6DC250001E17B /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B162DCA1BD6DC250001E17B /* libiconv.tbd */; };
+		2B1B4F1A1CBEE66D00859F5A /* LAZQuadReader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2B1B4F191CBEE66D00859F5A /* LAZQuadReader.mm */; };
 		2B43299D1BE2B003003293EE /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2B4329451BE2B003003293EE /* CMakeLists.txt */; };
 		2B4329CC1BE2B012003293EE /* c_api.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B43299F1BE2B012003293EE /* c_api.cpp */; };
 		2B4329CD1BE2B012003293EE /* chipper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B4329A01BE2B012003293EE /* chipper.cpp */; };
@@ -158,6 +159,14 @@
 		2B162B471BD5A15E0001E17B /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		2B162CE81BD5C2810001E17B /* boost.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = boost.a; path = ../libs/ofxiOSBoost/libs/boost/ios/boost.a; sourceTree = "<group>"; };
 		2B162DCA1BD6DC250001E17B /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		2B1B4F181CBEE66D00859F5A /* LAZQuadReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAZQuadReader.h; sourceTree = "<group>"; };
+		2B1B4F191CBEE66D00859F5A /* LAZQuadReader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LAZQuadReader.mm; sourceTree = "<group>"; };
+		2B1B4F1D1CBEEC0B00859F5A /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabase.h; path = "../../libs/WhirlyGlobe-Maply/third-party/fmdb/src/fmdb/FMDatabase.h"; sourceTree = "<group>"; };
+		2B1B4F1E1CBEEC0B00859F5A /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabaseAdditions.h; path = "../../libs/WhirlyGlobe-Maply/third-party/fmdb/src/fmdb/FMDatabaseAdditions.h"; sourceTree = "<group>"; };
+		2B1B4F1F1CBEEC0B00859F5A /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabasePool.h; path = "../../libs/WhirlyGlobe-Maply/third-party/fmdb/src/fmdb/FMDatabasePool.h"; sourceTree = "<group>"; };
+		2B1B4F201CBEEC0B00859F5A /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDatabaseQueue.h; path = "../../libs/WhirlyGlobe-Maply/third-party/fmdb/src/fmdb/FMDatabaseQueue.h"; sourceTree = "<group>"; };
+		2B1B4F211CBEEC0B00859F5A /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMDB.h; path = "../../libs/WhirlyGlobe-Maply/third-party/fmdb/src/fmdb/FMDB.h"; sourceTree = "<group>"; };
+		2B1B4F221CBEEC0B00859F5A /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMResultSet.h; path = "../../libs/WhirlyGlobe-Maply/third-party/fmdb/src/fmdb/FMResultSet.h"; sourceTree = "<group>"; };
 		2B4329451BE2B003003293EE /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		2B4329471BE2B003003293EE /* bounds.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bounds.hpp; sourceTree = "<group>"; };
 		2B4329491BE2B003003293EE /* las_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = las_config.h; sourceTree = "<group>"; };
@@ -468,6 +477,7 @@
 		2B162AFF1BD59E3C0001E17B /* LidarViewer */ = {
 			isa = PBXGroup;
 			children = (
+				2B1B4F1C1CBEEBEE00859F5A /* FMDatabase */,
 				2BB6A8921BD992A400FDB60A /* AFNetworking */,
 				2B162B031BD59E3C0001E17B /* AppDelegate.h */,
 				2B162B041BD59E3C0001E17B /* AppDelegate.m */,
@@ -475,6 +485,8 @@
 				2BB6BC081BE01F0300FDB60A /* LAZShader.mm */,
 				2BB6BC041BE01E5300FDB60A /* LAZReader.h */,
 				2BB6BC051BE01E5300FDB60A /* LAZReader.mm */,
+				2B1B4F181CBEE66D00859F5A /* LAZQuadReader.h */,
+				2B1B4F191CBEE66D00859F5A /* LAZQuadReader.mm */,
 				2B162B061BD59E3C0001E17B /* ViewController.h */,
 				2B162B071BD59E3C0001E17B /* ViewController.mm */,
 				2B162B091BD59E3C0001E17B /* Main.storyboard */,
@@ -545,6 +557,19 @@
 				2BB6BBCE1BE0052100FDB60A /* src */,
 			);
 			name = LASlib;
+			sourceTree = "<group>";
+		};
+		2B1B4F1C1CBEEBEE00859F5A /* FMDatabase */ = {
+			isa = PBXGroup;
+			children = (
+				2B1B4F1D1CBEEC0B00859F5A /* FMDatabase.h */,
+				2B1B4F1E1CBEEC0B00859F5A /* FMDatabaseAdditions.h */,
+				2B1B4F1F1CBEEC0B00859F5A /* FMDatabasePool.h */,
+				2B1B4F201CBEEC0B00859F5A /* FMDatabaseQueue.h */,
+				2B1B4F211CBEEC0B00859F5A /* FMDB.h */,
+				2B1B4F221CBEEC0B00859F5A /* FMResultSet.h */,
+			);
+			name = FMDatabase;
 			sourceTree = "<group>";
 		};
 		2B4329441BE2B003003293EE /* include */ = {
@@ -1159,6 +1184,7 @@
 				2B4329E21BE2B012003293EE /* gt_citation.cpp in Sources */,
 				2B4329D81BE2B012003293EE /* utility.cpp in Sources */,
 				2B4329E61BE2B012003293EE /* point.cpp in Sources */,
+				2B1B4F1A1CBEE66D00859F5A /* LAZQuadReader.mm in Sources */,
 				2BB6BBED1BE0052100FDB60A /* lasreader_bil.cpp in Sources */,
 				2BB6BBAF1BE004FE00FDB60A /* laswriteitemcompressed_v2.cpp in Sources */,
 				2BB6BBA81BE004FE00FDB60A /* lasinterval.cpp in Sources */,

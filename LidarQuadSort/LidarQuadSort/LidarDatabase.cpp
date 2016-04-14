@@ -10,7 +10,7 @@
 
 using namespace Kompex;
 
-LidarDatabase::LidarDatabase(Kompex::SQLiteDatabase *db)
+LidarDatabase::LidarDatabase(Kompex::SQLiteDatabase *db,Type type)
     : valid(true), insertStmt(NULL), db(db)
 {
     SQLiteStatement stmt(db);
@@ -24,7 +24,15 @@ LidarDatabase::LidarDatabase(Kompex::SQLiteDatabase *db)
         stmt.SqlStatement((std::string)"ALTER TABLE manifest ADD maxpoints INTEGER DEFAULT 0 NOT NULL;");
         stmt.SqlStatement((std::string)"ALTER TABLE manifest ADD srs TEXT DEFAULT '' NOT NULL;");
 
-        stmt.SqlStatement("CREATE TABLE lidartiles (data BLOB,level INTEGER,x INTEGER,y INTEGER,quadindex INTEGER PRIMARY KEY);");
+        switch (type)
+        {
+            case FullData:
+                stmt.SqlStatement("CREATE TABLE lidartiles (data BLOB,level INTEGER,x INTEGER,y INTEGER,quadindex INTEGER PRIMARY KEY);");
+                break;
+            case IndexOnly:
+                stmt.SqlStatement("CREATE TABLE tileaddress (start BIGINT, count INTEGER, level INTEGER,x INTEGER,y INTEGER,quadindex INTEGER PRIMARY KEY);");
+                break;
+        }
     } catch (SQLiteException &exc) {
         fprintf(stderr,"Failed to write to database:\n%s\n",exc.GetString().c_str());
         valid = false;
@@ -76,6 +84,40 @@ bool LidarDatabase::addTile(const void *tileData,int dataSize,int x,int y,int le
             fprintf(stderr,"Failed to write blob to database:\n%s\n",except.GetString().c_str());
             return false;
         }
+    }
+
+    return true;
+}
+
+bool LidarDatabase::addTileOffset(long long start,int length,int x,int y,int level)
+{
+    // Calculate a quad index for later use
+    int quadIndex = 0;
+    for (int iq=0;iq<level;iq++)
+        quadIndex += (1<<iq)*(1<<iq);
+    quadIndex += y*(1<<level) + x;
+    
+    if (!insertStmt)
+    {
+        insertStmt = new SQLiteStatement(db);
+        insertStmt->Sql("INSERT INTO tileaddress (start,count,level,x,y,quadindex) VALUES (@start,@count,@level,@x,@y,@quadindex);");
+    }
+
+    // Now insert the samples into the database as a blob
+    try {
+        insertStmt->BindInt64(1, start);
+        insertStmt->BindInt(2, length);
+        insertStmt->BindInt(3, level);
+        insertStmt->BindInt(4, x);
+        insertStmt->BindInt(5, y);
+        insertStmt->BindInt(6, quadIndex);
+        insertStmt->Execute();
+        insertStmt->Reset();
+    }
+    catch (SQLiteException &except)
+    {
+        fprintf(stderr,"Failed to write blob to database:\n%s\n",except.GetString().c_str());
+        return false;
     }
 
     return true;
