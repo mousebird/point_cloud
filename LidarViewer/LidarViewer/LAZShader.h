@@ -9,3 +9,5 @@
 #import "WhirlyGlobeComponent.h"
 
 MaplyShader *BuildPointShader(MaplyBaseViewController *viewC);
+
+MaplyShader *BuildRampPointShader(MaplyBaseViewController *viewC,UIImage *colorRamp);

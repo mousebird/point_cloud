@@ -41,7 +41,7 @@
 }
 
 // Maximum number of points we'd like to display
-static int MaxDisplayedPoints = 2000000;
+static int MaxDisplayedPoints = 3000000;
 
 - (void)viewDidLoad
 {
@@ -57,7 +57,6 @@ static int MaxDisplayedPoints = 2000000;
     globeViewC.delegate = self;
     
     // Give us a tilt
-    // Note: Debugging
     [globeViewC setTiltMinHeight:0.001 maxHeight:0.01 minTilt:1.21771169 maxTilt:0.0];
     
     // Start location
@@ -78,19 +77,21 @@ static int MaxDisplayedPoints = 2000000;
     layer.handleEdges = true;
     layer.coverPoles = true;
     layer.drawPriority = 0;
+    layer.color = [UIColor colorWithWhite:0.5 alpha:1.0];
     [globeViewC addLayer:layer];
     
     // Custom point shader (may get more complex later)
-    pointShader = BuildPointShader(globeViewC);
+//    pointShader = BuildPointShader(globeViewC);
+    pointShader = BuildRampPointShader(globeViewC,[UIImage imageNamed:@"colorramp.png"]);
     
     lazReader = [[LAZReader alloc] init];
     lazReader.shader = pointShader;
     
     // Database to read
-//    NSString *indexPath = [self findFile:@"st-helens-index" ext:@"sqlite"];
-//    NSString *lazPath = [self findFile:@"st-helens" ext:@"laz"];
-    NSString *indexPath = [self findFile:@"st-helens-quad-data" ext:@"sqlite"];
-//    NSString *lazPath = [self findFile:@"st-helens" ext:@"laz"];
+//    NSString *indexPath = [self findFile:@"st-helens-quad-data" ext:@"sqlite"];
+    NSString *indexPath = [self findFile:@"10SGC3969_1-quad-data" ext:@"sqlite"];
+//    NSString *indexPath = [self findFile:@"stadium-utm-quad-data" ext:@"sqlite"];
+//    NSString *indexPath = [self findFile:@"44123A1305_ALL-quad-data" ext:@"sqlite"];
     
     if (indexPath)
     {
@@ -106,7 +107,8 @@ static int MaxDisplayedPoints = 2000000;
         // Note: Would be nice to fix this
         lazLayer.numSimultaneousFetches = 1;
         lazLayer.maxTiles = [quadDelegate getNumTilesFromMaxPoints:MaxDisplayedPoints];
-        lazLayer.importance = 64*64;
+        NSLog(@"Loading %d tiles, max",lazLayer.maxTiles);
+        lazLayer.importance = 128*128;
         lazLayer.minTileHeight = ll.z;
         lazLayer.maxTileHeight = ur.z;
         [globeViewC addLayer:lazLayer];

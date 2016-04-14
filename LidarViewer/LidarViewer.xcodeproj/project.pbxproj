@@ -62,6 +62,7 @@
 		2B4329EE1BE2B012003293EE /* version.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B4329C91BE2B012003293EE /* version.cpp */; };
 		2B4329EF1BE2B012003293EE /* Version.rc in Resources */ = {isa = PBXBuildFile; fileRef = 2B4329CA1BE2B012003293EE /* Version.rc */; };
 		2B4329F01BE2B012003293EE /* writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B4329CB1BE2B012003293EE /* writer.cpp */; };
+		2B8FBD601CC0545000882AC9 /* colorramp.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B8FBD5F1CC0545000882AC9 /* colorramp.png */; };
 		2BA6DB141CB710BD0017E3AF /* libgdal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BA6DB131CB710BD0017E3AF /* libgdal.a */; };
 		2BB6BBA31BE004FE00FDB60A /* arithmeticdecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BB6D1BE004FE00FDB60A /* arithmeticdecoder.cpp */; };
 		2BB6BBA41BE004FE00FDB60A /* arithmeticencoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BB6F1BE004FE00FDB60A /* arithmeticencoder.cpp */; };
@@ -287,6 +288,7 @@
 		2B4329C91BE2B012003293EE /* version.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = version.cpp; sourceTree = "<group>"; };
 		2B4329CA1BE2B012003293EE /* Version.rc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Version.rc; sourceTree = "<group>"; };
 		2B4329CB1BE2B012003293EE /* writer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = writer.cpp; sourceTree = "<group>"; };
+		2B8FBD5F1CC0545000882AC9 /* colorramp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = colorramp.png; sourceTree = SOURCE_ROOT; };
 		2BA6DB131CB710BD0017E3AF /* libgdal.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgdal.a; path = ../../../../../usr/local/Cellar/gdal/1.11.1_3/lib/libgdal.a; sourceTree = "<group>"; };
 		2BB6A8931BD992DC00FDB60A /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperation.h; path = "../../libs/WhirlyGlobe-Maply/third-party/AFNetworking/AFNetworking/AFHTTPRequestOperation.h"; sourceTree = "<group>"; };
 		2BB6A8941BD992DC00FDB60A /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperationManager.h; path = "../../libs/WhirlyGlobe-Maply/third-party/AFNetworking/AFNetworking/AFHTTPRequestOperationManager.h"; sourceTree = "<group>"; };
@@ -493,6 +495,7 @@
 				2B162B0C1BD59E3C0001E17B /* Assets.xcassets */,
 				2B162B0E1BD59E3C0001E17B /* LaunchScreen.storyboard */,
 				2B162B111BD59E3C0001E17B /* Info.plist */,
+				2B8FBD621CC0547300882AC9 /* Resources */,
 				2B162D521BD6B0670001E17B /* LASlib */,
 				2B162D091BD5C5680001E17B /* laszip */,
 				2BB6BABD1BDFFE4C00FDB60A /* libblas */,
@@ -812,6 +815,14 @@
 			path = writer;
 			sourceTree = "<group>";
 		};
+		2B8FBD621CC0547300882AC9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2B8FBD5F1CC0545000882AC9 /* colorramp.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		2BB6A8921BD992A400FDB60A /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
@@ -1088,6 +1099,7 @@
 				2B162B101BD59E3C0001E17B /* LaunchScreen.storyboard in Resources */,
 				2B4329EF1BE2B012003293EE /* Version.rc in Resources */,
 				2B4329CF1BE2B012003293EE /* CMakeLists.txt in Resources */,
+				2B8FBD601CC0545000882AC9 /* colorramp.png in Resources */,
 				2B162B0D1BD59E3C0001E17B /* Assets.xcassets in Resources */,
 				2B162B0B1BD59E3C0001E17B /* Main.storyboard in Resources */,
 				2B43299D1BE2B003003293EE /* CMakeLists.txt in Resources */,

@@ -14,6 +14,30 @@
 #import "FMDatabase.h"
 #import "FMDatabaseQueue.h"
 
+// Keep track of tile size (height in particular)
+class TileSizeInfo
+{
+public:
+    TileSizeInfo(MaplyTileID tileID) : tileID(tileID), minZ(0.0), maxZ(0.0) { }
+    TileSizeInfo() { }
+    
+    bool operator < (const TileSizeInfo &that) const
+    {
+        if (tileID.level == that.tileID.level)
+        {
+            if (tileID.y == that.tileID.y)
+                return tileID.x < that.tileID.x;
+            return tileID.y < that.tileID.y;
+        }
+        return tileID.level < that.tileID.level;
+    }
+    
+    MaplyTileID tileID;
+    double minZ,maxZ;
+};
+
+typedef std::set<TileSizeInfo> TileSizeSet;
+
 @implementation LAZQuadReader
 {
     FMDatabase *db;
@@ -21,6 +45,7 @@
     std::ifstream *ifs;
     liblas::Reader *lazReader;
     bool hasColors;
+    TileSizeSet tileSizes;
 }
 
 - (id)initWithDB:(NSString *)lazFileName indexFile:(NSString *)sqliteFileName
@@ -48,7 +73,7 @@
     lazReader = new liblas::Reader(reader);
     liblas::Header header = lazReader->GetHeader();
     hasColors = header.GetDataFormatId() != liblas::ePointFormat0 && header.GetDataFormatId() != liblas::ePointFormat1;
-
+    
     // Note: Should check the LAZ reader
     
     return self;
@@ -60,7 +85,7 @@
     if (!self)
         return nil;
     
-    _zOffset = 1.0;
+    _zOffset = 0.0;
     
     NSString *sqlitePath = nil;
     // See if that was a direct path first
@@ -98,9 +123,15 @@
     }
     
     // Note: If this isn't set up right, we need to fake it
-    if (srs)
+    if (srs && [srs length])
     {
         _coordSys = [[MaplyProj4CoordSystem alloc] initWithString:srs];
+        MaplyCoordinate ll,ur;
+        ll.x = _minX;  ll.y = _minY;  ur.x = _maxX;  ur.y = _maxY;
+        [_coordSys setBoundsLL:&ll ur:&ur];
+    } else {
+        // Nebraska state plane.  Because why not.
+        _coordSys = [[MaplyProj4CoordSystem alloc] initWithString:@"+proj=lcc +lat_1=43 +lat_2=40 +lat_0=39.83333333333334 +lon_0=-100 +x_0=500000.00001016 +y_0=0 +ellps=GRS80 +to_meter=0.3048006096012192 +no_defs "];
         MaplyCoordinate ll,ur;
         ll.x = _minX;  ll.y = _minY;  ur.x = _maxX;  ur.y = _maxY;
         [_coordSys setBoundsLL:&ll ur:&ur];
@@ -109,6 +140,14 @@
     queue = [FMDatabaseQueue databaseQueueWithPath:sqlitePath];
 
     return self;
+}
+
+- (void)setShader:(MaplyShader *)shader
+{
+    _shader = shader;
+    
+    [_shader setUniformFloatNamed:@"u_zmin" val:_minZ];
+    [_shader setUniformFloatNamed:@"u_zmax" val:_maxZ];
 }
 
 - (void)dealloc
@@ -144,10 +183,31 @@
     ur->x = _maxX;  ur->y = _maxY;  ur->z = _maxZ+_zOffset;
 }
 
+- (void)getBoundingBox:(MaplyTileID)tileID ll:(MaplyCoordinate3dD *)ll ur:(MaplyCoordinate3dD *)ur
+{
+    @synchronized (self) {
+        TileSizeInfo dummy(tileID);
+        TileSizeSet::iterator it = tileSizes.find(dummy);
+        if (it != tileSizes.end())
+        {
+            ll->z = it->minZ;
+            ur->z = it->maxZ;
+        }
+    }
+}
+
+- (void)tileDidUnload:(MaplyTileID)tileID
+{
+    @synchronized (self) {
+        TileSizeInfo dummy(tileID);
+        TileSizeSet::iterator it = tileSizes.find(dummy);
+        if (it != tileSizes.end())
+            tileSizes.erase(it);
+    }
+}
+
 - (void)startFetchForTile:(MaplyTileID)tileID forLayer:(MaplyQuadPagingLayer *__nonnull)layer
 {
-    double scaleX = 1.0, scaleY = 1.0, scaleZ = 1.0;
-
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
    ^{
        // Put together the precalculated quad index.  This is faster
@@ -190,7 +250,10 @@
                }
            
                MaplyPoints *points = [[MaplyPoints alloc] initWithNumPoints:count];
+               int elevID = [points addAttributeType:@"a_elev" type:MaplyShaderAttrTypeFloat];
+               
                long long which = 0;
+               double minZ=MAXFLOAT,maxZ=-MAXFLOAT;
                while (which < count)
                {
                    // Get the point and convert to geocentric
@@ -209,6 +272,9 @@
                    MaplyCoordinate3dD coord;
                    coord.x = p.GetX();  coord.y = p.GetY();  coord.z = p.GetZ();
                    coord.z += _zOffset;
+                   
+                   minZ = std::min(coord.z,minZ);
+                   maxZ = std::max(coord.z,maxZ);
 
                    MaplyCoordinate3dD dispCoord = [layer.viewC displayCoordD:coord fromSystem:_coordSys];
                    
@@ -220,8 +286,18 @@
                    }
                    [points addDispCoordDoubleX:dispCoord.x y:dispCoord.y z:dispCoord.z];
                    [points addColorR:red g:green b:blue a:1.0];
+                   [points addAttribute:elevID fVal:coord.z];
                    
                    which++;
+               }
+               
+               // Keep track of tile size
+               if (minZ == maxZ)
+                   maxZ += 1.0;
+               @synchronized (self) {
+                   TileSizeInfo tileInfo(tileID);
+                   tileInfo.minZ = minZ;  tileInfo.maxZ = maxZ;
+                   tileSizes.insert(tileInfo);
                }
 
                compObj = [layer.viewC addPoints:@[points] desc:

@@ -50,6 +50,11 @@ bool LidarSorter::process(const std::string &fileName,TileIdent tileID,LidarData
         // Input file
         std::ifstream ifs;
         ifs.open(fileName, std::ios::in | std::ios::binary);
+        if (!ifs)
+        {
+            fprintf(stderr,"Failed to open file %s",fileName.c_str());
+            return false;
+        }
         
         liblas::ReaderFactory f;
         liblas::Reader reader = f.CreateWithStream(ifs);
@@ -65,6 +70,11 @@ bool LidarSorter::process(const std::string &fileName,TileIdent tileID,LidarData
             tileHeader.SetPointRecordsCount(0);
             tileHeader.SetCompressed(true);
             ofs = new std::stringstream(std::stringstream::out);
+            if (!(*ofs))
+            {
+                fprintf(stderr,"Unable to open string stream.");
+                return false;
+            }
             tileW = new liblas::Writer(*ofs,tileHeader);
         } else {
 //            startPoint = outW->GetHeader().GetPointRecordsCount();

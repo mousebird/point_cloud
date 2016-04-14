@@ -71,7 +71,7 @@ int main(int argc, const char * argv[])
 
     // Set up the recursive sorter and let it run
     LidarSorter sorter(tmpDir);
-    sorter.setPointLimit(5000,5500);
+    sorter.setPointLimit(20000,25000);
     if (sorter.process(inFile,outLaz,lidarDb))
     {
         fprintf(stdout,"Wrote a total of %d points",sorter.getNumPointsWritten());
