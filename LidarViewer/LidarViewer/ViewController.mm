@@ -112,8 +112,9 @@ static int MaxDisplayedPoints = 3000000;
         [globeViewC setViewState:viewState];
         
         MaplyQuadPagingLayer *lazLayer = [[MaplyQuadPagingLayer alloc] initWithCoordSystem:quadDelegate.coordSys delegate:quadDelegate];
-        // Note: Would be nice to fix this
-        lazLayer.numSimultaneousFetches = 1;
+        // It takes no real time to fetch from the database.
+        // All the threading is in projecting coordinates
+        lazLayer.numSimultaneousFetches = 4;
         lazLayer.maxTiles = [quadDelegate getNumTilesFromMaxPoints:MaxDisplayedPoints];
         NSLog(@"Loading %d tiles, max",lazLayer.maxTiles);
         lazLayer.importance = 128*128;

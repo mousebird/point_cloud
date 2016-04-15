@@ -44,7 +44,6 @@ typedef std::set<TileSizeInfo> TileSizeSet;
     FMDatabaseQueue *queue;
     std::ifstream *ifs;
     liblas::Reader *lazReader;
-    bool hasColors;
     TileSizeSet tileSizes;
 }
 
@@ -72,7 +71,6 @@ typedef std::set<TileSizeInfo> TileSizeSet;
     liblas::Reader reader = f.CreateWithStream(*ifs);
     lazReader = new liblas::Reader(reader);
     liblas::Header header = lazReader->GetHeader();
-    hasColors = header.GetDataFormatId() != liblas::ePointFormat0 && header.GetDataFormatId() != liblas::ePointFormat1;
     
     // Note: Should check the LAZ reader
     
@@ -217,7 +215,14 @@ typedef std::set<TileSizeInfo> TileSizeSet;
            quadIdx += (1<<iq)*(1<<iq);
        quadIdx += tileID.y*(1<<tileID.level)+tileID.x;
 
+       // Information set up from the database or from the global file
+       liblas::Reader * __block thisReader = NULL;
+       std::stringstream * __block tileStream = NULL;
        MaplyComponentObject * __block compObj = nil;
+       NSData * __block data = nil;
+       long long __block pointStart = 0;
+       int __block count = 0;
+       bool __block hasColors = false;
        
        // We're either using the index with an external LAZ files or we're grabbing the raw data itself
        [queue inDatabase:^(FMDatabase *theDb) {
@@ -228,17 +233,15 @@ typedef std::set<TileSizeInfo> TileSizeSet;
                res = [db executeQuery:[NSString stringWithFormat:@"SELECT data FROM lidartiles WHERE quadindex=%d;",quadIdx]];
            if ([res next])
            {
-               long long pointStart = 0;
-               int count = 0;
-               liblas::Reader *thisReader = NULL;
-               std::stringstream *tileStream = NULL;
                if (lazReader)
                {
                    pointStart = [res longLongIntForColumn:@"start"];
                    count = [res intForColumn:@"count"];
                    thisReader = lazReader;
+                   liblas::Header header = thisReader->GetHeader();
+                   hasColors = header.GetDataFormatId() != liblas::ePointFormat0 && header.GetDataFormatId() != liblas::ePointFormat1;
                } else {
-                   NSData *data = [res dataForColumn:@"data"];
+                   data = [res dataForColumn:@"data"];
                    tileStream = new std::stringstream();
                    tileStream->write(reinterpret_cast<const char *>([data bytes]),[data length]);
                    liblas::ReaderFactory f;
@@ -248,96 +251,98 @@ typedef std::set<TileSizeInfo> TileSizeSet;
                    count = header.GetPointRecordsCount();
                    hasColors = header.GetDataFormatId() != liblas::ePointFormat0 && header.GetDataFormatId() != liblas::ePointFormat1;
                }
-           
-               MaplyPoints *points = [[MaplyPoints alloc] initWithNumPoints:count];
-               int elevID = [points addAttributeType:@"a_elev" type:MaplyShaderAttrTypeFloat];
-               
-               // Center the coordinates around the tile center
-               MaplyCoordinate3dD tileCenter;
-               tileCenter.x = (thisReader->GetHeader().GetMinX()+thisReader->GetHeader().GetMaxX())/2.0;
-               tileCenter.y = (thisReader->GetHeader().GetMinY()+thisReader->GetHeader().GetMaxY())/2.0;
-               tileCenter.z = 0.0;
-               MaplyCoordinate3dD tileCenterDisp = [layer.viewC displayCoordD:tileCenter fromSystem:_coordSys];
-               points.transform = [[MaplyMatrix alloc] initWithTranslateX:tileCenterDisp.x y:tileCenterDisp.y z:tileCenterDisp.z];
-               
-               long long which = 0;
-               double minZ=MAXFLOAT,maxZ=-MAXFLOAT;
-               while (which < count)
-               {
-                   // Get the point and convert to geocentric
-                   if (lazReader)
-                   {
-                       if (!thisReader->ReadPointAt((size_t)(which+pointStart)))
-                           break;
-                   } else {
-                       if (!thisReader->ReadNextPoint())
-                           break;
-                   }
-                   liblas::Point const& p = thisReader->GetPoint();
-                   //                double x,y,z;
-                   //                x = p.GetX(), y = p.GetY(); z = p.GetZ();
-                   //                trans->TransformEx(1, &x, &y, &z);
-                   MaplyCoordinate3dD coord;
-                   coord.x = p.GetX();  coord.y = p.GetY();  coord.z = p.GetZ();
-                   coord.z += _zOffset;
-                   
-                   minZ = std::min(coord.z,minZ);
-                   maxZ = std::max(coord.z,maxZ);
 
-                   MaplyCoordinate3dD dispCoord = [layer.viewC displayCoordD:coord fromSystem:_coordSys];
-                   MaplyCoordinate3dD dispCoordCenter = MaplyCoordinate3dDMake(dispCoord.x-tileCenterDisp.x, dispCoord.y-tileCenterDisp.y, dispCoord.z-tileCenterDisp.z);
-                   
-                   float red = 1.0,green = 1.0, blue = 1.0;
-                   if (hasColors)
-                   {
-                       liblas::Color color = p.GetColor();
-                       red = color.GetRed() / 255.0;  green = color.GetGreen() / 255.0;  blue = color.GetBlue() / 255.0;
-                   }
-                   [points addDispCoordDoubleX:dispCoordCenter.x y:dispCoordCenter.y z:dispCoordCenter.z];
-                   [points addColorR:red g:green b:blue a:1.0];
-                   [points addAttribute:elevID fVal:coord.z];
-                   
-                   which++;
-               }
-               
-               // Keep track of tile size
-               if (minZ == maxZ)
-                   maxZ += 1.0;
-               @synchronized (self) {
-                   TileSizeInfo tileInfo(tileID);
-                   tileInfo.minZ = minZ;  tileInfo.maxZ = maxZ;
-                   tileSizes.insert(tileInfo);
-               }
-
-               compObj = [layer.viewC addPoints:@[points] desc:
-                                                @{kMaplyColor: [UIColor redColor],
-                                                  kMaplyPointSize: @(6.0),
-                                                  kMaplyDrawPriority: @(10000000),
-                                                  kMaplyShader: _shader.name,
-                                                  kMaplyZBufferRead: @(YES),
-                                                  kMaplyZBufferWrite: @(YES)
-                                                  }
-                                                    mode:MaplyThreadCurrent];
-               [layer addData:@[compObj] forTile:tileID style:MaplyDataStyleAdd];
-
-               if (!lazReader)
-               {
-                   delete thisReader;
-                   delete tileStream;
-               }
+               [res close];
            }
-           
-           [res close];
        }];
        
-       if (compObj)
+       if (thisReader)
        {
-//           NSLog(@"Tile did load %d: (%d,%d)",tileID.level,tileID.x,tileID.y);
-           [layer tileDidLoad:tileID];
-       } else {
-//           NSLog(@"Tile did not load %d: (%d,%d)",tileID.level,tileID.x,tileID.y);
-           [layer tileFailedToLoad:tileID];
+           MaplyPoints *points = [[MaplyPoints alloc] initWithNumPoints:count];
+           int elevID = [points addAttributeType:@"a_elev" type:MaplyShaderAttrTypeFloat];
+           
+           // Center the coordinates around the tile center
+           MaplyCoordinate3dD tileCenter;
+           tileCenter.x = (thisReader->GetHeader().GetMinX()+thisReader->GetHeader().GetMaxX())/2.0;
+           tileCenter.y = (thisReader->GetHeader().GetMinY()+thisReader->GetHeader().GetMaxY())/2.0;
+           tileCenter.z = 0.0;
+           MaplyCoordinate3dD tileCenterDisp = [layer.viewC displayCoordD:tileCenter fromSystem:_coordSys];
+           points.transform = [[MaplyMatrix alloc] initWithTranslateX:tileCenterDisp.x y:tileCenterDisp.y z:tileCenterDisp.z];
+           
+           long long which = 0;
+           double minZ=MAXFLOAT,maxZ=-MAXFLOAT;
+           while (which < count)
+           {
+               // Get the point and convert to geocentric
+               if (lazReader)
+               {
+                   if (!thisReader->ReadPointAt((size_t)(which+pointStart)))
+                       break;
+               } else {
+                   if (!thisReader->ReadNextPoint())
+                       break;
+               }
+               liblas::Point const& p = thisReader->GetPoint();
+               //                double x,y,z;
+               //                x = p.GetX(), y = p.GetY(); z = p.GetZ();
+               //                trans->TransformEx(1, &x, &y, &z);
+               MaplyCoordinate3dD coord;
+               coord.x = p.GetX();  coord.y = p.GetY();  coord.z = p.GetZ();
+               coord.z += _zOffset;
+               
+               minZ = std::min(coord.z,minZ);
+               maxZ = std::max(coord.z,maxZ);
+
+               MaplyCoordinate3dD dispCoord = [layer.viewC displayCoordD:coord fromSystem:_coordSys];
+               MaplyCoordinate3dD dispCoordCenter = MaplyCoordinate3dDMake(dispCoord.x-tileCenterDisp.x, dispCoord.y-tileCenterDisp.y, dispCoord.z-tileCenterDisp.z);
+               
+               float red = 1.0,green = 1.0, blue = 1.0;
+               if (hasColors)
+               {
+                   liblas::Color color = p.GetColor();
+                   red = color.GetRed() / 255.0;  green = color.GetGreen() / 255.0;  blue = color.GetBlue() / 255.0;
+               }
+               [points addDispCoordDoubleX:dispCoordCenter.x y:dispCoordCenter.y z:dispCoordCenter.z];
+               [points addColorR:red g:green b:blue a:1.0];
+               [points addAttribute:elevID fVal:coord.z];
+               
+               which++;
+           }
+           
+           // Keep track of tile size
+           if (minZ == maxZ)
+               maxZ += 1.0;
+           @synchronized (self) {
+               TileSizeInfo tileInfo(tileID);
+               tileInfo.minZ = minZ;  tileInfo.maxZ = maxZ;
+               tileSizes.insert(tileInfo);
+           }
+
+           compObj = [layer.viewC addPoints:@[points] desc:
+                                            @{kMaplyColor: [UIColor redColor],
+                                              kMaplyPointSize: @(6.0),
+                                              kMaplyDrawPriority: @(10000000),
+                                              kMaplyShader: _shader.name,
+                                              kMaplyZBufferRead: @(YES),
+                                              kMaplyZBufferWrite: @(YES)
+                                              }
+                                                mode:MaplyThreadCurrent];
+           [layer addData:@[compObj] forTile:tileID style:MaplyDataStyleAdd];
        }
+
+       if (!lazReader)
+       {
+           if (thisReader)
+           {
+               delete thisReader;
+               delete tileStream;
+           }
+       }
+       
+       if (compObj)
+           [layer tileDidLoad:tileID];
+       else
+           [layer tileFailedToLoad:tileID];
    });
 }
 
