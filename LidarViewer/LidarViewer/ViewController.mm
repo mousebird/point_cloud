@@ -111,12 +111,19 @@ static int MaxDisplayedPoints = 3000000;
         viewState.pos = MaplyCoordinateDMake(center.x,center.y);
         [globeViewC setViewState:viewState];
         
+        // Drop a label so the user can find it when zoomed out
+        MaplyScreenLabel *label = [[MaplyScreenLabel alloc] init];
+        label.text = dbName;
+        label.loc = center;
+        [globeViewC addScreenLabels:@[label] desc:@{kMaplyMaxVis: @(10.0),
+                                                    kMaplyMinVis: @(0.1),
+                                                    kMaplyFont: [UIFont boldSystemFontOfSize:24.0]}];
+        
         MaplyQuadPagingLayer *lazLayer = [[MaplyQuadPagingLayer alloc] initWithCoordSystem:quadDelegate.coordSys delegate:quadDelegate];
         // It takes no real time to fetch from the database.
         // All the threading is in projecting coordinates
         lazLayer.numSimultaneousFetches = 4;
         lazLayer.maxTiles = [quadDelegate getNumTilesFromMaxPoints:MaxDisplayedPoints];
-        NSLog(@"Loading %d tiles, max",lazLayer.maxTiles);
         lazLayer.importance = 128*128;
         lazLayer.minTileHeight = ll.z;
         lazLayer.maxTileHeight = ur.z;

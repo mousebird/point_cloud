@@ -143,9 +143,6 @@ typedef std::set<TileSizeInfo> TileSizeSet;
 - (void)setShader:(MaplyShader *)shader
 {
     _shader = shader;
-    
-    [_shader setUniformFloatNamed:@"u_zmin" val:_minZ];
-    [_shader setUniformFloatNamed:@"u_zmax" val:_maxZ];
 }
 
 - (void)dealloc
@@ -323,6 +320,9 @@ typedef std::set<TileSizeInfo> TileSizeSet;
                                               kMaplyPointSize: @(6.0),
                                               kMaplyDrawPriority: @(10000000),
                                               kMaplyShader: _shader.name,
+                                              kMaplyShaderUniforms:
+                                                  @{@"u_zmin": @(_minZ),
+                                                    @"u_zmax": @(_maxZ)},
                                               kMaplyZBufferRead: @(YES),
                                               kMaplyZBufferWrite: @(YES)
                                               }
