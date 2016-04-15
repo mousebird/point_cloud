@@ -20,9 +20,7 @@
 @implementation ViewController
 {
     WhirlyGlobeViewController *globeViewC;
-    LAZReader *lazReader;
-    MaplyShader *pointShader;
-    LAZQuadReader *quadDelegate;
+    MaplyShader *pointShaderRamp,*pointShaderColor;
 }
 
 // Look for a file in the bundle or in the doc dir
@@ -59,14 +57,6 @@ static int MaxDisplayedPoints = 3000000;
     // Give us a tilt
     [globeViewC setTiltMinHeight:0.001 maxHeight:0.01 minTilt:1.21771169 maxTilt:0.0];
     
-    // Start location
-    WhirlyGlobeViewControllerAnimationState *viewState = [[WhirlyGlobeViewControllerAnimationState alloc] init];
-    viewState.heading = -3.118891;
-    viewState.height = 0.003194;
-    viewState.tilt   = 0.988057;
-    viewState.pos = MaplyCoordinateDMake(-2.132972, 0.808100);
-    [globeViewC setViewState:viewState];
-    
     // Add a base layer
     NSString * baseCacheDir = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString * cartodbTilesCacheDir = [NSString stringWithFormat:@"%@/cartodbtiles/", baseCacheDir];
@@ -80,29 +70,47 @@ static int MaxDisplayedPoints = 3000000;
     layer.color = [UIColor colorWithWhite:0.5 alpha:1.0];
     [globeViewC addLayer:layer];
     
-    // Custom point shader (may get more complex later)
-//    pointShader = BuildPointShader(globeViewC);
-    pointShader = BuildRampPointShader(globeViewC,[UIImage imageNamed:@"colorramp.png"]);
+    // Shader Shaders for color and ramp versions
+    pointShaderColor = BuildPointShader(globeViewC);
+    pointShaderRamp = BuildRampPointShader(globeViewC,[UIImage imageNamed:@"colorramp.png"]);
     
-    lazReader = [[LAZReader alloc] init];
-    lazReader.shader = pointShader;
+    [self addLaz:@"st-helens-quad-data" shader:pointShaderColor];
+    [self addLaz:@"10SGC3969_1-quad-data" shader:pointShaderRamp];
+    [self addLaz:@"stadium-utm-quad-data" shader:pointShaderColor];
+    [self addLaz:@"44123A1305_ALL-quad-data" shader:pointShaderRamp];
     
+    // Note: Should toss up a warning if we can't find the files
+
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
+//    ^{
+//        if (indexPath && lazPath)
+//            [lazReader readPoints:lazPath viewC:globeViewC];
+//    });
+}
+
+- (void)addLaz:(NSString *)dbName shader:(MaplyShader *)shader
+{
     // Database to read
-//    NSString *indexPath = [self findFile:@"st-helens-quad-data" ext:@"sqlite"];
-    NSString *indexPath = [self findFile:@"10SGC3969_1-quad-data" ext:@"sqlite"];
-//    NSString *indexPath = [self findFile:@"stadium-utm-quad-data" ext:@"sqlite"];
-//    NSString *indexPath = [self findFile:@"44123A1305_ALL-quad-data" ext:@"sqlite"];
-    
+    NSString *indexPath = [self findFile:dbName ext:@"sqlite"];
+
     if (indexPath)
     {
         // Set up the paging logic
-//        quadDelegate = [[LAZQuadReader alloc] initWithDB:lazPath indexFile:indexPath];
+        //        quadDelegate = [[LAZQuadReader alloc] initWithDB:lazPath indexFile:indexPath];
         MaplyCoordinate3dD ll,ur;
-        quadDelegate = [[LAZQuadReader alloc] initWithDB:indexPath];
-        quadDelegate.shader = pointShader;
-//        quadDelegate.zOffset = 5000;
+        LAZQuadReader *quadDelegate = [[LAZQuadReader alloc] initWithDB:indexPath];
+        quadDelegate.shader = shader;
         [quadDelegate getBoundsLL:&ll ur:&ur];
-
+        
+        // Start location
+        WhirlyGlobeViewControllerAnimationState *viewState = [[WhirlyGlobeViewControllerAnimationState alloc] init];
+        viewState.heading = -3.118891;
+        viewState.height = 0.003194;
+        viewState.tilt   = 0.988057;
+        MaplyCoordinate center = [[quadDelegate coordSys] localToGeo:[quadDelegate getCenter]];
+        viewState.pos = MaplyCoordinateDMake(center.x,center.y);
+        [globeViewC setViewState:viewState];
+        
         MaplyQuadPagingLayer *lazLayer = [[MaplyQuadPagingLayer alloc] initWithCoordSystem:quadDelegate.coordSys delegate:quadDelegate];
         // Note: Would be nice to fix this
         lazLayer.numSimultaneousFetches = 1;
@@ -113,13 +121,6 @@ static int MaxDisplayedPoints = 3000000;
         lazLayer.maxTileHeight = ur.z;
         [globeViewC addLayer:lazLayer];
     }
-    // Note: Should toss up a warning if we can't find the files
-
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
-//    ^{
-//        if (indexPath && lazPath)
-//            [lazReader readPoints:lazPath viewC:globeViewC];
-//    });
 }
 
 //- (void)globeViewController:(WhirlyGlobeViewController *__nonnull)viewC didMove:(MaplyCoordinate *__nonnull)corners

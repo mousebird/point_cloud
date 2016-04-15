@@ -252,6 +252,14 @@ typedef std::set<TileSizeInfo> TileSizeSet;
                MaplyPoints *points = [[MaplyPoints alloc] initWithNumPoints:count];
                int elevID = [points addAttributeType:@"a_elev" type:MaplyShaderAttrTypeFloat];
                
+               // Center the coordinates around the tile center
+               MaplyCoordinate3dD tileCenter;
+               tileCenter.x = (thisReader->GetHeader().GetMinX()+thisReader->GetHeader().GetMaxX())/2.0;
+               tileCenter.y = (thisReader->GetHeader().GetMinY()+thisReader->GetHeader().GetMaxY())/2.0;
+               tileCenter.z = 0.0;
+               MaplyCoordinate3dD tileCenterDisp = [layer.viewC displayCoordD:tileCenter fromSystem:_coordSys];
+               points.transform = [[MaplyMatrix alloc] initWithTranslateX:tileCenterDisp.x y:tileCenterDisp.y z:tileCenterDisp.z];
+               
                long long which = 0;
                double minZ=MAXFLOAT,maxZ=-MAXFLOAT;
                while (which < count)
@@ -259,7 +267,7 @@ typedef std::set<TileSizeInfo> TileSizeSet;
                    // Get the point and convert to geocentric
                    if (lazReader)
                    {
-                       if (!thisReader->ReadPointAt(which+pointStart))
+                       if (!thisReader->ReadPointAt((size_t)(which+pointStart)))
                            break;
                    } else {
                        if (!thisReader->ReadNextPoint())
@@ -277,6 +285,7 @@ typedef std::set<TileSizeInfo> TileSizeSet;
                    maxZ = std::max(coord.z,maxZ);
 
                    MaplyCoordinate3dD dispCoord = [layer.viewC displayCoordD:coord fromSystem:_coordSys];
+                   MaplyCoordinate3dD dispCoordCenter = MaplyCoordinate3dDMake(dispCoord.x-tileCenterDisp.x, dispCoord.y-tileCenterDisp.y, dispCoord.z-tileCenterDisp.z);
                    
                    float red = 1.0,green = 1.0, blue = 1.0;
                    if (hasColors)
@@ -284,7 +293,7 @@ typedef std::set<TileSizeInfo> TileSizeSet;
                        liblas::Color color = p.GetColor();
                        red = color.GetRed() / 255.0;  green = color.GetGreen() / 255.0;  blue = color.GetBlue() / 255.0;
                    }
-                   [points addDispCoordDoubleX:dispCoord.x y:dispCoord.y z:dispCoord.z];
+                   [points addDispCoordDoubleX:dispCoordCenter.x y:dispCoordCenter.y z:dispCoordCenter.z];
                    [points addColorR:red g:green b:blue a:1.0];
                    [points addAttribute:elevID fVal:coord.z];
                    
