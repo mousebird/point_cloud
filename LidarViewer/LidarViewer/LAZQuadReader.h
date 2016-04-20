@@ -14,6 +14,9 @@
 // Coordinate system this database is in
 @property (strong,readonly) MaplyCoordinateSystem *coordSys;
 
+// Name as read from the database
+@property (nonatomic,readonly) NSString *name;
+
 // Bounding box from the LAZ database
 @property (readonly) double minX,minY,minZ,maxX,maxY,maxZ;
 
@@ -43,5 +46,8 @@
 
 // Calculate the bounding box including offsets
 - (void)getBoundsLL:(MaplyCoordinate3dD *)ll ur:(MaplyCoordinate3dD *)ur;
+
+// Set if the points have their own color
+- (bool)hasColor;
 
 @end

@@ -208,7 +208,7 @@ bool LidarSorter::process(const std::string &fileName,TileIdent tileID,LidarData
         if (!removeAfterDone)
         {
             std::string proj4Str = header.GetSRS().GetProj4();
-            lidarDB->setHeader(proj4Str.c_str(), header.GetMinX(), header.GetMinY(), header.GetMinZ(), header.GetMaxX(), header.GetMaxY(), header.GetMaxZ(), 0, maxLevel,minPointLimit,maxPointLimit);
+            lidarDB->setHeader(proj4Str.c_str(),header.GetFileSignature().c_str(), header.GetMinX(), header.GetMinY(), header.GetMinZ(), header.GetMaxX(), header.GetMaxY(), header.GetMaxZ(), 0, maxLevel,minPointLimit,maxPointLimit,(int)header.GetDataFormatId());
         }
     }
     catch (const std::string &reason)

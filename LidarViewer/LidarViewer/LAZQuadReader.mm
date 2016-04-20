@@ -45,6 +45,7 @@ typedef std::set<TileSizeInfo> TileSizeSet;
     std::ifstream *ifs;
     liblas::Reader *lazReader;
     TileSizeSet tileSizes;
+    int pointType;
 }
 
 - (id)initWithDB:(NSString *)lazFileName indexFile:(NSString *)sqliteFileName
@@ -71,7 +72,7 @@ typedef std::set<TileSizeInfo> TileSizeSet;
     liblas::Reader reader = f.CreateWithStream(*ifs);
     lazReader = new liblas::Reader(reader);
     liblas::Header header = lazReader->GetHeader();
-    
+        
     // Note: Should check the LAZ reader
     
     return self;
@@ -119,6 +120,14 @@ typedef std::set<TileSizeInfo> TileSizeSet;
         _maxTilePoints = [res intForColumn:@"maxpoints"];
         srs = [res stringForColumn:@"srs"];
     }
+    res = [db executeQuery:@"SELECT pointtype from manifest"];
+    if ([res next])
+    {
+        pointType = [res intForColumn:@"pointtype"];        
+    }
+
+    // Note: Debugging
+    srs = @"+proj=utm +zone=10 +datum=NAD83 +no_defs";
     
     // Note: If this isn't set up right, we need to fake it
     if (srs && [srs length])
@@ -152,6 +161,19 @@ typedef std::set<TileSizeInfo> TileSizeSet;
         delete ifs;
         delete lazReader;
     }
+}
+
+- (bool)hasColor
+{
+    int thisPointType = pointType;
+    
+    if (lazReader)
+    {
+        liblas::Header header = lazReader->GetHeader();
+        thisPointType = header.GetDataFormatId();
+    }
+    
+    return thisPointType != liblas::ePointFormat0 && thisPointType != liblas::ePointFormat1;
 }
 
 - (int)getNumTilesFromMaxPoints:(int)maxPoints
@@ -287,6 +309,8 @@ typedef std::set<TileSizeInfo> TileSizeSet;
                coord.x = p.GetX();  coord.y = p.GetY();  coord.z = p.GetZ();
                coord.z += _zOffset;
                
+//               NSLog(@"coord = (%f,%f,%f)",coord.x,coord.y,coord.z);
+               
                minZ = std::min(coord.z,minZ);
                maxZ = std::max(coord.z,maxZ);
 
@@ -297,7 +321,9 @@ typedef std::set<TileSizeInfo> TileSizeSet;
                if (hasColors)
                {
                    liblas::Color color = p.GetColor();
-                   red = color.GetRed() / 255.0;  green = color.GetGreen() / 255.0;  blue = color.GetBlue() / 255.0;
+//                   red = color.GetRed() / 255.0;  green = color.GetGreen() / 255.0;  blue = color.GetBlue() / 255.0;
+                   float denom = (1<<16)-1;
+                   red = color.GetRed() / denom;  green = color.GetGreen() / denom;  blue = color.GetBlue() / denom;
                }
                [points addDispCoordDoubleX:dispCoordCenter.x y:dispCoordCenter.y z:dispCoordCenter.z];
                [points addColorR:red g:green b:blue a:1.0];
@@ -314,6 +340,8 @@ typedef std::set<TileSizeInfo> TileSizeSet;
                tileInfo.minZ = minZ;  tileInfo.maxZ = maxZ;
                tileSizes.insert(tileInfo);
            }
+           
+//           NSLog(@"Loaded tile %d: (%d,%d) with %d points",tileID.level,tileID.x,tileID.y,count);
 
            compObj = [layer.viewC addPoints:@[points] desc:
                                             @{kMaplyColor: [UIColor redColor],
