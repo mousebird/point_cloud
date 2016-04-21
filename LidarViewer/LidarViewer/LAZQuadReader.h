@@ -9,6 +9,16 @@
 #import <Foundation/Foundation.h>
 #import "WhirlyGlobeComponent.h"
 
+/// Override the coordinate system
+extern NSString * const kLAZReaderCoordSys;
+/// Add in a z offset
+extern NSString * const kLAZReaderZOffset;
+/// Scale the color values.  By default this is (1<<16)-1
+extern NSString * const kLAZReaderColorScale;
+
+/** @brief The LAZ Quad Reader will page a Lidar (LAZ or LAS) database organized
+    into tiles in a sqlite database.
+  */
 @interface LAZQuadReader : NSObject<MaplyPagingDelegate>
 
 // Coordinate system this database is in
@@ -32,11 +42,20 @@
 // The shader to use for rendering.  Need to assign this.
 @property (nonatomic,strong) MaplyShader *shader;
 
-// Initialize with the file name of the sqlite db and the LAZ file
-- (id)initWithDB:(NSString *)fileName indexFile:(NSString *)indexFileName;
+// Point size to pass through to the shader
+@property (nonatomic) float pointSize;
 
-// Initialize the variant that just uses the SQLite database
-- (id)initWithDB:(NSString *)fileName;
+/** @brief Initialize with the file name of the sqlite db and the LAZ file
+    @details Initialize the the reader with a LAZ file and a separate index file.
+  */
+//- (id)initWithDB:(NSString *)fileName indexFile:(NSString *)indexFileName desc:(NSDictionary *)desc;
+
+/** @brief Initialize the pager with a LAZ sqlite database.
+    @details This opens the sqlite database and reads the manifest.
+    @param fileName The sqlite LAZ database to read.  Pass in the full path.
+    @param desc Overrides for the setup.  We put attributes in here that aren't quite right in the database.
+  */
+- (id)initWithDB:(NSString *)fileName desc:(NSDictionary *)desc;
 
 // Based on the number of points we want to display, how many tiles should we fetch?
 - (int)getNumTilesFromMaxPoints:(int)maxPoints;

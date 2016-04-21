@@ -10,9 +10,14 @@
 #include <iostream>
 #include <liblas/liblas.hpp>
 #import "LAZQuadReader.h"
+#import "LAZShader.h"
 #import "sqlite3.h"
 #import "FMDatabase.h"
 #import "FMDatabaseQueue.h"
+
+NSString * const kLAZReaderCoordSys = @"coordsys";
+NSString * const kLAZReaderZOffset = @"zoffset";
+NSString * const kLAZReaderColorScale = @"colorscale";
 
 // Keep track of tile size (height in particular)
 class TileSizeInfo
@@ -46,11 +51,13 @@ typedef std::set<TileSizeInfo> TileSizeSet;
     liblas::Reader *lazReader;
     TileSizeSet tileSizes;
     int pointType;
+    double colorScale;
 }
 
-- (id)initWithDB:(NSString *)lazFileName indexFile:(NSString *)sqliteFileName
+// Note: This variant is deprecated
+- (id)initWithDB:(NSString *)lazFileName indexFile:(NSString *)sqliteFileName desc:(NSDictionary *)desc
 {
-    self = [self initWithDB:sqliteFileName];
+    self = [self initWithDB:sqliteFileName desc:desc];
     if (!self)
         return nil;
     
@@ -78,13 +85,15 @@ typedef std::set<TileSizeInfo> TileSizeSet;
     return self;
 }
 
-- (id)initWithDB:(NSString *)sqliteFileName
+- (id)initWithDB:(NSString *)sqliteFileName desc:(NSDictionary *)desc
 {
     self = [super init];
     if (!self)
         return nil;
     
     _zOffset = 0.0;
+    _pointSize = 6.0;
+    colorScale = (1<<16)-1;
     
     NSString *sqlitePath = nil;
     // See if that was a direct path first
@@ -122,13 +131,21 @@ typedef std::set<TileSizeInfo> TileSizeSet;
     }
     res = [db executeQuery:@"SELECT pointtype from manifest"];
     if ([res next])
-    {
-        pointType = [res intForColumn:@"pointtype"];        
-    }
+        pointType = [res intForColumn:@"pointtype"];
 
-    // Note: Debugging
-    srs = @"+proj=utm +zone=10 +datum=NAD83 +no_defs";
-    
+    // Override the coordinate system
+    if (desc[kLAZReaderCoordSys])
+        srs = desc[kLAZReaderCoordSys];
+    // The point size
+    if (desc[kLAZShaderPointSize])
+        _pointSize = [desc[kLAZShaderPointSize] floatValue];
+    // Z offset
+    if (desc[kLAZReaderZOffset])
+        _zOffset = [desc[kLAZReaderZOffset] floatValue];
+    // Color scale
+    if (desc[kLAZReaderColorScale])
+        colorScale = [desc[kLAZReaderColorScale] doubleValue];
+
     // Note: If this isn't set up right, we need to fake it
     if (srs && [srs length])
     {
@@ -147,6 +164,11 @@ typedef std::set<TileSizeInfo> TileSizeSet;
     queue = [FMDatabaseQueue databaseQueueWithPath:sqlitePath];
 
     return self;
+}
+
+- (void)setZOffset:(double)zOffset
+{
+    _zOffset = zOffset;
 }
 
 - (void)setShader:(MaplyShader *)shader
@@ -322,8 +344,7 @@ typedef std::set<TileSizeInfo> TileSizeSet;
                {
                    liblas::Color color = p.GetColor();
 //                   red = color.GetRed() / 255.0;  green = color.GetGreen() / 255.0;  blue = color.GetBlue() / 255.0;
-                   float denom = (1<<16)-1;
-                   red = color.GetRed() / denom;  green = color.GetGreen() / denom;  blue = color.GetBlue() / denom;
+                   red = color.GetRed() / colorScale;  green = color.GetGreen() / colorScale;  blue = color.GetBlue() / colorScale;
                }
                [points addDispCoordDoubleX:dispCoordCenter.x y:dispCoordCenter.y z:dispCoordCenter.z];
                [points addColorR:red g:green b:blue a:1.0];
@@ -345,12 +366,13 @@ typedef std::set<TileSizeInfo> TileSizeSet;
 
            compObj = [layer.viewC addPoints:@[points] desc:
                                             @{kMaplyColor: [UIColor redColor],
-                                              kMaplyPointSize: @(6.0),
                                               kMaplyDrawPriority: @(10000000),
                                               kMaplyShader: _shader.name,
                                               kMaplyShaderUniforms:
-                                                  @{@"u_zmin": @(_minZ),
-                                                    @"u_zmax": @(_maxZ)},
+                                                  @{kLAZShaderZMin: @(_minZ+_zOffset),
+                                                    kLAZShaderZMax: @(_maxZ+_zOffset),
+                                                    kLAZShaderPointSize: @(_pointSize)
+                                                    },
                                               kMaplyZBufferRead: @(YES),
                                               kMaplyZBufferWrite: @(YES)
                                               }

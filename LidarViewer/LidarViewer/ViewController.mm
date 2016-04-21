@@ -72,13 +72,23 @@ static int MaxDisplayedPoints = 3000000;
 {
     [super viewDidLoad];
     
+    // Overrides for various databases
+    NSDictionary *dbDesc = @{@"ot_35121F2416A_1-quad-data": @{kLAZReaderCoordSys:@"+proj=utm +zone=10 +datum=NAD83 +no_defs", kLAZShaderPointSize: @(4.0), kLAZReaderZOffset: @(2.0)},
+                             @"ot_35121F2416B_1-quad-data": @{kLAZReaderCoordSys:@"+proj=utm +zone=10 +datum=NAD83 +no_defs", kLAZShaderPointSize: @(4.0), kLAZReaderZOffset: @(2.0)},
+                             @"ot_35121F2416C_1-quad-data": @{kLAZReaderCoordSys:@"+proj=utm +zone=10 +datum=NAD83 +no_defs", kLAZShaderPointSize: @(4.0), kLAZReaderZOffset: @(2.0)},
+                             @"ot_35121F2416D_1-quad-data": @{kLAZReaderCoordSys:@"+proj=utm +zone=10 +datum=NAD83 +no_defs", kLAZShaderPointSize: @(4.0), kLAZReaderZOffset: @(2.0)},
+                             @"st-helens-quad-data": @{kLAZReaderColorScale: @(255.0)},
+                             @"stadium-utm-quad-data": @{kLAZReaderColorScale: @(255.0)}
+                             };
+
+    
     // Set up the globe
     globeViewC = [[WhirlyGlobeViewController alloc] init];
     [self.view addSubview:globeViewC.view];
     globeViewC.view.frame = self.view.bounds;
     [self addChildViewController:globeViewC];
     globeViewC.frameInterval = 2;
-    globeViewC.performanceOutput = true;
+//    globeViewC.performanceOutput = true;
     globeViewC.delegate = self;
     
     // Give us a tilt
@@ -86,10 +96,10 @@ static int MaxDisplayedPoints = 3000000;
     
     // Add a base layer
     NSString * baseCacheDir = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString * cartodbTilesCacheDir = [NSString stringWithFormat:@"%@/cartodbtiles/", baseCacheDir];
+    NSString * cacheDir = [NSString stringWithFormat:@"%@/maqquesttiles/", baseCacheDir];
     int maxZoom = 18;
     MaplyRemoteTileSource *tileSource = [[MaplyRemoteTileSource alloc] initWithBaseURL:@"http://otile1.mqcdn.com/tiles/1.0.0/sat/" ext:@"png" minZoom:0 maxZoom:maxZoom];
-    tileSource.cacheDir = cartodbTilesCacheDir;
+    tileSource.cacheDir = cacheDir;
     MaplyQuadImageTilesLayer *layer = [[MaplyQuadImageTilesLayer alloc] initWithCoordSystem:tileSource.coordSys tileSource:tileSource];
     layer.handleEdges = true;
     layer.coverPoles = true;
@@ -108,31 +118,25 @@ static int MaxDisplayedPoints = 3000000;
         NSString *ext = [path pathExtension];
         if ([ext isEqualToString:@"sqlite"])
         {
-//            if (![path containsString:@"ot_"])
-//                continue;
-            if (![path containsString:@"helen"])
-                continue;
-            [self addLaz:[docDir stringByAppendingPathComponent:path] rampShader:pointShaderRamp regularShader:pointShaderColor];
+            NSString *base = [[path lastPathComponent] stringByDeletingPathExtension];
+            
+            // Look for overrides
+            NSDictionary *desc = dbDesc[base];
+
+            // Add the database
+            [self addLaz:[docDir stringByAppendingPathComponent:path] rampShader:pointShaderRamp regularShader:pointShaderColor desc:desc];
         }
     }
-    
-    // Note: Should toss up a warning if we can't find the files
-
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
-//    ^{
-//        if (indexPath && lazPath)
-//            [lazReader readPoints:lazPath viewC:globeViewC];
-//    });
 }
 
-- (void)addLaz:(NSString *)dbPath rampShader:(MaplyShader *)rampShader regularShader:(MaplyShader *)regShader
+- (void)addLaz:(NSString *)dbPath rampShader:(MaplyShader *)rampShader regularShader:(MaplyShader *)regShader desc:(NSDictionary *)desc
 {
     if (dbPath)
     {
         // Set up the paging logic
         //        quadDelegate = [[LAZQuadReader alloc] initWithDB:lazPath indexFile:indexPath];
         MaplyCoordinate3dD ll,ur;
-        LAZQuadReader *quadDelegate = [[LAZQuadReader alloc] initWithDB:dbPath];
+        LAZQuadReader *quadDelegate = [[LAZQuadReader alloc] initWithDB:dbPath desc:desc];
         if (quadDelegate.hasColor)
             quadDelegate.shader = regShader;
         else
@@ -160,8 +164,6 @@ static int MaxDisplayedPoints = 3000000;
         
         // Drop a label so the user can find it when zoomed out
         MaplyScreenLabel *label = [[MaplyScreenLabel alloc] init];
-        // Note: Name goes in header
-//        label.text = quadDelegate.name;
         label.text = [[dbPath lastPathComponent] stringByDeletingPathExtension];
         label.loc = center;
         [globeViewC addScreenLabels:@[label] desc:@{kMaplyMaxVis: @(10.0),
@@ -169,12 +171,5 @@ static int MaxDisplayedPoints = 3000000;
                                                     kMaplyFont: [UIFont boldSystemFontOfSize:24.0]}];
     }
 }
-
-//- (void)globeViewController:(WhirlyGlobeViewController *__nonnull)viewC didMove:(MaplyCoordinate *__nonnull)corners
-//{
-//    WhirlyGlobeViewControllerAnimationState *viewState = [viewC getViewState];
-//    
-//    NSLog(@"Loc = (%f,%f), heading = %f, tilt = %f, height = %f",viewState.pos.x,viewState.pos.y,viewState.heading,viewState.tilt,viewState.height);
-//}
 
 @end

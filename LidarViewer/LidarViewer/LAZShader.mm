@@ -8,8 +8,13 @@
 
 #import "LAZShader.h"
 
+NSString* const kLAZShaderPointSize = @"u_pointsize";
+NSString* const kLAZShaderZMin = @"u_zmin";
+NSString* const kLAZShaderZMax = @"u_zmax";
+
 static const char *vertexShaderTriPoint =
 "uniform mat4  u_mvpMatrix;\n"
+"uniform float     u_pointsize;\n"
 "\n"
 "attribute vec3 a_position;\n"
 "attribute vec4 a_color;\n"
@@ -20,8 +25,7 @@ static const char *vertexShaderTriPoint =
 "void main()\n"
 "{\n"
 "   v_color = a_color;\n"
-//"   gl_PointSize = a_size;\n"
-"   gl_PointSize = 6.0;\n"
+"   gl_PointSize = u_pointsize;\n"
 "   gl_Position = u_mvpMatrix * vec4(a_position,1.0);\n"
 "}\n"
 ;
@@ -31,6 +35,7 @@ static const char *vertexShaderTriPointRamp =
 "\n"
 "uniform float     u_zmin;\n"
 "uniform float     u_zmax;\n"
+"uniform float     u_pointsize;\n"
 "\n"
 "attribute vec3 a_position;\n"
 "attribute float a_size;\n"
@@ -40,10 +45,9 @@ static const char *vertexShaderTriPointRamp =
 "\n"
 "void main()\n"
 "{\n"
-//"   gl_PointSize = a_size;\n"
 "   v_colorPos = (a_elev-u_zmin)/(u_zmax-u_zmin);\n"
 "\n"
-"   gl_PointSize = 6.0;\n"
+"   gl_PointSize = u_pointsize;\n"
 "   gl_Position = u_mvpMatrix * vec4(a_position,1.0);\n"
 "}\n"
 ;
@@ -78,7 +82,10 @@ MaplyShader *BuildPointShader(MaplyBaseViewController *viewC)
     MaplyShader *shader = [[MaplyShader alloc] initWithName:@"Lidar Point Shader" vertex:[NSString stringWithFormat:@"%s",vertexShaderTriPoint] fragment:[NSString stringWithFormat:@"%s",fragmentShaderTriPoint] viewC:viewC];
     
     if (shader)
+    {
         [viewC addShaderProgram:shader sceneName:shader.name];
+        [shader setUniformFloatNamed:kLAZShaderPointSize val:6.0];
+    }
     
     return shader;
 }
@@ -91,6 +98,7 @@ MaplyShader *BuildRampPointShader(MaplyBaseViewController *viewC,UIImage *colorR
     {
         [viewC addShaderProgram:shader sceneName:shader.name];
         [shader addTextureNamed:@"s_colorRamp" image:colorRamp];
+        [shader setUniformFloatNamed:kLAZShaderPointSize val:6.0];
     }
     
     return shader;
