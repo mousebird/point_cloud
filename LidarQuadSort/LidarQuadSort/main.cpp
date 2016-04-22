@@ -31,22 +31,94 @@ bool FullDataMode = true;
 
 int main(int argc, const char * argv[])
 {
-    if (argc < 4)
+    if (argc < 2)
     {
-//        fprintf(stderr,"syntax: %s <in_las> <tmp_dir> <out.laz> <out_sqlite>\n",argv[0]);
-        fprintf(stderr,"syntax: %s <in_las> <tmp_dir> <out_sqlite>\n",argv[0]);
+        fprintf(stderr,"syntax: %s [<in_las> ...] [-tmp <tmp_dir>] [-o <out_sqlite>] [-filelist <fileList.txt>] [-pts <min> <max>]\n",argv[0]);
         return -1;
     }
-    const char *inFile = argv[1];
-    const char *tmpDir = argv[2];
-//    const char *outLaz = argv[3];
-    const char *outSqlite = argv[3];
-    const char *outLaz = "";
+
+    std::vector<std::string> inFiles;
+    const char *fileList = NULL;
+    std::string tmpDir = "lidarquadsort";
+    const char *outSqlite = NULL;
+    int inc = 0;
+    int minPts=20000,maxPts=25000;
+    for (unsigned int arg=1;arg<argc;arg+=inc)
+    {
+        if (!strcmp(argv[arg],"-tmp"))
+        {
+            inc = 2;
+            if (arg+inc > argc)
+            {
+                fprintf(stderr,"Expecting one argument for -tmp\n");
+                return -1;
+            }
+            tmpDir = argv[arg+1];
+        } else if (!strcmp(argv[arg],"-o"))
+        {
+            inc = 2;
+            if (arg+inc > argc)
+            {
+                fprintf(stderr,"Expecting one argument for -o\n");
+                return -1;
+            }
+            outSqlite = argv[arg+1];
+        } else if (!strcmp(argv[arg],"-filelist"))
+        {
+            inc = 2;
+            if (arg+inc > argc)
+            {
+                fprintf(stderr,"Expecting one argument for -filelist\n");
+                return -1;
+            }
+            fileList = argv[arg+1];
+        } else if (!strcmp(argv[arg],"-pts"))
+        {
+            inc = 3;
+            if (arg+inc > argc)
+            {
+                fprintf(stderr,"Expecting two arguments for -pts");
+                return -1;
+            }
+            minPts = atoi(argv[arg+1]);
+            maxPts = atoi(argv[arg+1]);
+        } else {
+            inc = 1;
+            inFiles.push_back(argv[arg]);
+        }
+    }
     
-    std::remove(outLaz);
+    if (!fileList && inFiles.empty())
+    {
+        fprintf(stderr,"Expecting at least one input file or -filelist\n");
+        return -1;
+    }
+    if (!outSqlite)
+    {
+        fprintf(stderr,"Expecting -o argument for output file.\n");
+        return -1;
+    }
+    if (minPts <= 0 || maxPts < minPts)
+    {
+        fprintf(stderr,"-pts arguments don't make sense.\n");
+        return -1;
+    }
+    
+    // Load the list of files from a text file
+    if (fileList)
+    {
+        // Note: Do this
+    }
+    
+    if (inFiles.empty())
+    {
+        fprintf(stderr,"Need input files.\n");
+        return -1;
+    }
+    
     std::remove(outSqlite);
     boost::filesystem::remove_all(boost::filesystem::path(tmpDir));
-    mkdir(tmpDir,0775);
+    mkdir(tmpDir.c_str(),0775);
 
     // Set up a SQLITE output db
     Kompex::SQLiteDatabase *sqliteDb = NULL;
@@ -59,7 +131,7 @@ int main(int argc, const char * argv[])
     LidarDatabase *lidarDb = new LidarDatabase(sqliteDb,(FullDataMode ? LidarDatabase::FullData : LidarDatabase::IndexOnly));
     if (!lidarDb->isValid())
     {
-        fprintf(stderr,"Failed to set up sqlite output.");
+        fprintf(stderr,"Failed to set up sqlite output.\n");
         return -1;
     }
     
@@ -68,11 +140,19 @@ int main(int argc, const char * argv[])
 //        Kompex::SQLiteStatement transactStmt(sqliteDb);
 //        transactStmt.SqlStatement((std::string)"BEGIN TRANSACTION");
     }
+    
+    // Set up the input data
+    LidarMultiWrapper lidarWrap(inFiles);
+    if (!lidarWrap.init())
+    {
+        fprintf(stderr,"Failed to read input files.  Giving up.\n");
+        return -1;
+    }
 
     // Set up the recursive sorter and let it run
-    LidarSorter sorter(tmpDir);
-    sorter.setPointLimit(20000,25000);
-    if (sorter.process(inFile,outLaz,lidarDb))
+    LidarSorter sorter(tmpDir.c_str());
+    sorter.setPointLimit(minPts,maxPts);
+    if (sorter.process(&lidarWrap,lidarDb))
     {
         fprintf(stdout,"Wrote a total of %d points",sorter.getNumPointsWritten());
         return 0;

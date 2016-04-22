@@ -231,6 +231,17 @@ typedef std::set<TileSizeInfo> TileSizeSet;
         {
             ll->z = it->minZ;
             ur->z = it->maxZ;
+        } else {
+            // Didn't find it, so look for the parent
+            MaplyTileID parentTileID;
+            parentTileID.x = tileID.x/2;  parentTileID.y = tileID.y/2;  parentTileID.level = tileID.level-1;
+            TileSizeInfo dummy(parentTileID);
+            TileSizeSet::iterator it = tileSizes.find(dummy);
+            if (it != tileSizes.end())
+            {
+                ll->z = it->minZ;
+                ur->z = it->maxZ;
+            }
         }
     }
 }

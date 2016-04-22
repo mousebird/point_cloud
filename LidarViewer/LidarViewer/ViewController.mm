@@ -73,10 +73,7 @@ static int MaxDisplayedPoints = 3000000;
     [super viewDidLoad];
     
     // Overrides for various databases
-    NSDictionary *dbDesc = @{@"ot_35121F2416A_1-quad-data": @{kLAZReaderCoordSys:@"+proj=utm +zone=10 +datum=NAD83 +no_defs", kLAZShaderPointSize: @(4.0), kLAZReaderZOffset: @(2.0)},
-                             @"ot_35121F2416B_1-quad-data": @{kLAZReaderCoordSys:@"+proj=utm +zone=10 +datum=NAD83 +no_defs", kLAZShaderPointSize: @(4.0), kLAZReaderZOffset: @(2.0)},
-                             @"ot_35121F2416C_1-quad-data": @{kLAZReaderCoordSys:@"+proj=utm +zone=10 +datum=NAD83 +no_defs", kLAZShaderPointSize: @(4.0), kLAZReaderZOffset: @(2.0)},
-                             @"ot_35121F2416D_1-quad-data": @{kLAZReaderCoordSys:@"+proj=utm +zone=10 +datum=NAD83 +no_defs", kLAZShaderPointSize: @(4.0), kLAZReaderZOffset: @(2.0)},
+    NSDictionary *dbDesc = @{@"ot_35121F2416_1-B-quad-data": @{kLAZReaderCoordSys:@"+proj=utm +zone=10 +datum=NAD83 +no_defs", kLAZShaderPointSize: @(4.0), kLAZReaderZOffset: @(2.0)},
                              @"st-helens-quad-data": @{kLAZReaderColorScale: @(255.0)},
                              @"stadium-utm-quad-data": @{kLAZReaderColorScale: @(255.0)}
                              };
@@ -160,6 +157,7 @@ static int MaxDisplayedPoints = 3000000;
         lazLayer.importance = 128*128;
         lazLayer.minTileHeight = ll.z;
         lazLayer.maxTileHeight = ur.z;
+        lazLayer.useParentTileBounds = false;
         [globeViewC addLayer:lazLayer];
         
         // Drop a label so the user can find it when zoomed out
