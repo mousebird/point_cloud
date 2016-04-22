@@ -65,8 +65,8 @@ protected:
     bool valid;
 
     int whichFile;
-    int whichPointOverall;
-    int whichPointInFile;
+    unsigned int whichPointOverall;
+    unsigned int whichPointInFile;
     std::ifstream *ifs;
     liblas::Reader *reader;
 };
@@ -93,7 +93,7 @@ protected:
     int minPointLimit,maxPointLimit;
     int maxLevel;
     std::string tmpDir;
-    int totalWrittenPoints;
+    unsigned int totalWrittenPoints;
 };
 
 #endif /* LidarSorter_hpp */

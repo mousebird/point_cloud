@@ -107,7 +107,24 @@ int main(int argc, const char * argv[])
     // Load the list of files from a text file
     if (fileList)
     {
-        // Note: Do this
+        FILE *fp = fopen(fileList,"r");
+        if (!fp)
+        {
+            fprintf(stderr,"Failed to open file list: %s\n",fileList);
+            return -1;
+        }
+        char line[2048];
+        while (fgets(line,2047,fp))
+        {
+            if (strlen(line) > 0)
+            {
+                size_t last = strlen(line);
+                if (line[last-1] == '\n')
+                    line[last-1] = 0;
+                inFiles.push_back(line);
+            }
+        }
+        fclose(fp);
     }
     
     if (inFiles.empty())

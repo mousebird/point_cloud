@@ -97,6 +97,8 @@ bool LidarMultiWrapper::init()
         }
     }
     
+    fprintf(stdout,"Checked all %ld files for %u points\n",files.size(),header.GetPointRecordsCount());
+    
     valid = true;    
     whichFile = -1;
     whichPointInFile = 0;
@@ -196,12 +198,12 @@ bool LidarSorter::process(LidarMultiWrapper *inputDB,TileIdent tileID,LidarDatab
 
                     liblas::Header subHeader = inputDB->header;
                     subHeader.SetPointRecordsCount(0);
-                    subHeader.SetCompressed(true);
+                    subHeader.SetCompressed(false);
                     subHeader.SetMin(inputDB->header.GetMinX()+sx*spanX_2, inputDB->header.GetMinY()+sy*spanY_2, inputDB->header.GetMinZ());
                     subHeader.SetMax(inputDB->header.GetMinX()+(sx+1)*spanX_2, inputDB->header.GetMinY()+(sy+1)*spanY_2, inputDB->header.GetMaxZ());
 
                     // Set up the write for this sub-tile
-                    std::string subFile = tmpDir + "/" + "src_" + std::to_string(subIdent.x) + "_" + std::to_string(subIdent.y) + "_" + std::to_string(subIdent.z) + ".laz";
+                    std::string subFile = tmpDir + "/" + "src_" + std::to_string(subIdent.x) + "_" + std::to_string(subIdent.y) + "_" + std::to_string(subIdent.z) + ".las";
                     std::ofstream *subofs = new std::ofstream(subFile,std::ios::out | std::ios::binary);
                     subTileNames[sy*2+sx] = subFile;
                     liblas::Writer *subW = new liblas::Writer(*subofs,subHeader);
@@ -211,8 +213,8 @@ bool LidarSorter::process(LidarMultiWrapper *inputDB,TileIdent tileID,LidarDatab
         }
         
         // Work through the points in the input file
-        int numToCopy = inputDB->header.GetPointRecordsCount();
-        int numCopiedToTile = 0;
+        uint32_t numToCopy = inputDB->header.GetPointRecordsCount();
+        uint32_t numCopiedToTile = 0;
         for (unsigned int ii=0;ii<numToCopy;ii++)
         {
             liblas::Point p = inputDB->getNextPoint();
@@ -245,7 +247,7 @@ bool LidarSorter::process(LidarMultiWrapper *inputDB,TileIdent tileID,LidarDatab
         std::string indent = "";
         for (int ii=0;ii<tileID.z;ii++)
             indent += " ";
-        fprintf(stdout,"%sTile %d: (%d,%d) saved %d of %d points\n",indent.c_str(),tileID.z,tileID.x,tileID.y,numCopiedToTile,inputDB->header.GetPointRecordsCount());
+        fprintf(stdout,"%sTile %d: (%d,%d) saved %d of %u points\n",indent.c_str(),tileID.z,tileID.x,tileID.y,numCopiedToTile,inputDB->header.GetPointRecordsCount());
 
         // Save the tile and close out the in-memory tile file
         delete tileW;
