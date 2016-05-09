@@ -123,6 +123,11 @@ liblas::Point LidarMultiWrapper::getNextPoint()
             delete reader;
             reader = NULL;
         }
+        if (ifs)
+        {
+            delete ifs;
+            ifs = NULL;
+        }
         whichPointInFile = 0;
 
         const std::string &fileName = files[whichFile];

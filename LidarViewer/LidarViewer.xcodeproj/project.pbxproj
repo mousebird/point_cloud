@@ -81,31 +81,6 @@
 		2BB6BBB11BE004FE00FDB60A /* laszip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BB9B1BE004FE00FDB60A /* laszip.cpp */; };
 		2BB6BBB21BE004FE00FDB60A /* laszip_dll.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BB9F1BE004FE00FDB60A /* laszip_dll.cpp */; };
 		2BB6BBB31BE004FE00FDB60A /* laszipper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BBA01BE004FE00FDB60A /* laszipper.cpp */; };
-		2BB6BBE91BE0052100FDB60A /* fopen_compressed.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BBCF1BE0052100FDB60A /* fopen_compressed.cpp */; };
-		2BB6BBEA1BE0052100FDB60A /* lasfilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BBD01BE0052100FDB60A /* lasfilter.cpp */; };
-		2BB6BBEB1BE0052100FDB60A /* lasreader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BBD11BE0052100FDB60A /* lasreader.cpp */; };
-		2BB6BBEC1BE0052100FDB60A /* lasreader_asc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BBD21BE0052100FDB60A /* lasreader_asc.cpp */; };
-		2BB6BBED1BE0052100FDB60A /* lasreader_bil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BBD31BE0052100FDB60A /* lasreader_bil.cpp */; };
-		2BB6BBEE1BE0052100FDB60A /* lasreader_bin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BBD41BE0052100FDB60A /* lasreader_bin.cpp */; };
-		2BB6BBEF1BE0052100FDB60A /* lasreader_dtm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BBD51BE0052100FDB60A /* lasreader_dtm.cpp */; };
-		2BB6BBF01BE0052100FDB60A /* lasreader_las.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BBD61BE0052100FDB60A /* lasreader_las.cpp */; };
-		2BB6BBF11BE0052100FDB60A /* lasreader_qfit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BBD71BE0052100FDB60A /* lasreader_qfit.cpp */; };
-		2BB6BBF21BE0052100FDB60A /* lasreader_shp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BBD81BE0052100FDB60A /* lasreader_shp.cpp */; };
-		2BB6BBF31BE0052100FDB60A /* lasreader_txt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BBD91BE0052100FDB60A /* lasreader_txt.cpp */; };
-		2BB6BBF41BE0052100FDB60A /* lasreaderbuffered.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BBDA1BE0052100FDB60A /* lasreaderbuffered.cpp */; };
-		2BB6BBF51BE0052100FDB60A /* lasreadermerged.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BBDB1BE0052100FDB60A /* lasreadermerged.cpp */; };
-		2BB6BBF61BE0052100FDB60A /* lasreaderpipeon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BBDC1BE0052100FDB60A /* lasreaderpipeon.cpp */; };
-		2BB6BBF71BE0052100FDB60A /* lastransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BBDD1BE0052100FDB60A /* lastransform.cpp */; };
-		2BB6BBF81BE0052100FDB60A /* lasutility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BBDE1BE0052100FDB60A /* lasutility.cpp */; };
-		2BB6BBF91BE0052100FDB60A /* laswaveform13reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BBDF1BE0052100FDB60A /* laswaveform13reader.cpp */; };
-		2BB6BBFA1BE0052100FDB60A /* laswaveform13writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BBE01BE0052100FDB60A /* laswaveform13writer.cpp */; };
-		2BB6BBFB1BE0052100FDB60A /* laswriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BBE11BE0052100FDB60A /* laswriter.cpp */; };
-		2BB6BBFC1BE0052100FDB60A /* laswriter_bin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BBE21BE0052100FDB60A /* laswriter_bin.cpp */; };
-		2BB6BBFD1BE0052100FDB60A /* laswriter_las.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BBE31BE0052100FDB60A /* laswriter_las.cpp */; };
-		2BB6BBFE1BE0052100FDB60A /* laswriter_qfit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BBE41BE0052100FDB60A /* laswriter_qfit.cpp */; };
-		2BB6BBFF1BE0052100FDB60A /* laswriter_txt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BBE51BE0052100FDB60A /* laswriter_txt.cpp */; };
-		2BB6BC001BE0052100FDB60A /* laswriter_wrl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BBE61BE0052100FDB60A /* laswriter_wrl.cpp */; };
-		2BB6BC011BE0052100FDB60A /* laswritercompatible.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BBE71BE0052100FDB60A /* laswritercompatible.cpp */; };
 		2BB6BC061BE01E5300FDB60A /* LAZReader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BC051BE01E5300FDB60A /* LAZReader.mm */; };
 		2BB6BC091BE01F0300FDB60A /* LAZShader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BC081BE01F0300FDB60A /* LAZShader.mm */; };
 /* End PBXBuildFile section */
@@ -354,56 +329,6 @@
 		2BB6BBA01BE004FE00FDB60A /* laszipper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = laszipper.cpp; sourceTree = "<group>"; };
 		2BB6BBA11BE004FE00FDB60A /* laszipper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = laszipper.hpp; sourceTree = "<group>"; };
 		2BB6BBA21BE004FE00FDB60A /* mydefs.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mydefs.hpp; sourceTree = "<group>"; };
-		2BB6BBB51BE0052100FDB60A /* lasdefinitions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasdefinitions.hpp; sourceTree = "<group>"; };
-		2BB6BBB61BE0052100FDB60A /* lasfilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasfilter.hpp; sourceTree = "<group>"; };
-		2BB6BBB71BE0052100FDB60A /* lasreader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasreader.hpp; sourceTree = "<group>"; };
-		2BB6BBB81BE0052100FDB60A /* lasreader_asc.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasreader_asc.hpp; sourceTree = "<group>"; };
-		2BB6BBB91BE0052100FDB60A /* lasreader_bil.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasreader_bil.hpp; sourceTree = "<group>"; };
-		2BB6BBBA1BE0052100FDB60A /* lasreader_bin.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasreader_bin.hpp; sourceTree = "<group>"; };
-		2BB6BBBB1BE0052100FDB60A /* lasreader_dtm.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasreader_dtm.hpp; sourceTree = "<group>"; };
-		2BB6BBBC1BE0052100FDB60A /* lasreader_las.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasreader_las.hpp; sourceTree = "<group>"; };
-		2BB6BBBD1BE0052100FDB60A /* lasreader_qfit.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasreader_qfit.hpp; sourceTree = "<group>"; };
-		2BB6BBBE1BE0052100FDB60A /* lasreader_shp.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasreader_shp.hpp; sourceTree = "<group>"; };
-		2BB6BBBF1BE0052100FDB60A /* lasreader_txt.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasreader_txt.hpp; sourceTree = "<group>"; };
-		2BB6BBC01BE0052100FDB60A /* lasreaderbuffered.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasreaderbuffered.hpp; sourceTree = "<group>"; };
-		2BB6BBC11BE0052100FDB60A /* lasreadermerged.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasreadermerged.hpp; sourceTree = "<group>"; };
-		2BB6BBC21BE0052100FDB60A /* lasreaderpipeon.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasreaderpipeon.hpp; sourceTree = "<group>"; };
-		2BB6BBC31BE0052100FDB60A /* lastransform.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lastransform.hpp; sourceTree = "<group>"; };
-		2BB6BBC41BE0052100FDB60A /* lasutility.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lasutility.hpp; sourceTree = "<group>"; };
-		2BB6BBC51BE0052100FDB60A /* laswaveform13reader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = laswaveform13reader.hpp; sourceTree = "<group>"; };
-		2BB6BBC61BE0052100FDB60A /* laswaveform13writer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = laswaveform13writer.hpp; sourceTree = "<group>"; };
-		2BB6BBC71BE0052100FDB60A /* laswriter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = laswriter.hpp; sourceTree = "<group>"; };
-		2BB6BBC81BE0052100FDB60A /* laswriter_bin.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = laswriter_bin.hpp; sourceTree = "<group>"; };
-		2BB6BBC91BE0052100FDB60A /* laswriter_las.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = laswriter_las.hpp; sourceTree = "<group>"; };
-		2BB6BBCA1BE0052100FDB60A /* laswriter_qfit.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = laswriter_qfit.hpp; sourceTree = "<group>"; };
-		2BB6BBCB1BE0052100FDB60A /* laswriter_txt.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = laswriter_txt.hpp; sourceTree = "<group>"; };
-		2BB6BBCC1BE0052100FDB60A /* laswriter_wrl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = laswriter_wrl.hpp; sourceTree = "<group>"; };
-		2BB6BBCD1BE0052100FDB60A /* laswritercompatible.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = laswritercompatible.hpp; sourceTree = "<group>"; };
-		2BB6BBCF1BE0052100FDB60A /* fopen_compressed.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fopen_compressed.cpp; sourceTree = "<group>"; };
-		2BB6BBD01BE0052100FDB60A /* lasfilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lasfilter.cpp; sourceTree = "<group>"; };
-		2BB6BBD11BE0052100FDB60A /* lasreader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lasreader.cpp; sourceTree = "<group>"; };
-		2BB6BBD21BE0052100FDB60A /* lasreader_asc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lasreader_asc.cpp; sourceTree = "<group>"; };
-		2BB6BBD31BE0052100FDB60A /* lasreader_bil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lasreader_bil.cpp; sourceTree = "<group>"; };
-		2BB6BBD41BE0052100FDB60A /* lasreader_bin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lasreader_bin.cpp; sourceTree = "<group>"; };
-		2BB6BBD51BE0052100FDB60A /* lasreader_dtm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lasreader_dtm.cpp; sourceTree = "<group>"; };
-		2BB6BBD61BE0052100FDB60A /* lasreader_las.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lasreader_las.cpp; sourceTree = "<group>"; };
-		2BB6BBD71BE0052100FDB60A /* lasreader_qfit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lasreader_qfit.cpp; sourceTree = "<group>"; };
-		2BB6BBD81BE0052100FDB60A /* lasreader_shp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lasreader_shp.cpp; sourceTree = "<group>"; };
-		2BB6BBD91BE0052100FDB60A /* lasreader_txt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lasreader_txt.cpp; sourceTree = "<group>"; };
-		2BB6BBDA1BE0052100FDB60A /* lasreaderbuffered.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lasreaderbuffered.cpp; sourceTree = "<group>"; };
-		2BB6BBDB1BE0052100FDB60A /* lasreadermerged.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lasreadermerged.cpp; sourceTree = "<group>"; };
-		2BB6BBDC1BE0052100FDB60A /* lasreaderpipeon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lasreaderpipeon.cpp; sourceTree = "<group>"; };
-		2BB6BBDD1BE0052100FDB60A /* lastransform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lastransform.cpp; sourceTree = "<group>"; };
-		2BB6BBDE1BE0052100FDB60A /* lasutility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lasutility.cpp; sourceTree = "<group>"; };
-		2BB6BBDF1BE0052100FDB60A /* laswaveform13reader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = laswaveform13reader.cpp; sourceTree = "<group>"; };
-		2BB6BBE01BE0052100FDB60A /* laswaveform13writer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = laswaveform13writer.cpp; sourceTree = "<group>"; };
-		2BB6BBE11BE0052100FDB60A /* laswriter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = laswriter.cpp; sourceTree = "<group>"; };
-		2BB6BBE21BE0052100FDB60A /* laswriter_bin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = laswriter_bin.cpp; sourceTree = "<group>"; };
-		2BB6BBE31BE0052100FDB60A /* laswriter_las.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = laswriter_las.cpp; sourceTree = "<group>"; };
-		2BB6BBE41BE0052100FDB60A /* laswriter_qfit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = laswriter_qfit.cpp; sourceTree = "<group>"; };
-		2BB6BBE51BE0052100FDB60A /* laswriter_txt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = laswriter_txt.cpp; sourceTree = "<group>"; };
-		2BB6BBE61BE0052100FDB60A /* laswriter_wrl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = laswriter_wrl.cpp; sourceTree = "<group>"; };
-		2BB6BBE71BE0052100FDB60A /* laswritercompatible.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = laswritercompatible.cpp; sourceTree = "<group>"; };
 		2BB6BC041BE01E5300FDB60A /* LAZReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAZReader.h; sourceTree = "<group>"; };
 		2BB6BC051BE01E5300FDB60A /* LAZReader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LAZReader.mm; sourceTree = "<group>"; };
 		2BB6BC071BE01F0300FDB60A /* LAZShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAZShader.h; sourceTree = "<group>"; };
@@ -496,7 +421,6 @@
 				2B162B0E1BD59E3C0001E17B /* LaunchScreen.storyboard */,
 				2B162B111BD59E3C0001E17B /* Info.plist */,
 				2B8FBD621CC0547300882AC9 /* Resources */,
-				2B162D521BD6B0670001E17B /* LASlib */,
 				2B162D091BD5C5680001E17B /* laszip */,
 				2BB6BABD1BDFFE4C00FDB60A /* libblas */,
 				2B162B001BD59E3C0001E17B /* Supporting Files */,
@@ -551,15 +475,6 @@
 				2BB6BB6C1BE004FE00FDB60A /* src */,
 			);
 			name = laszip;
-			sourceTree = "<group>";
-		};
-		2B162D521BD6B0670001E17B /* LASlib */ = {
-			isa = PBXGroup;
-			children = (
-				2BB6BBB41BE0052100FDB60A /* inc */,
-				2BB6BBCE1BE0052100FDB60A /* src */,
-			);
-			name = LASlib;
 			sourceTree = "<group>";
 		};
 		2B1B4F1C1CBEEBEE00859F5A /* FMDatabase */ = {
@@ -911,72 +826,6 @@
 			path = ../../libs/LAStools/LASzip/src;
 			sourceTree = "<group>";
 		};
-		2BB6BBB41BE0052100FDB60A /* inc */ = {
-			isa = PBXGroup;
-			children = (
-				2BB6BBB51BE0052100FDB60A /* lasdefinitions.hpp */,
-				2BB6BBB61BE0052100FDB60A /* lasfilter.hpp */,
-				2BB6BBB71BE0052100FDB60A /* lasreader.hpp */,
-				2BB6BBB81BE0052100FDB60A /* lasreader_asc.hpp */,
-				2BB6BBB91BE0052100FDB60A /* lasreader_bil.hpp */,
-				2BB6BBBA1BE0052100FDB60A /* lasreader_bin.hpp */,
-				2BB6BBBB1BE0052100FDB60A /* lasreader_dtm.hpp */,
-				2BB6BBBC1BE0052100FDB60A /* lasreader_las.hpp */,
-				2BB6BBBD1BE0052100FDB60A /* lasreader_qfit.hpp */,
-				2BB6BBBE1BE0052100FDB60A /* lasreader_shp.hpp */,
-				2BB6BBBF1BE0052100FDB60A /* lasreader_txt.hpp */,
-				2BB6BBC01BE0052100FDB60A /* lasreaderbuffered.hpp */,
-				2BB6BBC11BE0052100FDB60A /* lasreadermerged.hpp */,
-				2BB6BBC21BE0052100FDB60A /* lasreaderpipeon.hpp */,
-				2BB6BBC31BE0052100FDB60A /* lastransform.hpp */,
-				2BB6BBC41BE0052100FDB60A /* lasutility.hpp */,
-				2BB6BBC51BE0052100FDB60A /* laswaveform13reader.hpp */,
-				2BB6BBC61BE0052100FDB60A /* laswaveform13writer.hpp */,
-				2BB6BBC71BE0052100FDB60A /* laswriter.hpp */,
-				2BB6BBC81BE0052100FDB60A /* laswriter_bin.hpp */,
-				2BB6BBC91BE0052100FDB60A /* laswriter_las.hpp */,
-				2BB6BBCA1BE0052100FDB60A /* laswriter_qfit.hpp */,
-				2BB6BBCB1BE0052100FDB60A /* laswriter_txt.hpp */,
-				2BB6BBCC1BE0052100FDB60A /* laswriter_wrl.hpp */,
-				2BB6BBCD1BE0052100FDB60A /* laswritercompatible.hpp */,
-			);
-			name = inc;
-			path = ../../libs/LAStools/LASlib/inc;
-			sourceTree = "<group>";
-		};
-		2BB6BBCE1BE0052100FDB60A /* src */ = {
-			isa = PBXGroup;
-			children = (
-				2BB6BBCF1BE0052100FDB60A /* fopen_compressed.cpp */,
-				2BB6BBD01BE0052100FDB60A /* lasfilter.cpp */,
-				2BB6BBD11BE0052100FDB60A /* lasreader.cpp */,
-				2BB6BBD21BE0052100FDB60A /* lasreader_asc.cpp */,
-				2BB6BBD31BE0052100FDB60A /* lasreader_bil.cpp */,
-				2BB6BBD41BE0052100FDB60A /* lasreader_bin.cpp */,
-				2BB6BBD51BE0052100FDB60A /* lasreader_dtm.cpp */,
-				2BB6BBD61BE0052100FDB60A /* lasreader_las.cpp */,
-				2BB6BBD71BE0052100FDB60A /* lasreader_qfit.cpp */,
-				2BB6BBD81BE0052100FDB60A /* lasreader_shp.cpp */,
-				2BB6BBD91BE0052100FDB60A /* lasreader_txt.cpp */,
-				2BB6BBDA1BE0052100FDB60A /* lasreaderbuffered.cpp */,
-				2BB6BBDB1BE0052100FDB60A /* lasreadermerged.cpp */,
-				2BB6BBDC1BE0052100FDB60A /* lasreaderpipeon.cpp */,
-				2BB6BBDD1BE0052100FDB60A /* lastransform.cpp */,
-				2BB6BBDE1BE0052100FDB60A /* lasutility.cpp */,
-				2BB6BBDF1BE0052100FDB60A /* laswaveform13reader.cpp */,
-				2BB6BBE01BE0052100FDB60A /* laswaveform13writer.cpp */,
-				2BB6BBE11BE0052100FDB60A /* laswriter.cpp */,
-				2BB6BBE21BE0052100FDB60A /* laswriter_bin.cpp */,
-				2BB6BBE31BE0052100FDB60A /* laswriter_las.cpp */,
-				2BB6BBE41BE0052100FDB60A /* laswriter_qfit.cpp */,
-				2BB6BBE51BE0052100FDB60A /* laswriter_txt.cpp */,
-				2BB6BBE61BE0052100FDB60A /* laswriter_wrl.cpp */,
-				2BB6BBE71BE0052100FDB60A /* laswritercompatible.cpp */,
-			);
-			name = src;
-			path = ../../libs/LAStools/LASlib/src;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1128,36 +977,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B4329F01BE2B012003293EE /* writer.cpp in Sources */,
-				2BB6BBFA1BE0052100FDB60A /* laswaveform13writer.cpp in Sources */,
 				2B4329E11BE2B012003293EE /* filter.cpp in Sources */,
-				2BB6BBFD1BE0052100FDB60A /* laswriter_las.cpp in Sources */,
 				2B4329DA1BE2B012003293EE /* point.cpp in Sources */,
 				2BB6BBB01BE004FE00FDB60A /* laswritepoint.cpp in Sources */,
 				2B4329CE1BE2B012003293EE /* classification.cpp in Sources */,
 				2B162B081BD59E3C0001E17B /* ViewController.mm in Sources */,
 				2BB6BBA31BE004FE00FDB60A /* arithmeticdecoder.cpp in Sources */,
-				2BB6BBEC1BE0052100FDB60A /* lasreader_asc.cpp in Sources */,
-				2BB6BBFB1BE0052100FDB60A /* laswriter.cpp in Sources */,
-				2BB6BBF91BE0052100FDB60A /* laswaveform13reader.cpp in Sources */,
-				2BB6BBEF1BE0052100FDB60A /* lasreader_dtm.cpp in Sources */,
 				2B4329D21BE2B012003293EE /* indexoutput.cpp in Sources */,
-				2BB6BBF11BE0052100FDB60A /* lasreader_qfit.cpp in Sources */,
 				2B4329E41BE2B012003293EE /* header.cpp in Sources */,
-				2BB6BBEB1BE0052100FDB60A /* lasreader.cpp in Sources */,
-				2BB6BBEA1BE0052100FDB60A /* lasfilter.cpp in Sources */,
 				2B4329E81BE2B012003293EE /* schema.cpp in Sources */,
-				2BB6BBF21BE0052100FDB60A /* lasreader_shp.cpp in Sources */,
 				2BB6BBA91BE004FE00FDB60A /* lasquadtree.cpp in Sources */,
 				2B4329DC1BE2B012003293EE /* zipwriter.cpp in Sources */,
-				2BB6BBF81BE0052100FDB60A /* lasutility.cpp in Sources */,
 				2BB6BC061BE01E5300FDB60A /* LAZReader.mm in Sources */,
 				2B162B051BD59E3C0001E17B /* AppDelegate.m in Sources */,
-				2BB6BBFE1BE0052100FDB60A /* laswriter_qfit.cpp in Sources */,
 				2BB6BBAB1BE004FE00FDB60A /* lasreaditemcompressed_v2.cpp in Sources */,
-				2BB6BBE91BE0052100FDB60A /* fopen_compressed.cpp in Sources */,
 				2B4329E51BE2B012003293EE /* index.cpp in Sources */,
-				2BB6BC001BE0052100FDB60A /* laswriter_wrl.cpp in Sources */,
-				2BB6BBFF1BE0052100FDB60A /* laswriter_txt.cpp in Sources */,
 				2B4329CC1BE2B012003293EE /* c_api.cpp in Sources */,
 				2BB6BBA61BE004FE00FDB60A /* integercompressor.cpp in Sources */,
 				2BB6BBAC1BE004FE00FDB60A /* lasreadpoint.cpp in Sources */,
@@ -1165,7 +999,6 @@
 				2B4329D71BE2B012003293EE /* sha1.cpp in Sources */,
 				2B4329CD1BE2B012003293EE /* chipper.cpp in Sources */,
 				2B4329DF1BE2B012003293EE /* error.cpp in Sources */,
-				2BB6BC011BE0052100FDB60A /* laswritercompatible.cpp in Sources */,
 				2B4329EB1BE2B012003293EE /* transform.cpp in Sources */,
 				2B4329D31BE2B012003293EE /* cachedreader.cpp in Sources */,
 				2BB6BBAE1BE004FE00FDB60A /* laswriteitemcompressed_v1.cpp in Sources */,
@@ -1175,17 +1008,12 @@
 				2B4329E71BE2B012003293EE /* reader.cpp in Sources */,
 				2B4329E01BE2B012003293EE /* factory.cpp in Sources */,
 				2BB6BBAD1BE004FE00FDB60A /* lasunzipper.cpp in Sources */,
-				2BB6BBEE1BE0052100FDB60A /* lasreader_bin.cpp in Sources */,
-				2BB6BBF61BE0052100FDB60A /* lasreaderpipeon.cpp in Sources */,
 				2B4329EC1BE2B012003293EE /* utility.cpp in Sources */,
 				2B4329DE1BE2B012003293EE /* dimension.cpp in Sources */,
 				2B4329EE1BE2B012003293EE /* version.cpp in Sources */,
-				2BB6BBF71BE0052100FDB60A /* lastransform.cpp in Sources */,
 				2B4329D51BE2B012003293EE /* reader.cpp in Sources */,
 				2B162B021BD59E3C0001E17B /* main.m in Sources */,
-				2BB6BBF41BE0052100FDB60A /* lasreaderbuffered.cpp in Sources */,
 				2B4329EA1BE2B012003293EE /* tifvsi.cpp in Sources */,
-				2BB6BBF51BE0052100FDB60A /* lasreadermerged.cpp in Sources */,
 				2B4329D01BE2B012003293EE /* color.cpp in Sources */,
 				2BB6BBA71BE004FE00FDB60A /* lasindex.cpp in Sources */,
 				2BB6BC091BE01F0300FDB60A /* LAZShader.mm in Sources */,
@@ -1197,16 +1025,12 @@
 				2B4329D81BE2B012003293EE /* utility.cpp in Sources */,
 				2B4329E61BE2B012003293EE /* point.cpp in Sources */,
 				2B1B4F1A1CBEE66D00859F5A /* LAZQuadReader.mm in Sources */,
-				2BB6BBED1BE0052100FDB60A /* lasreader_bil.cpp in Sources */,
 				2BB6BBAF1BE004FE00FDB60A /* laswriteitemcompressed_v2.cpp in Sources */,
 				2BB6BBA81BE004FE00FDB60A /* lasinterval.cpp in Sources */,
-				2BB6BBFC1BE0052100FDB60A /* laswriter_bin.cpp in Sources */,
 				2B4329ED1BE2B012003293EE /* variablerecord.cpp in Sources */,
 				2BB6BBA41BE004FE00FDB60A /* arithmeticencoder.cpp in Sources */,
 				2B4329DD1BE2B012003293EE /* zippoint.cpp in Sources */,
-				2BB6BBF01BE0052100FDB60A /* lasreader_las.cpp in Sources */,
 				2B4329D61BE2B012003293EE /* zipreader.cpp in Sources */,
-				2BB6BBF31BE0052100FDB60A /* lasreader_txt.cpp in Sources */,
 				2B4329D41BE2B012003293EE /* header.cpp in Sources */,
 				2BB6BBB21BE004FE00FDB60A /* laszip_dll.cpp in Sources */,
 			);
