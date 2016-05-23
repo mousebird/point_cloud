@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "WhirlyGlobeComponent.h"
-#import "AFHTTPRequestOperation.h"
+//#import "AFHTTPRequestOperation.h"
 #import "LAZShader.h"
 #import "LAZReader.h"
 #import "LAZQuadReader.h"

@@ -68,7 +68,6 @@
 		2BB6BBA41BE004FE00FDB60A /* arithmeticencoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BB6F1BE004FE00FDB60A /* arithmeticencoder.cpp */; };
 		2BB6BBA51BE004FE00FDB60A /* arithmeticmodel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BB711BE004FE00FDB60A /* arithmeticmodel.cpp */; };
 		2BB6BBA61BE004FE00FDB60A /* integercompressor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BB7E1BE004FE00FDB60A /* integercompressor.cpp */; };
-		2BB6BBA71BE004FE00FDB60A /* lasindex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BB811BE004FE00FDB60A /* lasindex.cpp */; };
 		2BB6BBA81BE004FE00FDB60A /* lasinterval.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BB831BE004FE00FDB60A /* lasinterval.cpp */; };
 		2BB6BBA91BE004FE00FDB60A /* lasquadtree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BB861BE004FE00FDB60A /* lasquadtree.cpp */; };
 		2BB6BBAA1BE004FE00FDB60A /* lasreaditemcompressed_v1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BB8A1BE004FE00FDB60A /* lasreaditemcompressed_v1.cpp */; };
@@ -79,7 +78,6 @@
 		2BB6BBAF1BE004FE00FDB60A /* laswriteitemcompressed_v2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BB961BE004FE00FDB60A /* laswriteitemcompressed_v2.cpp */; };
 		2BB6BBB01BE004FE00FDB60A /* laswritepoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BB991BE004FE00FDB60A /* laswritepoint.cpp */; };
 		2BB6BBB11BE004FE00FDB60A /* laszip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BB9B1BE004FE00FDB60A /* laszip.cpp */; };
-		2BB6BBB21BE004FE00FDB60A /* laszip_dll.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BB9F1BE004FE00FDB60A /* laszip_dll.cpp */; };
 		2BB6BBB31BE004FE00FDB60A /* laszipper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BBA01BE004FE00FDB60A /* laszipper.cpp */; };
 		2BB6BC061BE01E5300FDB60A /* LAZReader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BC051BE01E5300FDB60A /* LAZReader.mm */; };
 		2BB6BC091BE01F0300FDB60A /* LAZShader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BC081BE01F0300FDB60A /* LAZShader.mm */; };
@@ -1015,7 +1013,6 @@
 				2B162B021BD59E3C0001E17B /* main.m in Sources */,
 				2B4329EA1BE2B012003293EE /* tifvsi.cpp in Sources */,
 				2B4329D01BE2B012003293EE /* color.cpp in Sources */,
-				2BB6BBA71BE004FE00FDB60A /* lasindex.cpp in Sources */,
 				2BB6BC091BE01F0300FDB60A /* LAZShader.mm in Sources */,
 				2B4329D11BE2B012003293EE /* indexcell.cpp in Sources */,
 				2B4329E91BE2B012003293EE /* spatialreference.cpp in Sources */,
@@ -1032,7 +1029,6 @@
 				2B4329DD1BE2B012003293EE /* zippoint.cpp in Sources */,
 				2B4329D61BE2B012003293EE /* zipreader.cpp in Sources */,
 				2B4329D41BE2B012003293EE /* header.cpp in Sources */,
-				2BB6BBB21BE004FE00FDB60A /* laszip_dll.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
