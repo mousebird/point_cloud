@@ -8,12 +8,17 @@
 
 #include <fstream>
 #include <iostream>
-#include <liblas/liblas.hpp>
+#import <set>
+#include <string>
+#include <iostream>
+#include <sstream>
+
 #import "LAZQuadReader.h"
 #import "LAZShader.h"
 #import "sqlite3.h"
 #import "FMDatabase.h"
 #import "FMDatabaseQueue.h"
+#import "laszip_api.h"
 
 NSString * const kLAZReaderCoordSys = @"coordsys";
 NSString * const kLAZReaderZOffset = @"zoffset";
@@ -48,7 +53,7 @@ typedef std::set<TileSizeInfo> TileSizeSet;
     FMDatabase *db;
     FMDatabaseQueue *queue;
     std::ifstream *ifs;
-    liblas::Reader *lazReader;
+    laszip_POINTER lazReader;
     TileSizeSet tileSizes;
     int pointType;
     double colorScale;
@@ -73,13 +78,9 @@ typedef std::set<TileSizeInfo> TileSizeSet;
     }
 
     // Open the LAZ File
-    liblas::ReaderFactory f;
-    ifs = new std::ifstream();
-    ifs->open([lazPath cStringUsingEncoding:NSASCIIStringEncoding], std::ios::in | std::ios::binary);
-    liblas::Reader reader = f.CreateWithStream(*ifs);
-    lazReader = new liblas::Reader(reader);
-    liblas::Header header = lazReader->GetHeader();
-        
+    laszip_BOOL is_compressed;
+    laszip_open_reader(lazReader, [lazPath cStringUsingEncoding:NSASCIIStringEncoding], &is_compressed);
+    
     // Note: Should check the LAZ reader
     
     return self;
@@ -181,7 +182,6 @@ typedef std::set<TileSizeInfo> TileSizeSet;
     if (ifs)
     {
         delete ifs;
-        delete lazReader;
     }
 }
 
@@ -191,11 +191,12 @@ typedef std::set<TileSizeInfo> TileSizeSet;
     
     if (lazReader)
     {
-        liblas::Header header = lazReader->GetHeader();
-        thisPointType = header.GetDataFormatId();
+        laszip_header *header;
+        laszip_get_header_pointer(lazReader,&header);
+        thisPointType = header->point_data_format;
     }
     
-    return thisPointType != liblas::ePointFormat0 && thisPointType != liblas::ePointFormat1;
+    return thisPointType > 1;
 }
 
 - (int)getNumTilesFromMaxPoints:(int)maxPoints
@@ -268,7 +269,7 @@ typedef std::set<TileSizeInfo> TileSizeSet;
        quadIdx += tileID.y*(1<<tileID.level)+tileID.x;
 
        // Information set up from the database or from the global file
-       liblas::Reader * __block thisReader = NULL;
+       laszip_POINTER __block thisReader = NULL;
        std::stringstream * __block tileStream = NULL;
        MaplyComponentObject * __block compObj = nil;
        NSData * __block data = nil;
@@ -290,18 +291,21 @@ typedef std::set<TileSizeInfo> TileSizeSet;
                    pointStart = [res longLongIntForColumn:@"start"];
                    count = [res intForColumn:@"count"];
                    thisReader = lazReader;
-                   liblas::Header header = thisReader->GetHeader();
-                   hasColors = header.GetDataFormatId() != liblas::ePointFormat0 && header.GetDataFormatId() != liblas::ePointFormat1;
+                   laszip_header_struct *header;
+                   laszip_get_header_pointer(thisReader,&header);
+                   hasColors = header->point_data_format > 1;
                } else {
                    data = [res dataForColumn:@"data"];
                    tileStream = new std::stringstream();
                    tileStream->write(reinterpret_cast<const char *>([data bytes]),[data length]);
-                   liblas::ReaderFactory f;
-                   liblas::Reader reader = f.CreateWithStream(*tileStream);
-                   thisReader = new liblas::Reader(reader);
-                   liblas::Header header = reader.GetHeader();
-                   count = header.GetPointRecordsCount();
-                   hasColors = header.GetDataFormatId() != liblas::ePointFormat0 && header.GetDataFormatId() != liblas::ePointFormat1;
+
+                   laszip_BOOL is_compressed;
+                   laszip_create(&thisReader);
+                   laszip_open_stream_reader(thisReader,tileStream,&is_compressed);
+                   laszip_header_struct *header;
+                   laszip_get_header_pointer(thisReader,&header);
+                   hasColors = header->point_data_format > 1;
+                   count = header->number_of_point_records;
                }
 
                [res close];
@@ -315,8 +319,10 @@ typedef std::set<TileSizeInfo> TileSizeSet;
            
            // Center the coordinates around the tile center
            MaplyCoordinate3dD tileCenter;
-           tileCenter.x = (thisReader->GetHeader().GetMinX()+thisReader->GetHeader().GetMaxX())/2.0;
-           tileCenter.y = (thisReader->GetHeader().GetMinY()+thisReader->GetHeader().GetMaxY())/2.0;
+           laszip_header_struct *header;
+           laszip_get_header_pointer(thisReader,&header);
+           tileCenter.x = (header->min_x+header->max_x)/2.0;
+           tileCenter.y = (header->min_y+header->max_y)/2.0;
            tileCenter.z = 0.0;
            MaplyCoordinate3dD tileCenterDisp = [layer.viewC displayCoordD:tileCenter fromSystem:_coordSys];
            points.transform = [[MaplyMatrix alloc] initWithTranslateX:tileCenterDisp.x y:tileCenterDisp.y z:tileCenterDisp.z];
@@ -328,18 +334,21 @@ typedef std::set<TileSizeInfo> TileSizeSet;
                // Get the point and convert to geocentric
                if (lazReader)
                {
-                   if (!thisReader->ReadPointAt((size_t)(which+pointStart)))
-                       break;
+                   laszip_seek_point(thisReader,(which+pointStart));
+                   laszip_read_point(thisReader);
                } else {
-                   if (!thisReader->ReadNextPoint())
-                       break;
+                   laszip_seek_point(thisReader,(which+pointStart));
+                   laszip_read_point(thisReader);
                }
-               liblas::Point const& p = thisReader->GetPoint();
+               laszip_point_struct *p;
+               laszip_get_point_pointer(thisReader, &p);
                //                double x,y,z;
                //                x = p.GetX(), y = p.GetY(); z = p.GetZ();
                //                trans->TransformEx(1, &x, &y, &z);
                MaplyCoordinate3dD coord;
-               coord.x = p.GetX();  coord.y = p.GetY();  coord.z = p.GetZ();
+               coord.x = p->X * header->x_scale_factor + header->x_offset;
+               coord.y = p->Y * header->y_scale_factor + header->y_offset;
+               coord.z = p->Z * header->z_scale_factor + header->z_offset;
                coord.z += _zOffset;
                
 //               NSLog(@"coord = (%f,%f,%f)",coord.x,coord.y,coord.z);
@@ -353,9 +362,11 @@ typedef std::set<TileSizeInfo> TileSizeSet;
                float red = 1.0,green = 1.0, blue = 1.0;
                if (hasColors)
                {
-                   liblas::Color color = p.GetColor();
 //                   red = color.GetRed() / 255.0;  green = color.GetGreen() / 255.0;  blue = color.GetBlue() / 255.0;
-                   red = color.GetRed() / colorScale;  green = color.GetGreen() / colorScale;  blue = color.GetBlue() / colorScale;
+//                   red = color.GetRed() / colorScale;  green = color.GetGreen() / colorScale;  blue = color.GetBlue() / colorScale;
+                   red = p->rgb[0] / colorScale;
+                   green = p->rgb[1] / colorScale;
+                   blue = p->rgb[2] / colorScale;
                }
                [points addDispCoordDoubleX:dispCoordCenter.x y:dispCoordCenter.y z:dispCoordCenter.z];
                [points addColorR:red g:green b:blue a:1.0];
@@ -395,7 +406,7 @@ typedef std::set<TileSizeInfo> TileSizeSet;
        {
            if (thisReader)
            {
-               delete thisReader;
+               laszip_destroy(thisReader);
                delete tileStream;
            }
        }
