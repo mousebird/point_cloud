@@ -11,16 +11,13 @@
 
 #include <stdio.h>
 #include <string>
+#include <vector>
 #include "LidarDatabase.hpp"
 #include <sys/stat.h>
 #include <iostream>
-#include <liblas/liblas.hpp>
 #include <fstream>
 #include <iostream>
-#include <ogr_srs_api.h>
-#include <cpl_port.h>
-#include <ogr_spatialref.h>
-#include <gdal.h>
+#import "laszip_api.h"
 
 class TileIdent
 {
@@ -52,10 +49,10 @@ public:
     bool hasNextPoint();
     
     // Fetch the next point, irrespective of the file it's in
-    liblas::Point getNextPoint();
+    laszip_point_struct *getNextPoint();
     
     // Header to cover the whole area
-    liblas::Header header;
+    laszip_header_struct header;
     
     // Remove the input file
     void removeFile();
@@ -67,8 +64,7 @@ protected:
     int whichFile;
     unsigned int whichPointOverall;
     unsigned int whichPointInFile;
-    std::ifstream *ifs;
-    liblas::Reader *reader;
+    laszip_POINTER reader;
 };
 
 /* The Lidar sorter recursively sorts LIDAR point files.
@@ -85,7 +81,7 @@ public:
     bool process(LidarMultiWrapper *inputDB,LidarDatabase *lidarDB);
     
     // Number of points written in various files
-    int getNumPointsWritten() { return totalWrittenPoints; }
+    long long getNumPointsWritten() { return totalWrittenPoints; }
     
 protected:
     bool process(LidarMultiWrapper *inputDB,TileIdent tileID,LidarDatabase *lidarDB,bool removeAfterDone);
@@ -93,7 +89,7 @@ protected:
     int minPointLimit,maxPointLimit;
     int maxLevel;
     std::string tmpDir;
-    unsigned int totalWrittenPoints;
+    long long totalWrittenPoints;
 };
 
 #endif /* LidarSorter_hpp */

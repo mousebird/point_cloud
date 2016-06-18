@@ -755,24 +755,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ENABLE_BITCODE = NO;
-				HEADER_SEARCH_PATHS = (
-					"../libs/WhirlyGlobe-Maply/WhirlyGlobeSrc/WhirlyGlobe-MaplyComponent/include/",
-					../libs/liblas/include/,
-					../libs/ofxiOSBoost/libs/boost/include,
-					../libs/gdal/install/GDAL/,
-					"../libs/gdal/gdal-2.0.1/gcore/",
-					"../libs/gdal/gdal-2.0.1/ogr/",
-					"../libs/gdal/gdal-2.0.1/port/",
-					"../libs/gdal/gdal-2.0.1/frmts/gtiff/libgeotiff/",
-					"../libs/gdal/gdal-2.0.1/frmts/gtiff/libtiff/",
-					../libs/LAStools/laszip,
-				);
+				HEADER_SEARCH_PATHS = "../libs/WhirlyGlobe-Maply/WhirlyGlobeSrc/WhirlyGlobe-MaplyComponent/include/";
 				INFOPLIST_FILE = LidarViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					../libs/gdal/install/,
-					/usr/local/Cellar/gdal/1.11.1_3/lib,
-				);
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mousebirdconsulting.LidarViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -783,24 +769,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ENABLE_BITCODE = NO;
-				HEADER_SEARCH_PATHS = (
-					"../libs/WhirlyGlobe-Maply/WhirlyGlobeSrc/WhirlyGlobe-MaplyComponent/include/",
-					../libs/liblas/include/,
-					../libs/ofxiOSBoost/libs/boost/include,
-					../libs/gdal/install/GDAL/,
-					"../libs/gdal/gdal-2.0.1/gcore/",
-					"../libs/gdal/gdal-2.0.1/ogr/",
-					"../libs/gdal/gdal-2.0.1/port/",
-					"../libs/gdal/gdal-2.0.1/frmts/gtiff/libgeotiff/",
-					"../libs/gdal/gdal-2.0.1/frmts/gtiff/libtiff/",
-					../libs/LAStools/laszip,
-				);
+				HEADER_SEARCH_PATHS = "../libs/WhirlyGlobe-Maply/WhirlyGlobeSrc/WhirlyGlobe-MaplyComponent/include/";
 				INFOPLIST_FILE = LidarViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					../libs/gdal/install/,
-					/usr/local/Cellar/gdal/1.11.1_3/lib,
-				);
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mousebirdconsulting.LidarViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

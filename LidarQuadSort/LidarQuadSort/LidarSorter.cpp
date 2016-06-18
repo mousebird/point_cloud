@@ -9,30 +9,47 @@
 #include "LidarSorter.hpp"
 
 LidarMultiWrapper::LidarMultiWrapper(const std::string &file)
-: reader(NULL), ifs(NULL)
+: reader(NULL)
 {
     files.push_back(file);
 }
 
 LidarMultiWrapper::LidarMultiWrapper(const std::vector<std::string> &files)
-: files(files), reader(NULL), ifs(NULL)
+: files(files), reader(NULL)
 {
 }
 
 LidarMultiWrapper::~LidarMultiWrapper()
 {
     if (reader)
-        delete reader;
+        laszip_destroy(reader);
     reader = NULL;
-    if (ifs)
-        delete ifs;
-    ifs = NULL;
 }
 
 void LidarMultiWrapper::removeFile()
 {
     for (const auto &file : files)
         remove(file.c_str());
+}
+
+long long getNumRecords(laszip_header_struct *header)
+{
+    if (header->extended_number_of_point_records > 0)
+        return header->extended_number_of_point_records;
+    return header->number_of_point_records;
+}
+
+long long getNumRecords(laszip_POINTER reader)
+{
+    laszip_header *theHeader;
+    
+    laszip_get_header_pointer(reader,&theHeader);
+    return getNumRecords(theHeader);
+}
+
+long long getNumRecords(laszip_header_struct &header)
+{
+    return getNumRecords(&header);
 }
 
 bool LidarMultiWrapper::init()
@@ -42,40 +59,39 @@ bool LidarMultiWrapper::init()
     bool firstFile = true;
     for (auto &fileName : files)
     {
-        // Open the file and take a look at the header
-        std::ifstream ifs;
-        ifs.open(fileName, std::ios::in | std::ios::binary);
-        if (!ifs)
+        laszip_POINTER thisReader;
+        laszip_create(&thisReader);
+        laszip_BOOL is_compressed;
+        if (laszip_open_reader(thisReader, fileName.c_str(), &is_compressed))
         {
             fprintf(stderr,"Failed to open file %s",fileName.c_str());
             return false;
         }
-        
-        liblas::ReaderFactory f;
-        liblas::Reader thisReader = f.CreateWithStream(ifs);
-        liblas::Header thisHeader = thisReader.GetHeader();
+        laszip_header_struct *thisHeader;
+        laszip_get_header_pointer(thisReader,&thisHeader);
         
         if (firstFile)
         {
-            header = thisHeader;
+            header = *thisHeader;
             firstFile = false;
         } else {
             // Basic comparison should pass
-            if (header.GetSRS().GetProj4() != thisHeader.GetSRS().GetProj4())
-            {
-                fprintf(stderr,"Projection doesn't match for all input files.\n");
-                return false;
-            }
-            if (header.GetOffsetX() != thisHeader.GetOffsetX() ||
-                header.GetOffsetY() != thisHeader.GetOffsetY() ||
-                header.GetOffsetZ() != thisHeader.GetOffsetZ())
+            // Note: Need to put this check back
+//            if (header.GetSRS().GetProj4() != thisHeader.GetSRS().GetProj4())
+//            {
+//                fprintf(stderr,"Projection doesn't match for all input files.\n");
+//                return false;
+//            }
+            if (header.x_offset != thisHeader->x_offset ||
+                header.y_offset != thisHeader->y_offset ||
+                header.z_offset != thisHeader->z_offset)
             {
                 fprintf(stderr,"Offset doesn't match for all input files.\n");
                 return false;
             }
-            if (header.GetScaleX() != thisHeader.GetScaleX() ||
-                header.GetScaleY() != thisHeader.GetScaleY() ||
-                header.GetScaleZ() != thisHeader.GetScaleZ())
+            if (header.x_scale_factor != thisHeader->x_scale_factor ||
+                header.y_scale_factor != thisHeader->y_scale_factor ||
+                header.z_scale_factor != thisHeader->z_scale_factor)
             {
                 fprintf(stderr,"Scale doesn't match for all input files.\n");
                 return false;
@@ -83,21 +99,22 @@ bool LidarMultiWrapper::init()
             
             // Merge in bounding box
             double minX,minY,maxX,maxY,minZ,maxZ;
-            minX = std::min(header.GetMinX(),thisHeader.GetMinX());
-            minY = std::min(header.GetMinY(),thisHeader.GetMinY());
-            minZ = std::min(header.GetMinZ(),thisHeader.GetMinZ());
-            maxX = std::max(header.GetMaxX(),thisHeader.GetMaxX());
-            maxY = std::max(header.GetMaxY(),thisHeader.GetMaxY());
-            maxZ = std::max(header.GetMaxZ(),thisHeader.GetMaxZ());
-            header.SetMin(minX, minY, minZ);
-            header.SetMax(maxX, maxY, maxZ);
+            minX = std::min(header.min_x,thisHeader->min_x);
+            minY = std::min(header.min_y,thisHeader->min_y);
+            minZ = std::min(header.min_z,thisHeader->min_z);
+            maxX = std::max(header.max_x,thisHeader->max_x);
+            maxY = std::max(header.max_y,thisHeader->max_y);
+            maxZ = std::max(header.max_z,thisHeader->max_z);
+            header.min_x = minX;  header.min_y = minY;  header.min_z = minZ;
+            header.max_x = maxX;  header.max_y = maxY;  header.max_z = maxZ;
             
             // Add in the point count
-            header.SetPointRecordsCount(header.GetPointRecordsCount()+thisHeader.GetPointRecordsCount());
+            header.extended_number_of_point_records = (header.extended_number_of_point_records+thisHeader->extended_number_of_point_records);
+            header.number_of_point_records = (laszip_U32)header.extended_number_of_point_records;
         }
     }
     
-    fprintf(stdout,"Checked all %ld files for %u points\n",files.size(),header.GetPointRecordsCount());
+    fprintf(stdout,"Checked all %ld files for %lld points\n",files.size(),getNumRecords(header));
     
     valid = true;    
     whichFile = -1;
@@ -109,46 +126,41 @@ bool LidarMultiWrapper::init()
 
 bool LidarMultiWrapper::hasNextPoint()
 {
-    return whichPointOverall < header.GetPointRecordsCount();
+    return whichPointOverall < getNumRecords(header);
 }
 
-liblas::Point LidarMultiWrapper::getNextPoint()
+laszip_point_struct *LidarMultiWrapper::getNextPoint()
 {
     // Open the next (or first) file
-    if (whichFile < 0 || whichPointInFile >= reader->GetHeader().GetPointRecordsCount())
+    if (whichFile < 0 || whichPointInFile >= getNumRecords(reader))
     {
         whichFile++;
         if (reader)
         {
-            delete reader;
+            laszip_close_reader(reader);
+            laszip_destroy(reader);
             reader = NULL;
-        }
-        if (ifs)
-        {
-            delete ifs;
-            ifs = NULL;
         }
         whichPointInFile = 0;
 
         const std::string &fileName = files[whichFile];
 
-        // Open the file and take a look at the header
-        ifs = new std::ifstream(fileName, std::ios::in | std::ios::binary);
-        if (!(*ifs))
+        laszip_create(&reader);
+        laszip_BOOL is_compressed;
+        if (laszip_open_reader(reader, fileName.c_str(), &is_compressed))
         {
-            throw (std::string)"Failed to open file " + fileName;
+            throw (std::string)"failed to open file " + fileName;
         }
-
-        liblas::ReaderFactory f;
-        liblas::Reader thisReader = f.CreateWithStream(*ifs);
-        reader = new liblas::Reader(thisReader);
     }
     
     whichPointInFile++;
     whichPointOverall++;
-    if (!reader->ReadNextPoint())
+    if (laszip_read_point(reader))
         throw "Unable to read input point";
-    return reader->GetPoint();
+
+    laszip_point_struct *p;
+    laszip_get_point_pointer(reader, &p);
+    return p;
 }
 
 LidarSorter::LidarSorter(const char *tmp_dir)
@@ -166,33 +178,33 @@ bool LidarSorter::process(LidarMultiWrapper *inputDB,LidarDatabase *lidarDB)
 bool LidarSorter::process(LidarMultiWrapper *inputDB,TileIdent tileID,LidarDatabase *lidarDB,bool removeAfterDone)
 {
     try {
-        liblas::SpatialReference srs = inputDB->header.GetSRS();
+        // Note: Need to put this back
+//        liblas::SpatialReference srs = inputDB->header.GetSRS();
+        
         
         // Tile output
         std::stringstream *ofs = NULL;
-        liblas::Writer *tileW = NULL;
-        liblas::Header tileHeader = inputDB->header;
-        tileHeader.SetPointRecordsCount(0);
-        tileHeader.SetCompressed(true);
         ofs = new std::stringstream(std::stringstream::out);
         if (!(*ofs))
         {
             fprintf(stderr,"Unable to open string stream.");
             return false;
         }
-        tileW = new liblas::Writer(*ofs,tileHeader);
+        laszip_POINTER tileW;
+        laszip_create(&tileW);
+        laszip_set_header(tileW,&inputDB->header);
+        laszip_open_stream_writer(tileW,ofs,true);
         
         // Figure out which points we're keeping and which we're outputting
-        bool allPoints = inputDB->header.GetPointRecordsCount() <= maxPointLimit;
-        float fracToKeep = (float)minPointLimit / (float)inputDB->header.GetPointRecordsCount();
+        bool allPoints = getNumRecords(inputDB->header) <= maxPointLimit;
+        float fracToKeep = (float)minPointLimit / (float)getNumRecords(inputDB->header);
 
-        liblas::Writer *subTiles[4] = {NULL,NULL,NULL,NULL};
-        std::ofstream *subOfStreams[4] = {NULL,NULL,NULL,NULL};
-        int subTileCount[4] = {0,0,0,0};
+        laszip_POINTER subTiles[4] = {NULL,NULL,NULL,NULL};
+        long long subTileCount[4] = {0,0,0,0};
         TileIdent subTileIDs[4];
         std::string subTileNames[4];
-        double spanX_2 = (inputDB->header.GetMaxX()-inputDB->header.GetMinX())/2.0;
-        double spanY_2 = (inputDB->header.GetMaxY()-inputDB->header.GetMinY())/2.0;
+        double spanX_2 = (inputDB->header.max_x-inputDB->header.min_x)/2.0;
+        double spanY_2 = (inputDB->header.max_y-inputDB->header.min_y)/2.0;
         if (!allPoints)
         {
             for (unsigned int sy=0;sy<2;sy++)
@@ -201,50 +213,65 @@ bool LidarSorter::process(LidarMultiWrapper *inputDB,TileIdent tileID,LidarDatab
                     TileIdent &subIdent = subTileIDs[sy*2+sx];
                     subIdent.x = 2*tileID.x + sx;  subIdent.y = 2*tileID.y + sy;  subIdent.z = tileID.z+1;
 
-                    liblas::Header subHeader = inputDB->header;
-                    subHeader.SetPointRecordsCount(0);
-                    subHeader.SetCompressed(false);
-                    subHeader.SetMin(inputDB->header.GetMinX()+sx*spanX_2, inputDB->header.GetMinY()+sy*spanY_2, inputDB->header.GetMinZ());
-                    subHeader.SetMax(inputDB->header.GetMinX()+(sx+1)*spanX_2, inputDB->header.GetMinY()+(sy+1)*spanY_2, inputDB->header.GetMaxZ());
-
                     // Set up the write for this sub-tile
                     std::string subFile = tmpDir + "/" + "src_" + std::to_string(subIdent.x) + "_" + std::to_string(subIdent.y) + "_" + std::to_string(subIdent.z) + ".las";
-                    std::ofstream *subofs = new std::ofstream(subFile,std::ios::out | std::ios::binary);
                     subTileNames[sy*2+sx] = subFile;
-                    liblas::Writer *subW = new liblas::Writer(*subofs,subHeader);
-                    subOfStreams[sy*2+sx] = subofs;
+
+                    laszip_POINTER subW;
+                    laszip_create(&subW);
+//                    laszip_set_header(subW, &inputDB->header);
+//                    laszip_header_struct *subHeader;
+
+                    laszip_open_writer(subW, subFile.c_str(), false);
+//                    laszip_get_header_pointer(subW, &subHeader);
+
+//                    subHeader->number_of_point_records = 0;
+//                    subHeader->extended_number_of_point_records = 0;
+//                    subHeader->number_of_point_records = 0;
+//                    subHeader->min_x = inputDB->header.min_x+sx*spanX_2;
+//                    subHeader->min_y = inputDB->header.min_y+sy*spanY_2;
+//                    subHeader->min_z = inputDB->header.min_z;
+//                    subHeader->max_x = inputDB->header.min_x+(sx+1)*spanX_2;
+//                    subHeader->max_y = inputDB->header.min_y+(sy+1)*spanY_2;
+//                    subHeader->max_z = inputDB->header.max_z;
+
                     subTiles[sy*2+sx] = subW;
                 }
         }
         
         // Work through the points in the input file
-        uint32_t numToCopy = inputDB->header.GetPointRecordsCount();
-        uint32_t numCopiedToTile = 0;
+        long long numToCopy = getNumRecords(inputDB->header);
+        long long numCopiedToTile = 0;
         for (unsigned int ii=0;ii<numToCopy;ii++)
         {
-            liblas::Point p = inputDB->getNextPoint();
+            laszip_point_struct *p = inputDB->getNextPoint();
             double randNum = drand48();
             bool tilePoint = randNum <= fracToKeep;
             // This point goes out to the tile
             if (tilePoint || allPoints)
             {
-                if (!tileW->WritePoint(p))
+                if (laszip_set_point(tileW,p) ||
+                    laszip_write_point(tileW) ||
+                    laszip_update_inventory(tileW))
                     throw (std::string)"Failed to write point in tile";
                 numCopiedToTile++;
                 totalWrittenPoints++;
             } else {
-                double x = p.GetX(), y = p.GetY();
+                double x = p->X * inputDB->header.x_scale_factor + inputDB->header.x_offset;
+                double y = p->Y * inputDB->header.y_scale_factor + inputDB->header.y_offset;
                 // This point goes in one of the subtiles
-                int whichX = (x-inputDB->header.GetMinX())/spanX_2;
-                int whichY = (y-inputDB->header.GetMinY())/spanY_2;
+                int whichX = (x-inputDB->header.min_x)/spanX_2;
+                int whichY = (y-inputDB->header.min_y)/spanY_2;
                 // Shouldn't be necessary, but you can't be too careful
                 whichX = std::min(whichX,1); whichY = std::min(whichY,1);
                 whichX = std::max(whichX,0); whichY = std::max(whichY,0);
                 
                 int whichTile = whichY*2+whichX;
-                liblas::Writer *w = subTiles[whichTile];
+                laszip_POINTER w = subTiles[whichTile];
                 subTileCount[whichTile]++;
-                if (!w->WritePoint(p))
+                if (laszip_set_point(w, p) ||
+                    laszip_write_point(w) ||
+                    laszip_update_inventory(w))
                     throw (std::string)"Failed to write point in sub tile";
             }
         }
@@ -252,10 +279,16 @@ bool LidarSorter::process(LidarMultiWrapper *inputDB,TileIdent tileID,LidarDatab
         std::string indent = "";
         for (int ii=0;ii<tileID.z;ii++)
             indent += " ";
-        fprintf(stdout,"%sTile %d: (%d,%d) saved %d of %u points\n",indent.c_str(),tileID.z,tileID.x,tileID.y,numCopiedToTile,inputDB->header.GetPointRecordsCount());
+        fprintf(stdout,"%sTile %d: (%d,%d) saved %lld of %llu points\n",indent.c_str(),tileID.z,tileID.x,tileID.y,numCopiedToTile,getNumRecords(inputDB->header));
 
         // Save the tile and close out the in-memory tile file
-        delete tileW;
+        {
+            laszip_header_struct *header;
+            laszip_get_header_pointer(tileW, &header);
+            header->number_of_point_records = (laszip_U32)numCopiedToTile;
+            laszip_close_writer(tileW);
+            laszip_destroy(tileW);
+        }
         std::string tileStr = ofs->str();
         lidarDB->addTile(tileStr.c_str(), (int)tileStr.size(), tileID.x, tileID.y, tileID.z);
         delete ofs;
@@ -264,9 +297,10 @@ bool LidarSorter::process(LidarMultiWrapper *inputDB,TileIdent tileID,LidarDatab
         for (unsigned int ii=0;ii<4;ii++)
             if (subTiles[ii])
             {
-                delete subTiles[ii];
-                subOfStreams[ii]->close();
-                delete subOfStreams[ii];
+                laszip_POINTER lasFile = subTiles[ii];
+                
+                laszip_close_writer(lasFile);
+                laszip_destroy(lasFile);
                 
                 // Remove the file if there were no points
                 if (subTileCount[ii] == 0)
@@ -303,8 +337,9 @@ bool LidarSorter::process(LidarMultiWrapper *inputDB,TileIdent tileID,LidarDatab
         // If this is the top file, we'll set up the output header
         if (!removeAfterDone)
         {
-            std::string proj4Str = inputDB->header.GetSRS().GetProj4();
-            lidarDB->setHeader(proj4Str.c_str(),inputDB->header.GetFileSignature().c_str(), inputDB->header.GetMinX(), inputDB->header.GetMinY(), inputDB->header.GetMinZ(), inputDB->header.GetMaxX(), inputDB->header.GetMaxY(), inputDB->header.GetMaxZ(), 0, maxLevel,minPointLimit,maxPointLimit,(int)inputDB->header.GetDataFormatId());
+            // Note: Turn this back on
+//            std::string proj4Str = inputDB->header.GetSRS().GetProj4();
+//            lidarDB->setHeader(proj4Str.c_str(),inputDB->header.GetFileSignature().c_str(), inputDB->header.GetMinX(), inputDB->header.GetMinY(), inputDB->header.GetMinZ(), inputDB->header.GetMaxX(), inputDB->header.GetMaxY(), inputDB->header.GetMaxZ(), 0, maxLevel,minPointLimit,maxPointLimit,(int)inputDB->header.GetDataFormatId());
         }
     }
     catch (const std::string &reason)

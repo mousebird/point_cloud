@@ -9,13 +9,10 @@
 #include <stdio.h>
 #include <sys/stat.h>
 #include <iostream>
-#include <liblas/liblas.hpp>
 #include <fstream>
 #include <iostream>
-#include <ogr_srs_api.h>
-#include <cpl_port.h>
-#include <ogr_spatialref.h>
-#include <gdal.h>
+#include <vector>
+#include <string>
 #include <boost/filesystem.hpp>
 #include "KompexSQLitePrerequisites.h"
 #include "KompexSQLiteDatabase.h"
