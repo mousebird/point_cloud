@@ -497,7 +497,11 @@
 		2BA6D9BC1CB7014A0017E3AF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = /usr/local/Cellar/boost/1.55.0_1/include;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/boost/1.55.0_1/include,
+					/usr/local/Cellar/libgeotiff/1.4.1/include,
+					/usr/local/Cellar/libtiff/4.0.3/include,
+				);
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/Cellar/gdal/1.11.1_3/lib,
 					/usr/local/Cellar/libtiff/4.0.3/lib,
@@ -512,7 +516,11 @@
 		2BA6D9BD1CB7014A0017E3AF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = /usr/local/Cellar/boost/1.55.0_1/include;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/boost/1.55.0_1/include,
+					/usr/local/Cellar/libgeotiff/1.4.1/include,
+					/usr/local/Cellar/libtiff/4.0.3/include,
+				);
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/Cellar/gdal/1.11.1_3/lib,
 					/usr/local/Cellar/libtiff/4.0.3/lib,

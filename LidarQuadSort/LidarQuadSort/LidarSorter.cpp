@@ -52,6 +52,74 @@ long long getNumRecords(laszip_header_struct &header)
     return getNumRecords(&header);
 }
 
+// Generate a proj4 compatible string
+bool GenerateProjStr(laszip_header_struct *thisHeader,std::string &str)
+{
+    ST_TIFF *tags = ST_Create();
+    
+    // Work through the VLRS
+    // Heavily inpsired by liblas (spatialreference.cpp)
+    for (int ii = 0; ii< thisHeader->number_of_variable_length_records;ii++)
+    {
+        laszip_vlr_struct *vlrs = &thisHeader->vlrs[ii];
+        std::string uid = vlrs->user_id;
+        
+        if (uid == "LASF_Projection")
+        {
+            std::vector<uint8_t> data(vlrs->record_length_after_header);
+            memcpy(&data.front(),vlrs->data,vlrs->record_length_after_header);
+
+            switch (vlrs->record_id)
+            {
+                case 34735:
+                {
+                    int count = vlrs->record_length_after_header/sizeof(int16_t);
+                    short *data_short = reinterpret_cast<short *>(&data.front());
+                    
+                    // Apparently there are blank geotags
+                    while ( count > 4 &&
+                            data_short[count-1] == 0 && data_short[count-2] == 0 &&
+                            data_short[count-3] == 0 && data_short[count-4] == 0)
+                    {
+                        count -= 4;
+                        data_short[3] -= 1;
+                    }
+
+                    ST_SetKey(tags, vlrs->record_id, count, STT_SHORT, data_short);
+                }
+                    break;
+                case 34736:
+                {
+                    int count = (int)(data.size()/sizeof(double));
+                    ST_SetKey(tags, vlrs->record_id, count, STT_DOUBLE, &data.front());
+                }
+                    break;
+                case 34737:
+                {
+                    int count = (int)(data.size()/sizeof(uint8_t));
+                    ST_SetKey(tags, vlrs->record_id, count, STT_ASCII, &data.front());
+                }
+                    break;
+            }
+        }
+    }
+    
+    // Now for something that works with proj4
+    GTIFDefn defn;
+    GTIF *geoTags = GTIFNewSimpleTags(tags);
+    if (GTIFGetDefn(geoTags, &defn))
+    {
+        char *proj4 = GTIFGetProj4Defn(&defn);
+        str = std::string(proj4);
+        GTIFFreeMemory(proj4);
+        return true;
+    }
+    GTIFFree(geoTags);
+    ST_Destroy(tags);
+    
+    return false;
+}
+
 bool LidarMultiWrapper::init()
 {
     valid = false;
@@ -70,18 +138,21 @@ bool LidarMultiWrapper::init()
         laszip_header_struct *thisHeader;
         laszip_get_header_pointer(thisReader,&thisHeader);
         
+        GenerateProjStr(thisHeader,projStr);
+        
         if (firstFile)
         {
             header = *thisHeader;
             firstFile = false;
         } else {
-            // Basic comparison should pass
-            // Note: Need to put this check back
-//            if (header.GetSRS().GetProj4() != thisHeader.GetSRS().GetProj4())
-//            {
-//                fprintf(stderr,"Projection doesn't match for all input files.\n");
-//                return false;
-//            }
+            std::string thisProjStr;
+            GenerateProjStr(thisHeader,thisProjStr);
+            if (projStr == thisProjStr)
+            {
+                fprintf(stderr,"Projection doesn't match for all input files.\n");
+                return false;
+            }
+            
             if (header.x_offset != thisHeader->x_offset ||
                 header.y_offset != thisHeader->y_offset ||
                 header.z_offset != thisHeader->z_offset)
@@ -178,9 +249,7 @@ bool LidarSorter::process(LidarMultiWrapper *inputDB,LidarDatabase *lidarDB)
 bool LidarSorter::process(LidarMultiWrapper *inputDB,TileIdent tileID,LidarDatabase *lidarDB,bool removeAfterDone)
 {
     try {
-        // Note: Need to put this back
-//        liblas::SpatialReference srs = inputDB->header.GetSRS();
-        
+        std::string proj4Str = inputDB->getProj4Str();
         
         // Tile output
         std::stringstream *ofs = NULL;
@@ -219,21 +288,21 @@ bool LidarSorter::process(LidarMultiWrapper *inputDB,TileIdent tileID,LidarDatab
 
                     laszip_POINTER subW;
                     laszip_create(&subW);
-//                    laszip_set_header(subW, &inputDB->header);
-//                    laszip_header_struct *subHeader;
+                    laszip_set_header(subW, &inputDB->header);
 
                     laszip_open_writer(subW, subFile.c_str(), false);
-//                    laszip_get_header_pointer(subW, &subHeader);
+                    laszip_header_struct *subHeader;
+                    laszip_get_header_pointer(subW, &subHeader);
 
-//                    subHeader->number_of_point_records = 0;
-//                    subHeader->extended_number_of_point_records = 0;
-//                    subHeader->number_of_point_records = 0;
-//                    subHeader->min_x = inputDB->header.min_x+sx*spanX_2;
-//                    subHeader->min_y = inputDB->header.min_y+sy*spanY_2;
-//                    subHeader->min_z = inputDB->header.min_z;
-//                    subHeader->max_x = inputDB->header.min_x+(sx+1)*spanX_2;
-//                    subHeader->max_y = inputDB->header.min_y+(sy+1)*spanY_2;
-//                    subHeader->max_z = inputDB->header.max_z;
+                    subHeader->number_of_point_records = 0;
+                    subHeader->extended_number_of_point_records = 0;
+                    subHeader->number_of_point_records = 0;
+                    subHeader->min_x = inputDB->header.min_x+sx*spanX_2;
+                    subHeader->min_y = inputDB->header.min_y+sy*spanY_2;
+                    subHeader->min_z = inputDB->header.min_z;
+                    subHeader->max_x = inputDB->header.min_x+(sx+1)*spanX_2;
+                    subHeader->max_y = inputDB->header.min_y+(sy+1)*spanY_2;
+                    subHeader->max_z = inputDB->header.max_z;
 
                     subTiles[sy*2+sx] = subW;
                 }
@@ -337,9 +406,13 @@ bool LidarSorter::process(LidarMultiWrapper *inputDB,TileIdent tileID,LidarDatab
         // If this is the top file, we'll set up the output header
         if (!removeAfterDone)
         {
-            // Note: Turn this back on
-//            std::string proj4Str = inputDB->header.GetSRS().GetProj4();
-//            lidarDB->setHeader(proj4Str.c_str(),inputDB->header.GetFileSignature().c_str(), inputDB->header.GetMinX(), inputDB->header.GetMinY(), inputDB->header.GetMinZ(), inputDB->header.GetMaxX(), inputDB->header.GetMaxY(), inputDB->header.GetMaxZ(), 0, maxLevel,minPointLimit,maxPointLimit,(int)inputDB->header.GetDataFormatId());
+            std::string proj4Str = inputDB->getProj4Str();
+            lidarDB->setHeader(proj4Str.c_str(),inputDB->header.system_identifier,
+                               inputDB->header.min_x, inputDB->header.min_y, inputDB->header.min_z,
+                               inputDB->header.max_x, inputDB->header.max_y, inputDB->header.max_z,
+                               0, maxLevel,
+                               minPointLimit,maxPointLimit,
+                               (int)inputDB->header.point_data_format);
         }
     }
     catch (const std::string &reason)

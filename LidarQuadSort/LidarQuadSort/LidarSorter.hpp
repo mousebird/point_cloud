@@ -17,6 +17,13 @@
 #include <iostream>
 #include <fstream>
 #include <iostream>
+
+#include <geotiff.h>
+#include <geo_simpletags.h>
+#include <geo_normalize.h>
+#include <geo_simpletags.h>
+#include <geovalues.h>
+
 #import "laszip_api.h"
 
 class TileIdent
@@ -57,6 +64,9 @@ public:
     // Remove the input file
     void removeFile();
     
+    // Return a proj4 compatible string (if we were able to make one)
+    std::string getProj4Str() { return projStr; }
+    
 protected:
     std::vector<std::string> files;
     bool valid;
@@ -65,6 +75,7 @@ protected:
     unsigned int whichPointOverall;
     unsigned int whichPointInFile;
     laszip_POINTER reader;
+    std::string projStr;
 };
 
 /* The Lidar sorter recursively sorts LIDAR point files.

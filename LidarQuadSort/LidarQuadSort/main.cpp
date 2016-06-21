@@ -168,7 +168,7 @@ int main(int argc, const char * argv[])
     sorter.setPointLimit(minPts,maxPts);
     if (sorter.process(&lidarWrap,lidarDb))
     {
-        fprintf(stdout,"Wrote a total of %d points",sorter.getNumPointsWritten());
+        fprintf(stdout,"Wrote a total of %lld points",sorter.getNumPointsWritten());
         return 0;
     }
 

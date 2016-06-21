@@ -94,7 +94,8 @@ typedef std::set<TileSizeInfo> TileSizeSet;
     
     _zOffset = 0.0;
     _pointSize = 6.0;
-    colorScale = (1<<16)-1;
+//    colorScale = (1<<16)-1;
+    colorScale = 255;
     
     NSString *sqlitePath = nil;
     // See if that was a direct path first
@@ -194,6 +195,48 @@ typedef std::set<TileSizeInfo> TileSizeSet;
         laszip_header *header;
         laszip_get_header_pointer(lazReader,&header);
         thisPointType = header->point_data_format;
+    }
+    
+    bool hasColor = false;
+    switch (thisPointType)
+    {
+        case 0:
+            hasColor = false;
+            break;
+        case 1:
+            hasColor = false;
+            break;
+        case 2:
+            hasColor = false;
+            break;
+        case 3:
+            hasColor = true;
+            break;
+        case 4:
+            hasColor = false;
+            break;
+        case 5:
+            hasColor = true;
+            break;
+        case 6:
+            hasColor = false;
+            break;
+        case 7:
+            hasColor = true;
+            break;
+        case 8:
+            hasColor = true;
+            colorScale = (1<<16)-1;
+            break;
+        case 9:
+            hasColor = false;
+            break;
+        case 10:
+            hasColor = true;
+            colorScale = (1<<16)-1;
+            break;
+        default:
+            break;
     }
     
     return thisPointType > 1;
