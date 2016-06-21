@@ -449,6 +449,7 @@ typedef std::set<TileSizeInfo> TileSizeSet;
        {
            if (thisReader)
            {
+               laszip_close_reader(thisReader);
                laszip_destroy(thisReader);
                delete tileStream;
            }
