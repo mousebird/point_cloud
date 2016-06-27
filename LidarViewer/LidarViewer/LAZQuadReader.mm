@@ -134,6 +134,13 @@ typedef std::set<TileSizeInfo> TileSizeSet;
     res = [db executeQuery:@"SELECT pointtype from manifest"];
     if ([res next])
         pointType = [res intForColumn:@"pointtype"];
+    res = [db executeQuery:@"SELECT maxcolor from manifest"];
+    if ([res next])
+    {
+        int maxColor = [res intForColumn:@"maxcolor"];
+        if (maxColor > 300)
+            colorScale = (1<<16)-1;
+    }
 
     // Override the coordinate system
     if (desc[kLAZReaderCoordSys])

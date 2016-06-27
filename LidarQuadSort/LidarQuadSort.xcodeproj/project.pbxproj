@@ -21,7 +21,6 @@
 		2BA6DB0E1CB7083A0017E3AF /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BA6DB0D1CB7083A0017E3AF /* libz.tbd */; };
 		2BA6DB101CB708470017E3AF /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BA6DB0F1CB708470017E3AF /* libstdc++.tbd */; };
 		2BA6DB121CB7084D0017E3AF /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BA6DB111CB7084D0017E3AF /* libc++.tbd */; };
-		2BA6DB191CB7111B0017E3AF /* libgdal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BA6DB181CB7111B0017E3AF /* libgdal.a */; };
 		2BA6DB1B1CB711620017E3AF /* libtiff.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BA6DB1A1CB711620017E3AF /* libtiff.a */; };
 		2BA6DB1D1CB712D00017E3AF /* libgeotiff.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BA6DB1C1CB712D00017E3AF /* libgeotiff.a */; };
 		2BA6DBCD1CB84E240017E3AF /* libboost_thread-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BA6DBCC1CB84E240017E3AF /* libboost_thread-mt.dylib */; };
@@ -162,7 +161,6 @@
 				2BA6DB0A1CB708210017E3AF /* libiconv.tbd in Frameworks */,
 				2BA6DB081CB708170017E3AF /* libsqlite3.tbd in Frameworks */,
 				2BA6DB1D1CB712D00017E3AF /* libgeotiff.a in Frameworks */,
-				2BA6DB191CB7111B0017E3AF /* libgdal.a in Frameworks */,
 				2B5FB43D1CBC6E46007ECD06 /* libboost_system-mt.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

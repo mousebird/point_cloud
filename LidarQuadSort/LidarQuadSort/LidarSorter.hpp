@@ -72,8 +72,8 @@ protected:
     bool valid;
 
     int whichFile;
-    unsigned int whichPointOverall;
-    unsigned int whichPointInFile;
+    long long whichPointOverall;
+    long long whichPointInFile;
     laszip_POINTER reader;
     std::string projStr;
 };
@@ -101,6 +101,7 @@ protected:
     int maxLevel;
     std::string tmpDir;
     long long totalWrittenPoints;
+    int maxColor;
 };
 
 #endif /* LidarSorter_hpp */

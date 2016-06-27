@@ -31,7 +31,7 @@ public:
     LidarDatabase(Kompex::SQLiteDatabase *db,Type type);
     
     // Set the header info after creation
-    bool setHeader(const char *srs,const char *name,double minX,double minY,double minZ,double maxX,double maxY,double maxZ,int minLevel,int maxLevel,int minPoints,int maxPoints,int pointType);
+    bool setHeader(const char *srs,const char *name,double minX,double minY,double minZ,double maxX,double maxY,double maxZ,int minLevel,int maxLevel,int minPoints,int maxPoints,int pointType,int maxColor);
     
     // Add data for a tile
     bool addTile(const void *tileData,int dataSize,int x,int y,int level);

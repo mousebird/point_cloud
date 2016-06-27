@@ -22,7 +22,10 @@ LidarMultiWrapper::LidarMultiWrapper(const std::vector<std::string> &files)
 LidarMultiWrapper::~LidarMultiWrapper()
 {
     if (reader)
+    {
+        laszip_close_reader(reader);
         laszip_destroy(reader);
+    }
     reader = NULL;
 }
 
@@ -147,7 +150,7 @@ bool LidarMultiWrapper::init()
         } else {
             std::string thisProjStr;
             GenerateProjStr(thisHeader,thisProjStr);
-            if (projStr == thisProjStr)
+            if (projStr != thisProjStr)
             {
                 fprintf(stderr,"Projection doesn't match for all input files.\n");
                 return false;
@@ -180,8 +183,10 @@ bool LidarMultiWrapper::init()
             header.max_x = maxX;  header.max_y = maxY;  header.max_z = maxZ;
             
             // Add in the point count
-            header.extended_number_of_point_records = (header.extended_number_of_point_records+thisHeader->extended_number_of_point_records);
+            header.extended_number_of_point_records = getNumRecords(header)+getNumRecords(thisHeader);
             header.number_of_point_records = (laszip_U32)header.extended_number_of_point_records;
+            if (header.number_of_point_records != header.extended_number_of_point_records)
+                header.number_of_point_records = 0;
         }
     }
     
@@ -235,7 +240,7 @@ laszip_point_struct *LidarMultiWrapper::getNextPoint()
 }
 
 LidarSorter::LidarSorter(const char *tmp_dir)
-: tmpDir(tmp_dir), minPointLimit(1000), maxPointLimit(1500), totalWrittenPoints(0),maxLevel(0)
+: tmpDir(tmp_dir), minPointLimit(1000), maxPointLimit(1500), totalWrittenPoints(0),maxLevel(0), maxColor(0)
 {
 }
 
@@ -311,9 +316,11 @@ bool LidarSorter::process(LidarMultiWrapper *inputDB,TileIdent tileID,LidarDatab
         // Work through the points in the input file
         long long numToCopy = getNumRecords(inputDB->header);
         long long numCopiedToTile = 0;
-        for (unsigned int ii=0;ii<numToCopy;ii++)
+        for (long long ii=0;ii<numToCopy;ii++)
         {
             laszip_point_struct *p = inputDB->getNextPoint();
+            if (inputDB->header.point_data_format > 2)
+                maxColor = std::max(std::max(std::max(std::max(maxColor,(int)p->rgb[0]),(int)p->rgb[1]),(int)p->rgb[2]),(int)p->rgb[3]);
             double randNum = drand48();
             bool tilePoint = randNum <= fracToKeep;
             // This point goes out to the tile
@@ -412,7 +419,7 @@ bool LidarSorter::process(LidarMultiWrapper *inputDB,TileIdent tileID,LidarDatab
                                inputDB->header.max_x, inputDB->header.max_y, inputDB->header.max_z,
                                0, maxLevel,
                                minPointLimit,maxPointLimit,
-                               (int)inputDB->header.point_data_format);
+                               (int)inputDB->header.point_data_format,maxColor);
         }
     }
     catch (const std::string &reason)
