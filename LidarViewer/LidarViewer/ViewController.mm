@@ -87,6 +87,7 @@ static int MaxDisplayedPoints = 3000000;
     globeViewC.frameInterval = 2;
 //    globeViewC.performanceOutput = true;
     globeViewC.delegate = self;
+    globeViewC.tiltGesture = true;
     
     // Give us a tilt
     [globeViewC setTiltMinHeight:0.001 maxHeight:0.01 minTilt:1.21771169 maxTilt:0.0];

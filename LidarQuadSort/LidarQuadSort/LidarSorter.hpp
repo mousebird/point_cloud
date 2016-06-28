@@ -102,6 +102,8 @@ protected:
     std::string tmpDir;
     long long totalWrittenPoints;
     int maxColor;
+    
+    double fullMinX,fullMinY,fullMaxX,fullMaxY;
 };
 
 #endif /* LidarSorter_hpp */

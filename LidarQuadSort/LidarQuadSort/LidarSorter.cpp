@@ -246,6 +246,11 @@ LidarSorter::LidarSorter(const char *tmp_dir)
 
 bool LidarSorter::process(LidarMultiWrapper *inputDB,LidarDatabase *lidarDB)
 {
+    fullMinX = inputDB->header.min_x;
+    fullMinY = inputDB->header.min_y;
+    fullMaxX = inputDB->header.max_x;
+    fullMaxY = inputDB->header.max_y;
+    
     bool ret = process(inputDB,TileIdent(0,0,0),lidarDB,false);
     
     return ret;
@@ -277,8 +282,14 @@ bool LidarSorter::process(LidarMultiWrapper *inputDB,TileIdent tileID,LidarDatab
         long long subTileCount[4] = {0,0,0,0};
         TileIdent subTileIDs[4];
         std::string subTileNames[4];
-        double spanX_2 = (inputDB->header.max_x-inputDB->header.min_x)/2.0;
-        double spanY_2 = (inputDB->header.max_y-inputDB->header.min_y)/2.0;
+        
+        double spanX = (fullMaxX-fullMinX)/(1<<tileID.z);
+        double spanY = (fullMaxY-fullMinY)/(1<<tileID.z);
+        double tileXmin = spanX * tileID.x + fullMinX, tileXmax = spanX * (tileID.x+1) + fullMinX;
+        double tileYmin = spanY * tileID.y + fullMinY, tileYmax = spanY * (tileID.y+1) + fullMinY;
+        double spanX_2 = spanX/2.0;
+        double spanY_2 = spanY/2.0;
+        
         if (!allPoints)
         {
             for (unsigned int sy=0;sy<2;sy++)
@@ -302,11 +313,11 @@ bool LidarSorter::process(LidarMultiWrapper *inputDB,TileIdent tileID,LidarDatab
                     subHeader->number_of_point_records = 0;
                     subHeader->extended_number_of_point_records = 0;
                     subHeader->number_of_point_records = 0;
-                    subHeader->min_x = inputDB->header.min_x+sx*spanX_2;
-                    subHeader->min_y = inputDB->header.min_y+sy*spanY_2;
+                    subHeader->min_x = tileXmin;
+                    subHeader->min_y = tileYmin;
                     subHeader->min_z = inputDB->header.min_z;
-                    subHeader->max_x = inputDB->header.min_x+(sx+1)*spanX_2;
-                    subHeader->max_y = inputDB->header.min_y+(sy+1)*spanY_2;
+                    subHeader->max_x = tileXmax;
+                    subHeader->max_y = tileYmax;
                     subHeader->max_z = inputDB->header.max_z;
 
                     subTiles[sy*2+sx] = subW;
@@ -336,8 +347,8 @@ bool LidarSorter::process(LidarMultiWrapper *inputDB,TileIdent tileID,LidarDatab
                 double x = p->X * inputDB->header.x_scale_factor + inputDB->header.x_offset;
                 double y = p->Y * inputDB->header.y_scale_factor + inputDB->header.y_offset;
                 // This point goes in one of the subtiles
-                int whichX = (x-inputDB->header.min_x)/spanX_2;
-                int whichY = (y-inputDB->header.min_y)/spanY_2;
+                int whichX = (x-tileXmin)/spanX_2;
+                int whichY = (y-tileYmin)/spanY_2;
                 // Shouldn't be necessary, but you can't be too careful
                 whichX = std::min(whichX,1); whichY = std::min(whichY,1);
                 whichX = std::max(whichX,0); whichY = std::max(whichY,0);

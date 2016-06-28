@@ -309,6 +309,11 @@ typedef std::set<TileSizeInfo> TileSizeSet;
 
 - (void)startFetchForTile:(MaplyTileID)tileID forLayer:(MaplyQuadPagingLayer *__nonnull)layer
 {
+    MaplyCoordinate ll,ur;
+    [layer boundsforTile:tileID ll:&ll ur:&ur];
+    
+//    NSLog(@"Tile %d: (%d,%d)  ll = (%f,%f),  ur (%f,%f)",tileID.level,tileID.x,tileID.y,ll.x,ll.y,ur.x,ur.y);
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
    ^{
        // Put together the precalculated quad index.  This is faster
@@ -401,8 +406,6 @@ typedef std::set<TileSizeInfo> TileSizeSet;
                coord.z = p->Z * header->z_scale_factor + header->z_offset;
                coord.z += _zOffset;
                
-//               NSLog(@"coord = (%f,%f,%f)",coord.x,coord.y,coord.z);
-               
                minZ = std::min(coord.z,minZ);
                maxZ = std::max(coord.z,maxZ);
 
@@ -412,8 +415,6 @@ typedef std::set<TileSizeInfo> TileSizeSet;
                float red = 1.0,green = 1.0, blue = 1.0;
                if (hasColors)
                {
-//                   red = color.GetRed() / 255.0;  green = color.GetGreen() / 255.0;  blue = color.GetBlue() / 255.0;
-//                   red = color.GetRed() / colorScale;  green = color.GetGreen() / colorScale;  blue = color.GetBlue() / colorScale;
                    red = p->rgb[0] / colorScale;
                    green = p->rgb[1] / colorScale;
                    blue = p->rgb[2] / colorScale;
