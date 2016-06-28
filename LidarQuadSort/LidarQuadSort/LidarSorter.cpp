@@ -21,6 +21,12 @@ LidarMultiWrapper::LidarMultiWrapper(const std::vector<std::string> &files)
 
 LidarMultiWrapper::~LidarMultiWrapper()
 {
+    for (auto &openReader : openReaders)
+    {
+        laszip_close_reader(openReader);
+        laszip_destroy(openReader);
+    }
+    openReaders.clear();
     if (reader)
     {
         laszip_close_reader(reader);
@@ -140,6 +146,8 @@ bool LidarMultiWrapper::init()
         }
         laszip_header_struct *thisHeader;
         laszip_get_header_pointer(thisReader,&thisHeader);
+        
+        openReaders.push_back(thisReader);
         
         GenerateProjStr(thisHeader,projStr);
         

@@ -76,6 +76,7 @@ protected:
     long long whichPointInFile;
     laszip_POINTER reader;
     std::string projStr;
+    std::vector<laszip_POINTER> openReaders;
 };
 
 /* The Lidar sorter recursively sorts LIDAR point files.
