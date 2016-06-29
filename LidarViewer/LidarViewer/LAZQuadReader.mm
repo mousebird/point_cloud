@@ -19,19 +19,24 @@
 #import "FMDatabase.h"
 #import "FMDatabaseQueue.h"
 #import "laszip_api.h"
+#import "WhirlyGlobe.h"
+#import "MeshBuilder.h"
+
+using namespace Eigen;
+using namespace WhirlyKit;
 
 NSString * const kLAZReaderCoordSys = @"coordsys";
 NSString * const kLAZReaderZOffset = @"zoffset";
 NSString * const kLAZReaderColorScale = @"colorscale";
 
 // Keep track of tile size (height in particular)
-class TileSizeInfo
+class TileBoundsInfo
 {
 public:
-    TileSizeInfo(MaplyTileID tileID) : tileID(tileID), minZ(0.0), maxZ(0.0) { }
-    TileSizeInfo() { }
+    TileBoundsInfo(MaplyTileID tileID) : tileID(tileID), minZ(0.0), maxZ(0.0) { }
+    TileBoundsInfo() { }
     
-    bool operator < (const TileSizeInfo &that) const
+    bool operator < (const TileBoundsInfo &that) const
     {
         if (tileID.level == that.tileID.level)
         {
@@ -44,9 +49,10 @@ public:
     
     MaplyTileID tileID;
     double minZ,maxZ;
+    WhirlyKit::VectorTrianglesRef mesh;
 };
 
-typedef std::set<TileSizeInfo> TileSizeSet;
+typedef std::set<TileBoundsInfo> TileBoundsSet;
 
 @implementation LAZQuadReader
 {
@@ -54,7 +60,7 @@ typedef std::set<TileSizeInfo> TileSizeSet;
     FMDatabaseQueue *queue;
     std::ifstream *ifs;
     laszip_POINTER lazReader;
-    TileSizeSet tileSizes;
+    TileBoundsSet tileSizes;
     int pointType;
     double colorScale;
 }
@@ -276,8 +282,8 @@ typedef std::set<TileSizeInfo> TileSizeSet;
 - (void)getBoundingBox:(MaplyTileID)tileID ll:(MaplyCoordinate3dD *)ll ur:(MaplyCoordinate3dD *)ur
 {
     @synchronized (self) {
-        TileSizeInfo dummy(tileID);
-        TileSizeSet::iterator it = tileSizes.find(dummy);
+        TileBoundsInfo dummy(tileID);
+        TileBoundsSet::iterator it = tileSizes.find(dummy);
         if (it != tileSizes.end())
         {
             ll->z = it->minZ;
@@ -286,8 +292,8 @@ typedef std::set<TileSizeInfo> TileSizeSet;
             // Didn't find it, so look for the parent
             MaplyTileID parentTileID;
             parentTileID.x = tileID.x/2;  parentTileID.y = tileID.y/2;  parentTileID.level = tileID.level-1;
-            TileSizeInfo dummy(parentTileID);
-            TileSizeSet::iterator it = tileSizes.find(dummy);
+            TileBoundsInfo dummy(parentTileID);
+            TileBoundsSet::iterator it = tileSizes.find(dummy);
             if (it != tileSizes.end())
             {
                 ll->z = it->minZ;
@@ -300,8 +306,8 @@ typedef std::set<TileSizeInfo> TileSizeSet;
 - (void)tileDidUnload:(MaplyTileID)tileID
 {
     @synchronized (self) {
-        TileSizeInfo dummy(tileID);
-        TileSizeSet::iterator it = tileSizes.find(dummy);
+        TileBoundsInfo dummy(tileID);
+        TileBoundsSet::iterator it = tileSizes.find(dummy);
         if (it != tileSizes.end())
             tileSizes.erase(it);
     }
@@ -382,6 +388,9 @@ typedef std::set<TileSizeInfo> TileSizeSet;
            MaplyCoordinate3dD tileCenterDisp = [layer.viewC displayCoordD:tileCenter fromSystem:_coordSys];
            points.transform = [[MaplyMatrix alloc] initWithTranslateX:tileCenterDisp.x y:tileCenterDisp.y z:tileCenterDisp.z];
            
+           // We generate a triangle mesh underneath a given tile to provide something to grab
+           MeshBuilder meshBuilder(10,10,Point2d(header->min_x,header->min_y),Point2d(header->max_x,header->max_y));
+           
            long long which = 0;
            double minZ=MAXFLOAT,maxZ=-MAXFLOAT;
            while (which < count)
@@ -423,6 +432,8 @@ typedef std::set<TileSizeInfo> TileSizeSet;
                [points addColorR:red g:green b:blue a:1.0];
                [points addAttribute:elevID fVal:coord.z];
                
+               meshBuilder.addPoint(Point3d(coord.x,coord.y,coord.z));
+               
                which++;
            }
            
@@ -430,7 +441,8 @@ typedef std::set<TileSizeInfo> TileSizeSet;
            if (minZ == maxZ)
                maxZ += 1.0;
            @synchronized (self) {
-               TileSizeInfo tileInfo(tileID);
+               TileBoundsInfo tileInfo(tileID);
+               tileInfo.mesh = meshBuilder.makeMesh();
                tileInfo.minZ = minZ;  tileInfo.maxZ = maxZ;
                tileSizes.insert(tileInfo);
            }

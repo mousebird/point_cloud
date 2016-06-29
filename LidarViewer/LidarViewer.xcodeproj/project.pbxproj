@@ -25,6 +25,7 @@
 		2B162DCB1BD6DC250001E17B /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B162DCA1BD6DC250001E17B /* libiconv.tbd */; };
 		2B1B4F1A1CBEE66D00859F5A /* LAZQuadReader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2B1B4F191CBEE66D00859F5A /* LAZQuadReader.mm */; };
 		2BB6BC091BE01F0300FDB60A /* LAZShader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BC081BE01F0300FDB60A /* LAZShader.mm */; };
+		2BC2DCF41D2435250088D350 /* MeshBuilder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2BC2DCF21D2435250088D350 /* MeshBuilder.mm */; };
 		2BFC7DE21D11F72F0040E2A3 /* arithmeticdecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BFC7DA91D11F72F0040E2A3 /* arithmeticdecoder.cpp */; };
 		2BFC7DE31D11F72F0040E2A3 /* arithmeticencoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BFC7DAB1D11F72F0040E2A3 /* arithmeticencoder.cpp */; };
 		2BFC7DE41D11F72F0040E2A3 /* arithmeticmodel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BFC7DAD1D11F72F0040E2A3 /* arithmeticmodel.cpp */; };
@@ -118,6 +119,8 @@
 		2BB6BC051BE01E5300FDB60A /* LAZReader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LAZReader.mm; sourceTree = "<group>"; };
 		2BB6BC071BE01F0300FDB60A /* LAZShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LAZShader.h; sourceTree = "<group>"; };
 		2BB6BC081BE01F0300FDB60A /* LAZShader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LAZShader.mm; sourceTree = "<group>"; };
+		2BC2DCF21D2435250088D350 /* MeshBuilder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MeshBuilder.mm; sourceTree = "<group>"; };
+		2BC2DCF31D2435250088D350 /* MeshBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeshBuilder.h; sourceTree = "<group>"; };
 		2BFC7DA91D11F72F0040E2A3 /* arithmeticdecoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = arithmeticdecoder.cpp; sourceTree = "<group>"; };
 		2BFC7DAA1D11F72F0040E2A3 /* arithmeticdecoder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = arithmeticdecoder.hpp; sourceTree = "<group>"; };
 		2BFC7DAB1D11F72F0040E2A3 /* arithmeticencoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = arithmeticencoder.cpp; sourceTree = "<group>"; };
@@ -254,6 +257,8 @@
 				2BB6BC051BE01E5300FDB60A /* LAZReader.mm */,
 				2B1B4F181CBEE66D00859F5A /* LAZQuadReader.h */,
 				2B1B4F191CBEE66D00859F5A /* LAZQuadReader.mm */,
+				2BC2DCF31D2435250088D350 /* MeshBuilder.h */,
+				2BC2DCF21D2435250088D350 /* MeshBuilder.mm */,
 				2B162B061BD59E3C0001E17B /* ViewController.h */,
 				2B162B071BD59E3C0001E17B /* ViewController.mm */,
 				2B162B091BD59E3C0001E17B /* Main.storyboard */,
@@ -583,6 +588,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BFC7DE31D11F72F0040E2A3 /* arithmeticencoder.cpp in Sources */,
+				2BC2DCF41D2435250088D350 /* MeshBuilder.mm in Sources */,
 				2B162B081BD59E3C0001E17B /* ViewController.mm in Sources */,
 				2BFC7DE41D11F72F0040E2A3 /* arithmeticmodel.cpp in Sources */,
 				2BFC7DEE1D11F72F0040E2A3 /* laswriteitemcompressed_v1.cpp in Sources */,
@@ -751,7 +757,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ENABLE_BITCODE = NO;
-				HEADER_SEARCH_PATHS = "../libs/WhirlyGlobe-Maply/WhirlyGlobeSrc/WhirlyGlobe-MaplyComponent/include/";
+				HEADER_SEARCH_PATHS = (
+					"../libs/WhirlyGlobe-Maply/WhirlyGlobeSrc/WhirlyGlobe-MaplyComponent/include/",
+					"../libs/WhirlyGlobe-Maply/WhirlyGlobeSrc/WhirlyGlobeLib/include/",
+					"../libs/WhirlyGlobe-Maply/third-party/eigen/",
+					"../libs/WhirlyGlobe-Maply/third-party/boost/",
+				);
 				INFOPLIST_FILE = LidarViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
@@ -765,7 +776,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ENABLE_BITCODE = NO;
-				HEADER_SEARCH_PATHS = "../libs/WhirlyGlobe-Maply/WhirlyGlobeSrc/WhirlyGlobe-MaplyComponent/include/";
+				HEADER_SEARCH_PATHS = (
+					"../libs/WhirlyGlobe-Maply/WhirlyGlobeSrc/WhirlyGlobe-MaplyComponent/include/",
+					"../libs/WhirlyGlobe-Maply/WhirlyGlobeSrc/WhirlyGlobeLib/include/",
+					"../libs/WhirlyGlobe-Maply/third-party/eigen/",
+					"../libs/WhirlyGlobe-Maply/third-party/boost/",
+				);
 				INFOPLIST_FILE = LidarViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
