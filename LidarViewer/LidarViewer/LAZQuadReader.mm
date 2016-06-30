@@ -21,9 +21,16 @@
 #import "laszip_api.h"
 #import "WhirlyGlobe.h"
 #import "MeshBuilder.h"
+#import "private/WhirlyGlobeViewController_private.h"
 
 using namespace Eigen;
 using namespace WhirlyKit;
+
+@interface LAZQuadReader()
+
+- (bool) intersectWithRenderer:(WhirlyKitSceneRendererES *)renderer view:(WhirlyKitView *)theView touchPt:(const Point2f &)touchPt org:(const Point3d &)org dir:(const Point3d &)dir interPt:(Point3d &)iPt dist:(double &)dist;
+
+@end
 
 NSString * const kLAZReaderCoordSys = @"coordsys";
 NSString * const kLAZReaderZOffset = @"zoffset";
@@ -52,6 +59,18 @@ public:
     WhirlyKit::VectorTrianglesRef mesh;
 };
 
+/// Intersection handler for grabbing objects
+class IntersectionHandler : public IntersectionManager::Intersectable
+{
+public:
+    bool findClosestIntersection(WhirlyKitSceneRendererES *renderer,WhirlyKitView *theView,const Point2f &frameSize,const Point2f &touchPt,const Point3d &org,const Point3d &dir,Point3d &iPt,double &dist)
+    {
+        return [quadReader intersectWithRenderer:renderer view:theView touchPt:touchPt org:org dir:dir interPt:iPt dist:dist];
+    }
+    
+    LAZQuadReader *quadReader;
+};
+
 typedef std::set<TileBoundsInfo> TileBoundsSet;
 
 @implementation LAZQuadReader
@@ -63,40 +82,16 @@ typedef std::set<TileBoundsInfo> TileBoundsSet;
     TileBoundsSet tileSizes;
     int pointType;
     double colorScale;
+    IntersectionHandler intersectionHandler;
+    MaplyBaseViewController *viewC;
 }
 
-// Note: This variant is deprecated
-- (id)initWithDB:(NSString *)lazFileName indexFile:(NSString *)sqliteFileName desc:(NSDictionary *)desc
-{
-    self = [self initWithDB:sqliteFileName desc:desc];
-    if (!self)
-        return nil;
-    
-    NSString *lazPath = nil;
-    // See if that was a direct path first
-    if ([[NSFileManager defaultManager] fileExistsAtPath:lazFileName])
-        lazPath = lazFileName;
-    else {
-        // Now try looking for it in the bundle
-        lazPath = [[NSBundle mainBundle] pathForResource:lazFileName ofType:@"laz"];
-        if (!lazPath)
-            return nil;
-    }
-
-    // Open the LAZ File
-    laszip_BOOL is_compressed;
-    laszip_open_reader(lazReader, [lazPath cStringUsingEncoding:NSASCIIStringEncoding], &is_compressed);
-    
-    // Note: Should check the LAZ reader
-    
-    return self;
-}
-
-- (id)initWithDB:(NSString *)sqliteFileName desc:(NSDictionary *)desc
+- (id)initWithDB:(NSString *)sqliteFileName desc:(NSDictionary *)desc viewC:(WhirlyGlobeViewController *)inViewC
 {
     self = [super init];
     if (!self)
         return nil;
+    viewC = inViewC;
     
     _zOffset = 0.0;
     _pointSize = 6.0;
@@ -177,6 +172,11 @@ typedef std::set<TileBoundsInfo> TileBoundsSet;
     }
     
     queue = [FMDatabaseQueue databaseQueueWithPath:sqlitePath];
+    
+    // Hook up an intersection handler
+    intersectionHandler.quadReader = self;
+    IntersectionManager *intersectMan = (IntersectionManager *)viewC->scene->getManager(kWKIntersectionManager);
+    intersectMan->addIntersectable(&intersectionHandler);
 
     return self;
 }
@@ -303,6 +303,40 @@ typedef std::set<TileBoundsInfo> TileBoundsSet;
     }
 }
 
+// Look for a valid intersection with any of our meshes
+- (bool) intersectWithRenderer:(WhirlyKitSceneRendererES *)renderer view:(WhirlyKitView *)theView touchPt:(const Point2f &)touchPt org:(const Point3d &)org dir:(const Point3d &)dir interPt:(Point3d &)iPt dist:(double &)dist
+{
+    double minDist = std::numeric_limits<double>::max();
+    Point3d minPt;
+
+    // Note: Naive implementation
+    @synchronized (self) {
+        for (auto tileBounds : tileSizes)
+        {
+            double thisT;
+            Point3d thisPt;
+            if (VectorTrianglesRayIntersect(org,dir,*(tileBounds.mesh),&thisT,&thisPt))
+            {
+                double thisDist = (thisPt-org).norm();
+                if (thisDist < minDist)
+                {
+                    minDist = thisDist;
+                    minPt = thisPt;
+                }
+            }
+        }
+    }
+    
+    if (minDist != std::numeric_limits<double>::max())
+    {
+        iPt = minPt;
+        dist = minDist;
+        return true;
+    }
+    
+    return false;
+}
+
 - (void)tileDidUnload:(MaplyTileID)tileID
 {
     @synchronized (self) {
@@ -389,7 +423,7 @@ typedef std::set<TileBoundsInfo> TileBoundsSet;
            points.transform = [[MaplyMatrix alloc] initWithTranslateX:tileCenterDisp.x y:tileCenterDisp.y z:tileCenterDisp.z];
            
            // We generate a triangle mesh underneath a given tile to provide something to grab
-           MeshBuilder meshBuilder(10,10,Point2d(header->min_x,header->min_y),Point2d(header->max_x,header->max_y));
+           MeshBuilder meshBuilder(10,10,Point2d(header->min_x,header->min_y),Point2d(header->max_x,header->max_y),self.coordSys);
            
            long long which = 0;
            double minZ=MAXFLOAT,maxZ=-MAXFLOAT;
@@ -442,7 +476,7 @@ typedef std::set<TileBoundsInfo> TileBoundsSet;
                maxZ += 1.0;
            @synchronized (self) {
                TileBoundsInfo tileInfo(tileID);
-               tileInfo.mesh = meshBuilder.makeMesh();
+               tileInfo.mesh = meshBuilder.makeMesh(layer.viewC);
                tileInfo.minZ = minZ;  tileInfo.maxZ = maxZ;
                tileSizes.insert(tileInfo);
            }

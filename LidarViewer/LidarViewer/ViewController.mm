@@ -88,6 +88,8 @@ static int MaxDisplayedPoints = 3000000;
 //    globeViewC.performanceOutput = true;
     globeViewC.delegate = self;
     globeViewC.tiltGesture = true;
+    globeViewC.autoMoveToTap = false;
+    globeViewC.twoFingerTapGesture = false;
     
     // Give us a tilt
     [globeViewC setTiltMinHeight:0.001 maxHeight:0.01 minTilt:1.21771169 maxTilt:0.0];
@@ -134,7 +136,7 @@ static int MaxDisplayedPoints = 3000000;
         // Set up the paging logic
         //        quadDelegate = [[LAZQuadReader alloc] initWithDB:lazPath indexFile:indexPath];
         MaplyCoordinate3dD ll,ur;
-        LAZQuadReader *quadDelegate = [[LAZQuadReader alloc] initWithDB:dbPath desc:desc];
+        LAZQuadReader *quadDelegate = [[LAZQuadReader alloc] initWithDB:dbPath desc:desc viewC:globeViewC];
         if (quadDelegate.hasColor)
             quadDelegate.shader = regShader;
         else

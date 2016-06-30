@@ -15,7 +15,6 @@
 		2B162B101BD59E3C0001E17B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B162B0E1BD59E3C0001E17B /* LaunchScreen.storyboard */; };
 		2B162B1B1BD59E3D0001E17B /* LidarViewerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B162B1A1BD59E3D0001E17B /* LidarViewerTests.m */; };
 		2B162B261BD59E3D0001E17B /* LidarViewerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B162B251BD59E3D0001E17B /* LidarViewerUITests.m */; };
-		2B162B3A1BD59E840001E17B /* libWhirlyGlobe-MaplyComponent.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B162B391BD59E5D0001E17B /* libWhirlyGlobe-MaplyComponent.a */; };
 		2B162B3E1BD5A13F0001E17B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B162B3D1BD5A13F0001E17B /* CoreLocation.framework */; };
 		2B162B401BD5A1490001E17B /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B162B3F1BD5A1490001E17B /* libc++.tbd */; };
 		2B162B421BD5A14F0001E17B /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B162B411BD5A14F0001E17B /* libstdc++.tbd */; };
@@ -26,6 +25,7 @@
 		2B1B4F1A1CBEE66D00859F5A /* LAZQuadReader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2B1B4F191CBEE66D00859F5A /* LAZQuadReader.mm */; };
 		2BB6BC091BE01F0300FDB60A /* LAZShader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6BC081BE01F0300FDB60A /* LAZShader.mm */; };
 		2BC2DCF41D2435250088D350 /* MeshBuilder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2BC2DCF21D2435250088D350 /* MeshBuilder.mm */; };
+		2BE53B0D1D2596C900B60FAD /* WhirlyGlobeMaplyComponent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BE53B0A1D2596C400B60FAD /* WhirlyGlobeMaplyComponent.framework */; };
 		2BFC7DE21D11F72F0040E2A3 /* arithmeticdecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BFC7DA91D11F72F0040E2A3 /* arithmeticdecoder.cpp */; };
 		2BFC7DE31D11F72F0040E2A3 /* arithmeticencoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BFC7DAB1D11F72F0040E2A3 /* arithmeticencoder.cpp */; };
 		2BFC7DE41D11F72F0040E2A3 /* arithmeticmodel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BFC7DAD1D11F72F0040E2A3 /* arithmeticmodel.cpp */; };
@@ -61,12 +61,19 @@
 			remoteGlobalIDString = 2B162AFC1BD59E3C0001E17B;
 			remoteInfo = LidarViewer;
 		};
-		2B162B381BD59E5D0001E17B /* PBXContainerItemProxy */ = {
+		2BE53B091D2596C400B60FAD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 2B162B331BD59E5D0001E17B /* WhirlyGlobe-MaplyComponent.xcodeproj */;
+			containerPortal = 2BE53B031D2596C400B60FAD /* WhirlyGlobeMaplyComponent.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 2B11E0DB15B4C030007AAE3F;
-			remoteInfo = "WhirlyGlobe-MaplyComponent";
+			remoteGlobalIDString = 2BE536FF1D2499E500B60FAD;
+			remoteInfo = WhirlyGlobeMaplyComponent;
+		};
+		2BE53B0B1D2596C400B60FAD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2BE53B031D2596C400B60FAD /* WhirlyGlobeMaplyComponent.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2BE537091D2499E500B60FAD;
+			remoteInfo = WhirlyGlobeMaplyComponentTests;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -87,7 +94,6 @@
 		2B162B211BD59E3D0001E17B /* LidarViewerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LidarViewerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B162B251BD59E3D0001E17B /* LidarViewerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LidarViewerUITests.m; sourceTree = "<group>"; };
 		2B162B271BD59E3D0001E17B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2B162B331BD59E5D0001E17B /* WhirlyGlobe-MaplyComponent.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "WhirlyGlobe-MaplyComponent.xcodeproj"; path = "../libs/WhirlyGlobe-Maply/WhirlyGlobeSrc/WhirlyGlobe-MaplyComponent/WhirlyGlobe-MaplyComponent.xcodeproj"; sourceTree = "<group>"; };
 		2B162B3D1BD5A13F0001E17B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2B162B3F1BD5A1490001E17B /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		2B162B411BD5A14F0001E17B /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
@@ -121,6 +127,7 @@
 		2BB6BC081BE01F0300FDB60A /* LAZShader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LAZShader.mm; sourceTree = "<group>"; };
 		2BC2DCF21D2435250088D350 /* MeshBuilder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MeshBuilder.mm; sourceTree = "<group>"; };
 		2BC2DCF31D2435250088D350 /* MeshBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeshBuilder.h; sourceTree = "<group>"; };
+		2BE53B031D2596C400B60FAD /* WhirlyGlobeMaplyComponent.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WhirlyGlobeMaplyComponent.xcodeproj; path = "../libs/WhirlyGlobe-Maply/WhirlyGlobeSrc/WhirlyGlobe-MaplyComponent/WhirlyGlobeMaplyComponent.xcodeproj"; sourceTree = "<group>"; };
 		2BFC7DA91D11F72F0040E2A3 /* arithmeticdecoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = arithmeticdecoder.cpp; sourceTree = "<group>"; };
 		2BFC7DAA1D11F72F0040E2A3 /* arithmeticdecoder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = arithmeticdecoder.hpp; sourceTree = "<group>"; };
 		2BFC7DAB1D11F72F0040E2A3 /* arithmeticencoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = arithmeticencoder.cpp; sourceTree = "<group>"; };
@@ -185,6 +192,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BE53B0D1D2596C900B60FAD /* WhirlyGlobeMaplyComponent.framework in Frameworks */,
 				2B162DCB1BD6DC250001E17B /* libiconv.tbd in Frameworks */,
 				2B162B481BD5A15E0001E17B /* libsqlite3.tbd in Frameworks */,
 				2B162B461BD5A1590001E17B /* libxml2.tbd in Frameworks */,
@@ -192,7 +200,6 @@
 				2B162B421BD5A14F0001E17B /* libstdc++.tbd in Frameworks */,
 				2B162B401BD5A1490001E17B /* libc++.tbd in Frameworks */,
 				2B162B3E1BD5A13F0001E17B /* CoreLocation.framework in Frameworks */,
-				2B162B3A1BD59E840001E17B /* libWhirlyGlobe-MaplyComponent.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,6 +223,7 @@
 		2B162AF41BD59E3C0001E17B = {
 			isa = PBXGroup;
 			children = (
+				2BE53B031D2596C400B60FAD /* WhirlyGlobeMaplyComponent.xcodeproj */,
 				2B162DCA1BD6DC250001E17B /* libiconv.tbd */,
 				2BA6DB131CB710BD0017E3AF /* libgdal.a */,
 				2B162CE81BD5C2810001E17B /* boost.a */,
@@ -225,7 +233,6 @@
 				2B162B411BD5A14F0001E17B /* libstdc++.tbd */,
 				2B162B3F1BD5A1490001E17B /* libc++.tbd */,
 				2B162B3D1BD5A13F0001E17B /* CoreLocation.framework */,
-				2B162B331BD59E5D0001E17B /* WhirlyGlobe-MaplyComponent.xcodeproj */,
 				2B162AFF1BD59E3C0001E17B /* LidarViewer */,
 				2B162C321BD5B3A40001E17B /* Data */,
 				2B162B191BD59E3D0001E17B /* LidarViewerTests */,
@@ -298,14 +305,6 @@
 			path = LidarViewerUITests;
 			sourceTree = "<group>";
 		};
-		2B162B341BD59E5D0001E17B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				2B162B391BD59E5D0001E17B /* libWhirlyGlobe-MaplyComponent.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		2B162C321BD5B3A40001E17B /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -348,6 +347,15 @@
 				2BB6A89C1BD992DC00FDB60A /* AFURLSessionManager.h */,
 			);
 			name = AFNetworking;
+			sourceTree = "<group>";
+		};
+		2BE53B041D2596C400B60FAD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2BE53B0A1D2596C400B60FAD /* WhirlyGlobeMaplyComponent.framework */,
+				2BE53B0C1D2596C400B60FAD /* WhirlyGlobeMaplyComponentTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		2BFC7DA81D11F72F0040E2A3 /* src */ = {
@@ -531,8 +539,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 2B162B341BD59E5D0001E17B /* Products */;
-					ProjectRef = 2B162B331BD59E5D0001E17B /* WhirlyGlobe-MaplyComponent.xcodeproj */;
+					ProductGroup = 2BE53B041D2596C400B60FAD /* Products */;
+					ProjectRef = 2BE53B031D2596C400B60FAD /* WhirlyGlobeMaplyComponent.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -545,11 +553,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		2B162B391BD59E5D0001E17B /* libWhirlyGlobe-MaplyComponent.a */ = {
+		2BE53B0A1D2596C400B60FAD /* WhirlyGlobeMaplyComponent.framework */ = {
 			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libWhirlyGlobe-MaplyComponent.a";
-			remoteRef = 2B162B381BD59E5D0001E17B /* PBXContainerItemProxy */;
+			fileType = wrapper.framework;
+			path = WhirlyGlobeMaplyComponent.framework;
+			remoteRef = 2BE53B091D2596C400B60FAD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2BE53B0C1D2596C400B60FAD /* WhirlyGlobeMaplyComponentTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = WhirlyGlobeMaplyComponentTests.xctest;
+			remoteRef = 2BE53B0B1D2596C400B60FAD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -762,6 +777,7 @@
 					"../libs/WhirlyGlobe-Maply/WhirlyGlobeSrc/WhirlyGlobeLib/include/",
 					"../libs/WhirlyGlobe-Maply/third-party/eigen/",
 					"../libs/WhirlyGlobe-Maply/third-party/boost/",
+					"../libs/WhirlyGlobe-Maply/third-party/SMCalloutView/",
 				);
 				INFOPLIST_FILE = LidarViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -781,6 +797,7 @@
 					"../libs/WhirlyGlobe-Maply/WhirlyGlobeSrc/WhirlyGlobeLib/include/",
 					"../libs/WhirlyGlobe-Maply/third-party/eigen/",
 					"../libs/WhirlyGlobe-Maply/third-party/boost/",
+					"../libs/WhirlyGlobe-Maply/third-party/SMCalloutView/",
 				);
 				INFOPLIST_FILE = LidarViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

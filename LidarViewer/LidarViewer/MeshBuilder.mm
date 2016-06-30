@@ -7,11 +7,13 @@
 //
 
 #include "MeshBuilder.h"
+#include <private/MaplyCoordinateSystem_private.h>
+#include <private/MaplyBaseViewController_private.h>
 
 using namespace WhirlyKit;
 
-MeshBuilder::MeshBuilder(int sizeX,int sizeY,const Point2d &ll,const Point2d &ur)
-: sizeX(sizeX), sizeY(sizeY), ll(ll), ur(ur)
+MeshBuilder::MeshBuilder(int sizeX,int sizeY,const Point2d &ll,const Point2d &ur,MaplyCoordinateSystem *srcCoordSys)
+: sizeX(sizeX), sizeY(sizeY), ll(ll), ur(ur), srcCoordSys(srcCoordSys)
 {
     span = ur - ll;
     minZs.resize(sizeX*sizeY,std::numeric_limits<double>::max());
@@ -28,8 +30,54 @@ void MeshBuilder::addPoint(const Point3d &pt)
     z = std::min(z,pt.z());
 }
 
-VectorTrianglesRef MeshBuilder::makeMesh()
+VectorTrianglesRef MeshBuilder::makeSimpleMesh(MaplyBaseViewController *viewC)
 {
+    CoordSystemDisplayAdapter *coordAdapter = viewC->visualView.coordAdapter;
+
+    // Look for the minimum overall
+    double minZ = std::numeric_limits<double>::max();
+    for (auto z : minZs)
+        minZ = std::min(z,minZ);
+    
+    // Didn't get any real samples
+    if (minZ == std::numeric_limits<double>::max())
+        return NULL;
+
+    VectorTrianglesRef mesh = VectorTriangles::createTriangles();
+    
+    mesh->pts.reserve(4);
+    mesh->tris.reserve(1);
+    
+    Point3d pts[4];
+    pts[0] = Point3d(ll.x(),ll.y(),minZ);
+    pts[1] = Point3d(ur.x(),ll.y(),minZ);
+    pts[2] = Point3d(ur.x(),ur.y(),minZ);
+    pts[3] = Point3d(ll.x(),ur.y(),minZ);
+    
+    for (unsigned int ii=0;ii<4;ii++)
+    {
+        Point3d localPt = CoordSystemConvert3d(srcCoordSys->coordSystem, coordAdapter->getCoordSystem(), pts[ii]);
+        Point3d dispPt = coordAdapter->localToDisplay(localPt);
+        mesh->pts.push_back(Point3f(dispPt.x(),dispPt.y(),dispPt.z()));
+    }
+    
+    VectorTriangles::Triangle tri;
+    tri.pts[0] = 0;
+    tri.pts[1] = 1;
+    tri.pts[2] = 2;
+    mesh->tris.push_back(tri);
+    tri.pts[0] = 0;
+    tri.pts[1] = 2;
+    tri.pts[2] = 3;
+    mesh->tris.push_back(tri);
+
+    return mesh;
+}
+
+VectorTrianglesRef MeshBuilder::makeMesh(MaplyBaseViewController *viewC)
+{
+    CoordSystemDisplayAdapter *coordAdapter = viewC->visualView.coordAdapter;
+    
     // Look for the minimum overall
     double minZ = std::numeric_limits<double>::max();
     for (auto z : minZs)
@@ -57,14 +105,16 @@ VectorTrianglesRef MeshBuilder::makeMesh()
             int whichX = std::max(ix,sizeX-1);
             int whichY = std::max(iy,sizeY-1);
             double z = minZs[whichY*sizeX+whichX];
-            mesh->pts.push_back(Point3f(pt.x(),pt.y(),z));
+            Point3d localPt = CoordSystemConvert3d(srcCoordSys->coordSystem, coordAdapter->getCoordSystem(), Point3d(pt.x(),pt.y(),z));
+            Point3d dispPt = coordAdapter->localToDisplay(localPt);
+            mesh->pts.push_back(Point3f(dispPt.x(),dispPt.y(),dispPt.z()));
         }
     }
 
     // Generate the triangles
     mesh->tris.reserve(sizeX*sizeY);
-    for (int iy=0;iy<=sizeY;iy++)
-        for (int ix=0;ix<=sizeX;ix++)
+    for (int iy=0;iy<sizeY;iy++)
+        for (int ix=0;ix<sizeX;ix++)
         {
             VectorTriangles::Triangle tri;
             tri.pts[0] = iy*(sizeX+1)+ix;

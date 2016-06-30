@@ -10,6 +10,7 @@
 #define MeshBuilder_h
 
 #import <Foundation/Foundation.h>
+#import <WhirlyGlobeComponent.h>
 #import <WhirlyGlobe.h>
 
 /** Used to build a mesh underneath a random collection of points.
@@ -19,14 +20,19 @@ class MeshBuilder
 {
 public:
     // Construct with the size of the grid we'll build and the extents
-    MeshBuilder(int sizeX,int sizeY,const WhirlyKit::Point2d &ll,const WhirlyKit::Point2d &ur);
+    MeshBuilder(int sizeX,int sizeY,const WhirlyKit::Point2d &ll,const WhirlyKit::Point2d &ur,MaplyCoordinateSystem *srcCoordSys);
 
     // Add a point for evaluation.  We'll snap to the edges
     void addPoint(const WhirlyKit::Point3d &pt);
     
-    WhirlyKit::VectorTrianglesRef makeMesh();
+    // Generate a mesh from the points underneath
+    WhirlyKit::VectorTrianglesRef makeMesh(MaplyBaseViewController *viewC);
+    
+    // Make a simple mesh that just uses the zmin
+    WhirlyKit::VectorTrianglesRef makeSimpleMesh(MaplyBaseViewController *viewC);
     
 protected:
+    MaplyCoordinateSystem *srcCoordSys;
     int sizeX,sizeY;
     WhirlyKit::Point2d ll,ur;
     WhirlyKit::Point2d span;

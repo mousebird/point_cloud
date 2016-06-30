@@ -55,7 +55,7 @@ extern NSString * const kLAZReaderColorScale;
     @param fileName The sqlite LAZ database to read.  Pass in the full path.
     @param desc Overrides for the setup.  We put attributes in here that aren't quite right in the database.
   */
-- (id)initWithDB:(NSString *)fileName desc:(NSDictionary *)desc;
+- (id)initWithDB:(NSString *)fileName desc:(NSDictionary *)desc viewC:(WhirlyGlobeViewController *)viewC;
 
 // Based on the number of points we want to display, how many tiles should we fetch?
 - (int)getNumTilesFromMaxPoints:(int)maxPoints;
