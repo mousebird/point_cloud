@@ -96,9 +96,9 @@ static int MaxDisplayedPoints = 3000000;
     
     // Add a base layer
     NSString * baseCacheDir = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString * cacheDir = [NSString stringWithFormat:@"%@/maqquesttiles/", baseCacheDir];
-    int maxZoom = 18;
-    MaplyRemoteTileSource *tileSource = [[MaplyRemoteTileSource alloc] initWithBaseURL:@"http://otile1.mqcdn.com/tiles/1.0.0/sat/" ext:@"png" minZoom:0 maxZoom:maxZoom];
+    NSString * cacheDir = [NSString stringWithFormat:@"%@/cartodb_light/", baseCacheDir];
+    int maxZoom = 22;
+    MaplyRemoteTileSource *tileSource = [[MaplyRemoteTileSource alloc] initWithBaseURL:@"http://light_all.basemaps.cartocdn.com/light_all/" ext:@"png" minZoom:0 maxZoom:maxZoom];
     tileSource.cacheDir = cacheDir;
     MaplyQuadImageTilesLayer *layer = [[MaplyQuadImageTilesLayer alloc] initWithCoordSystem:tileSource.coordSys tileSource:tileSource];
     layer.handleEdges = true;
