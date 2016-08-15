@@ -22,6 +22,7 @@
 #import "WhirlyGlobe.h"
 #import "MeshBuilder.h"
 #import "private/WhirlyGlobeViewController_private.h"
+#import "private/MaplyCoordinateSystem_private.h"
 
 using namespace Eigen;
 using namespace WhirlyKit;
@@ -308,6 +309,7 @@ typedef std::set<TileBoundsInfo> TileBoundsSet;
 {
     double minDist = std::numeric_limits<double>::max();
     Point3d minPt;
+    CoordSystemDisplayAdapter *coordAdapter = viewC->visualView.coordAdapter;
 
     // Note: Naive implementation
     @synchronized (self) {
@@ -320,8 +322,27 @@ typedef std::set<TileBoundsInfo> TileBoundsSet;
                 double thisDist = (thisPt-org).norm();
                 if (thisDist < minDist)
                 {
-                    minDist = thisDist;
-                    minPt = thisPt;
+                    // Project point back to source system
+                    Point3d localPt = coordAdapter->displayToLocal(thisPt);
+                    Point3d srcPt = CoordSystemConvert3d(coordAdapter->getCoordSystem(), _coordSys->coordSystem, localPt);
+                    
+                    // We found an intersection, but let's check if a higher res tile is loaded
+                    int numTiles = 1<<(tileBounds.tileID.level+1);
+                    Point2d tileSize((self.maxX-self.minX)/numTiles,(self.maxY-self.minY)/numTiles);
+                    MaplyTileID subTile;
+                    subTile.x = (srcPt.x() - self.minX)/tileSize.x();
+                    subTile.y = (srcPt.y() - self.minY)/tileSize.y();
+                    subTile.level = tileBounds.tileID.level+1;
+                    
+                    // If the higher res tile is loaded, then we have to trust its surface
+                    // Odds are that our lower res surface missed some dips.
+                    TileBoundsInfo dummyTile(subTile);
+                    auto it = tileSizes.find(dummyTile);
+                    if (it == tileSizes.end())
+                    {
+                        minDist = thisDist;
+                        minPt = thisPt;
+                    }
                 }
             }
         }
