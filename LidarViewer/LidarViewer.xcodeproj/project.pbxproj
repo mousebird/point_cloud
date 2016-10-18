@@ -515,6 +515,7 @@
 				TargetAttributes = {
 					2B162AFC1BD59E3C0001E17B = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = BFXSGS6V8N;
 					};
 					2B162B151BD59E3D0001E17B = {
 						CreatedOnToolsVersion = 7.0;
@@ -771,6 +772,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = BFXSGS6V8N;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"../libs/WhirlyGlobe-Maply/WhirlyGlobeSrc/WhirlyGlobe-MaplyComponent/include/",
@@ -791,6 +793,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = BFXSGS6V8N;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"../libs/WhirlyGlobe-Maply/WhirlyGlobeSrc/WhirlyGlobe-MaplyComponent/include/",

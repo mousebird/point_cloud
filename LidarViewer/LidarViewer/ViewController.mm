@@ -161,6 +161,7 @@ static int MaxDisplayedPoints = 3000000;
         lazLayer.minTileHeight = ll.z;
         lazLayer.maxTileHeight = ur.z;
         lazLayer.useParentTileBounds = false;
+        lazLayer.singleLevelLoading = false;
         [globeViewC addLayer:lazLayer];
         
         // Drop a label so the user can find it when zoomed out

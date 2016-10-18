@@ -141,9 +141,10 @@ bool LidarMultiWrapper::init()
         laszip_BOOL is_compressed;
         if (laszip_open_reader(thisReader, fileName.c_str(), &is_compressed))
         {
-            fprintf(stderr,"Failed to open file %s",fileName.c_str());
+            fprintf(stderr,"Failed to open file %s\n",fileName.c_str());
             return false;
         }
+        fprintf(stdout,"Opened file %s\n",fileName.c_str());
         laszip_header_struct *thisHeader;
         laszip_get_header_pointer(thisReader,&thisHeader);
         
@@ -314,7 +315,9 @@ bool LidarSorter::process(LidarMultiWrapper *inputDB,TileIdent tileID,LidarDatab
                     laszip_create(&subW);
                     laszip_set_header(subW, &inputDB->header);
 
-                    laszip_open_writer(subW, subFile.c_str(), false);
+                    // Note:  Set this to false to make it faster
+                    bool outCompress = true;
+                    laszip_open_writer(subW, subFile.c_str(), outCompress);
                     laszip_header_struct *subHeader;
                     laszip_get_header_pointer(subW, &subHeader);
 
