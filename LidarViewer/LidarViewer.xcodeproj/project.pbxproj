@@ -43,7 +43,6 @@
 		2BFC7DF11D11F72F0040E2A3 /* laszip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BFC7DD91D11F72F0040E2A3 /* laszip.cpp */; };
 		2BFC7DF21D11F72F0040E2A3 /* laszip_dll.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BFC7DDD1D11F72F0040E2A3 /* laszip_dll.cpp */; };
 		2BFC7DF31D11F72F0040E2A3 /* laszipper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BFC7DDE1D11F72F0040E2A3 /* laszipper.cpp */; };
-		2BFC7DFA1D11F8CF0040E2A3 /* Makefile.am in Resources */ = {isa = PBXBuildFile; fileRef = 2BFC7DF91D11F8CF0040E2A3 /* Makefile.am */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -184,7 +183,6 @@
 		2BFC7DDF1D11F72F0040E2A3 /* laszipper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = laszipper.hpp; sourceTree = "<group>"; };
 		2BFC7DE11D11F72F0040E2A3 /* mydefs.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mydefs.hpp; sourceTree = "<group>"; };
 		2BFC7DF81D11F8CF0040E2A3 /* laszip_api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = laszip_api.h; sourceTree = "<group>"; };
-		2BFC7DF91D11F8CF0040E2A3 /* Makefile.am */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -443,7 +441,6 @@
 			isa = PBXGroup;
 			children = (
 				2BFC7DF81D11F8CF0040E2A3 /* laszip_api.h */,
-				2BFC7DF91D11F8CF0040E2A3 /* Makefile.am */,
 			);
 			path = laszip;
 			sourceTree = "<group>";
@@ -576,7 +573,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B162B101BD59E3C0001E17B /* LaunchScreen.storyboard in Resources */,
-				2BFC7DFA1D11F8CF0040E2A3 /* Makefile.am in Resources */,
 				2B162B0D1BD59E3C0001E17B /* Assets.xcassets in Resources */,
 				2B162B0B1BD59E3C0001E17B /* Main.storyboard in Resources */,
 			);

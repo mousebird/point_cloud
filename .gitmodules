@@ -4,3 +4,6 @@
 [submodule "libs/LASzip"]
 	path = libs/LASzip
 url=https://github.com/mousebird/LASzip
+[submodule "libs/WhirlyGlobe-Maply3"]
+	path = libs/WhirlyGlobe-Maply3
+	url = https://github.com/mousebird/WhirlyGlobe.git
